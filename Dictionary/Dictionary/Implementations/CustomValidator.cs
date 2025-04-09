@@ -13,7 +13,7 @@ public class CustomValidator : ICustomValidator
 
         while ( !int.TryParse( userCommandInput, out userCommandChoice ) )
         {
-            Console.Write( Messages.INVALID_COMMAND_INPUT_MESSAGE );
+            Console.Write( Messages.InvalidCommandInput );
 
             userCommandInput = Console.ReadLine();
         }
@@ -28,7 +28,7 @@ public class CustomValidator : ICustomValidator
 
         while ( string.IsNullOrEmpty( userInput ) )
         {
-            Console.WriteLine( Messages.INVALID_USER_INPUT_MESSAGE );
+            Console.WriteLine( Messages.InvalidUserInput );
             Console.Write( askUserInput );
 
             userInput = Console.ReadLine();

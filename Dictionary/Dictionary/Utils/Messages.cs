@@ -2,25 +2,25 @@
 
 public class Messages
 {
-    public const string GREETING_MESSAGE = "Добро пожаловать!";
-    public const string FAREWELL_MESSAGE = "До свидания!";
+    public const string GreetingMessage = "Добро пожаловать!";
+    public const string FarewellMessage = "До свидания!";
 
-    public const string ASK_USER_CHOICE_MESSAGE = "Выберите команду: ";
-    public const string ASK_USER_INPUT_MESSAGE = "Введите слово, для которого нужно найти перевод: ";
-    public const string TRANSLATED_WORD_MESSAGE = "Перевод введённого слова:";
-    public const string NEW_TRANSLATION_ADDED_MESSAGE = "Новое слово и его перевод успешно добавлены!";
+    public const string AskUserChoiceMessage = "Выберите команду: ";
+    public const string AskUserInputMessage = "Введите слово, для которого нужно найти перевод: ";
+    public const string TranslatedWordMessage = "Перевод введённого слова:";
+    public const string NewTranslationAddedMessage = "Новое слово и его перевод успешно добавлены!";
 
-    public const string ASK_USER_NEW_RUSSIAN_WORD = "Введите новое слово на русском: ";
-    public const string ASK_USER_NEW_ENGLISH_WORD = "Введите новое слово на английском: ";
-    public const string ASK_USER_NEW_TRANSLATION = "Введите перевод для нового слова: ";
+    public const string AskUserNewRussianWord = "Введите новое слово на русском: ";
+    public const string AskUserNewEnglishWord = "Введите новое слово на английском: ";
+    public const string AskUserNewTranslation = "Введите перевод для нового слова: ";
 
-    public const string UNKNOWN_SELECTED_COMMAND_MESSAGE = "Не удалось распознать команду, попробуйте повторить ввод";
-    public const string INVALID_COMMAND_INPUT_MESSAGE = "Команда должна быть в виде числа, попробуйте повторить ввод: ";
-    public const string TRANSLATION_ALREADY_EXISTS_MESSAGE = "Ошибка, такое слово уже есть!";
-    public const string INVALID_USER_INPUT_MESSAGE = "Неверный ввод, попробуйте ещё раз.";
-    public const string TRANSLATION_NOT_FOUND_MESSAGE = "Не удалось найти перевод для данного слова.";
+    public const string UnknownSelectedCommand = "Не удалось распознать команду, попробуйте повторить ввод";
+    public const string InvalidCommandInput = "Команда должна быть в виде числа, попробуйте повторить ввод: ";
+    public const string TranslationAlreadyExists = "Ошибка, такое слово уже есть!";
+    public const string InvalidUserInput = "Неверный ввод, попробуйте ещё раз.";
+    public const string TranslationNotFound = "Не удалось найти перевод для данного слова.";
 
-    public const string MENU_MESSAGE = """
+    public const string MenuMessage = """
         1. Узнать перевод русского слова (на английский).
         2. Узнать перевод английского слова (на русский).
         3. Добавить перевод русского слова.

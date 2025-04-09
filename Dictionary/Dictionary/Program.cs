@@ -18,58 +18,58 @@ public class Program
         string newWord;
         string newTranslation;
 
-        Console.WriteLine( Messages.GREETING_MESSAGE );
-        Console.WriteLine( Messages.MENU_MESSAGE );
+        Console.WriteLine( Messages.GreetingMessage );
+        Console.WriteLine( Messages.MenuMessage );
 
         bool isExitSelected = false;
 
         while ( !isExitSelected )
         {
-            Console.Write( Messages.ASK_USER_CHOICE_MESSAGE );
+            Console.Write( Messages.AskUserChoiceMessage );
             int userCommandChoice = validator.GetValidUserChoice();
 
-            switch ( ( UserCommands )userCommandChoice )
+            switch ( ( UserCommand )userCommandChoice )
             {
-                case UserCommands.RussianToEnglish:
-                    word = validator.GetValidUserInput( Messages.ASK_USER_INPUT_MESSAGE );
+                case UserCommand.RussianToEnglish:
+                    word = validator.GetValidUserInput( Messages.AskUserInputMessage );
 
                     translatorService.GetTranslation( word, isEnglishToRussian: false );
                     break;
 
-                case UserCommands.EnglishToRussian:
-                    word = validator.GetValidUserInput( Messages.ASK_USER_INPUT_MESSAGE );
+                case UserCommand.EnglishToRussian:
+                    word = validator.GetValidUserInput( Messages.AskUserInputMessage );
 
                     translatorService.GetTranslation( word, isEnglishToRussian: true );
                     break;
 
-                case UserCommands.AddNewRussianWord:
-                    newWord = validator.GetValidUserInput( Messages.ASK_USER_NEW_RUSSIAN_WORD );
-                    newTranslation = validator.GetValidUserInput( Messages.ASK_USER_NEW_TRANSLATION );
+                case UserCommand.AddNewRussianWord:
+                    newWord = validator.GetValidUserInput( Messages.AskUserNewRussianWord );
+                    newTranslation = validator.GetValidUserInput( Messages.AskUserNewTranslation );
 
                     translatorService.AddNewTranslation( newWord, newTranslation );
                     break;
 
-                case UserCommands.AddNewEnglishWord:
-                    newTranslation = validator.GetValidUserInput( Messages.ASK_USER_NEW_ENGLISH_WORD );
-                    newWord = validator.GetValidUserInput( Messages.ASK_USER_NEW_TRANSLATION );
+                case UserCommand.AddNewEnglishWord:
+                    newTranslation = validator.GetValidUserInput( Messages.AskUserNewEnglishWord );
+                    newWord = validator.GetValidUserInput( Messages.AskUserNewTranslation );
 
                     translatorService.AddNewTranslation( newWord, newTranslation );
                     break;
 
-                case UserCommands.GetAllTranslations:
+                case UserCommand.GetAllTranslations:
                     translatorService.GetAllTranslations();
                     break;
 
-                case UserCommands.Exit:
+                case UserCommand.Exit:
                     isExitSelected = true;
                     break;
 
                 default:
-                    Console.WriteLine( Messages.UNKNOWN_SELECTED_COMMAND_MESSAGE );
+                    Console.WriteLine( Messages.UnknownSelectedCommand );
                     break;
             }
         }
 
-        Console.WriteLine( Messages.FAREWELL_MESSAGE );
+        Console.WriteLine( Messages.FarewellMessage );
     }
 }
