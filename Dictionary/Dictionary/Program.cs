@@ -7,11 +7,11 @@ namespace Dictionary;
 
 public class Program
 {
-    private const string FILE_PATH = "translations.txt";
+    private const string FilePath = "translations.txt";
 
     public static void Main()
     {
-        ITranslatorService translatorService = new TranslatorService( FILE_PATH );
+        ITranslatorService translatorService = new TranslatorService( FilePath );
         ICustomValidator validator = new CustomValidator();
 
         string word;
