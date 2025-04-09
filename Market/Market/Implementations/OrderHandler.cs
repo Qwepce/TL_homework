@@ -25,7 +25,7 @@ public class OrderHandler : IOrderHandler
 
         Console.WriteLine( $"\n{confirmationMessage}" );
 
-        string userSelectedCommand = _validator.GetValidUserCommandFromConsole( Messages.ASK_USER_COMMAND_MESSAGE, Messages.UNKNOWN_SELECTED_COMMAND_ERROR_MESSAGE );
+        string userSelectedCommand = _validator.GetValidUserCommandFromConsole( Messages.AskUserCommandMessage, Messages.UnknownSelectedCommandErrorMessage );
 
         return userSelectedCommand switch
         {
