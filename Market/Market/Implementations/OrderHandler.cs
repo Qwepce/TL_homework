@@ -8,16 +8,20 @@ public class OrderHandler : IOrderHandler
 {
     private readonly ICustomValidator _validator;
 
-    private const int DELIVERY_DAYS = 3;
+    private const int DeliveryDays = 3;
 
     public OrderHandler( ICustomValidator validator )
     {
         _validator = validator;
     }
 
-    public bool? ConfirmOrder( string productName, int productQuantity, string customerName, string address )
+    public UserCommand ConfirmOrder(
+        string productName,
+        int productQuantity,
+        string customerName,
+        string address )
     {
-        var confirmationMessage = $"""
+        string confirmationMessage = $"""
             Здравствуйте, {customerName}!
             Вы заказали {productName} в количестве {productQuantity} шт. по адресу {address}
             Все данные указаны верно? (yes/no/cancel)
@@ -29,27 +33,31 @@ public class OrderHandler : IOrderHandler
 
         return userSelectedCommand switch
         {
-            "yes" => true,
-            "no" => false,
-            "cancel" => null
+            "yes" => UserCommand.Yes,
+            "no" => UserCommand.No,
+            "cancel" => UserCommand.Cancel
         };
     }
 
-    public Order CreateOrder( string productName, int productQuantity, string customerName, string address )
+    public Order CreateOrder(
+        string productName,
+        int productQuantity,
+        string customerName,
+        string address )
     {
-        DateTime deliveryDate = DateTime.Now.AddDays( DELIVERY_DAYS );
+        DateTime deliveryDate = DateTime.Now.AddDays( DeliveryDays );
 
         Order order = new Order( productName, productQuantity, customerName, address, deliveryDate );
 
         return order;
     }
 
-    public void SuccessfullOrderCreated( Order order )
+    public void PrintOrderConfirmation( Order order )
     {
-        var successfulMessage = $"""
+        string successfulMessage = $"""
             {order.CustomerName}!
             Ваш заказ {order.ProductName} в количестве {order.ProductQuantity} шт. оформлен!
-            Ожидайте доставку по адресу {order.Address} {order.DeliveryDate:d MMMM yyyy}г.
+            Ожидайте доставку по адресу {order.DeliveryAddress} {order.DeliveryDate:d MMMM yyyy}г.
             """;
 
         Console.WriteLine( $"\n{successfulMessage}" );

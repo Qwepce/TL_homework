@@ -43,20 +43,24 @@ public class CustomValidator : ICustomValidator
     {
         Console.Write( message );
 
-        string userInput = Console.ReadLine();
-
         while ( true )
         {
-            userInput = userInput.Trim().ToLower();
+            string userInput = Console.ReadLine();
 
-            if ( Enum.IsDefined( typeof( UserCommands ), userInput ) )
+            userInput = userInput.Trim();
+
+            if ( int.TryParse( userInput, out int result ) )
             {
-                return userInput.ToString().ToLower();
+                PrintErrorMessage( errorMessage, message );
+                continue;
+            }
+
+            if ( Enum.TryParse( typeof( UserCommand ), userInput, ignoreCase: true, out var command ) )
+            {
+                return ( ( UserCommand )command ).ToString().ToLower();
             }
 
             PrintErrorMessage( errorMessage, message );
-
-            userInput = Console.ReadLine();
         }
     }
 

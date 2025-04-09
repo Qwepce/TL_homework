@@ -8,7 +8,7 @@ public class Order
 
     public string CustomerName { get; init; }
 
-    public string Address { get; init; }
+    public string DeliveryAddress { get; init; }
 
     public DateTime DeliveryDate { get; init; }
 
@@ -16,13 +16,13 @@ public class Order
         string productName,
         int productQuantity,
         string customerName,
-        string address,
+        string deliveryAddress,
         DateTime deliveryDate )
     {
         ProductName = productName;
         ProductQuantity = productQuantity;
         CustomerName = customerName;
-        Address = address;
+        DeliveryAddress = deliveryAddress;
         DeliveryDate = deliveryDate;
     }
 }
