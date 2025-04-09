@@ -66,11 +66,11 @@ public class TranslatorService : ITranslatorService
 
         if ( translation != null )
         {
-            Console.WriteLine( $"{Messages.TRANSLATED_WORD_MESSAGE} {translation}" );
+            Console.WriteLine( $"{Messages.TranslatedWordMessage} {translation}" );
         }
         else
         {
-            Console.WriteLine( Messages.TRANSLATION_NOT_FOUND_MESSAGE );
+            Console.WriteLine( Messages.TranslationNotFound );
         }
     }
 
@@ -78,7 +78,7 @@ public class TranslatorService : ITranslatorService
     {
         if ( _dictionary.ContainsKey( translation ) || _dictionary.ContainsValue( word ) )
         {
-            Console.WriteLine( Messages.TRANSLATION_ALREADY_EXISTS_MESSAGE );
+            Console.WriteLine( Messages.TranslationAlreadyExists );
         }
         else
         {
@@ -91,7 +91,7 @@ public class TranslatorService : ITranslatorService
 
             _dictionary[ translation ] = word;
 
-            Console.WriteLine( Messages.NEW_TRANSLATION_ADDED_MESSAGE );
+            Console.WriteLine( Messages.NewTranslationAddedMessage );
         }
     }
 

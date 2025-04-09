@@ -1,6 +1,6 @@
 ﻿namespace Dictionary.Enums;
 
-public enum UserCommands
+public enum UserCommand
 {
     RussianToEnglish = 1,
     EnglishToRussian = 2,
