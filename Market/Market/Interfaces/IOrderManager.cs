@@ -2,5 +2,5 @@
 
 public interface IOrderManager
 {
-    void InitOrderManager();
+    void ProcessOrder();
 }

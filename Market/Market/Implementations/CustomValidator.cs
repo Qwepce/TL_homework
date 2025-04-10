@@ -21,7 +21,7 @@ public class CustomValidator : ICustomValidator
         return userInput.Trim();
     }
 
-    public int GetValidProductQuantity( string message, string errorMessage )
+    public int GetValidProductQuantityFromConsole( string message, string errorMessage )
     {
         Console.Write( message );
 
@@ -45,17 +45,15 @@ public class CustomValidator : ICustomValidator
 
         while ( true )
         {
-            string userInput = Console.ReadLine();
+            string userInput = Console.ReadLine()?.Trim();
 
-            userInput = userInput.Trim();
-
-            if ( int.TryParse( userInput, out int result ) )
+            if ( int.TryParse( userInput, out int _ ) )
             {
                 PrintErrorMessage( errorMessage, message );
                 continue;
             }
 
-            if ( Enum.TryParse( typeof( UserCommand ), userInput, ignoreCase: true, out var command ) )
+            if ( Enum.TryParse( typeof( UserCommand ), userInput, ignoreCase: true, out object? command ) )
             {
                 return ( ( UserCommand )command ).ToString().ToLower();
             }

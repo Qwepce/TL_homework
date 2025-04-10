@@ -1,4 +1,5 @@
-﻿using Market.Interfaces;
+﻿using System.Numerics;
+using Market.Interfaces;
 using Market.Model;
 using Market.Utils;
 
@@ -8,32 +9,44 @@ public class OrderManager : IOrderManager
 {
     private readonly ICustomValidator _validator;
 
-    private readonly IOrderHandler _orderHandler;
+    private const int DeliveryDays = 3;
 
-    public OrderManager( ICustomValidator validator, IOrderHandler handler )
+    public OrderManager( ICustomValidator validator )
     {
         _validator = validator;
-        _orderHandler = handler;
     }
 
-    public void InitOrderManager()
+    public void ProcessOrder()
     {
         bool isOrderCreatedOrCancelled = false;
 
         while ( !isOrderCreatedOrCancelled )
         {
             string productName = _validator.GetValidInputFromConsole( Messages.InputProductNameMessage, Messages.DefaultStringInputErrorMessage );
-            int productQuantity = _validator.GetValidProductQuantity( Messages.InputProductQuantityMessage, Messages.DefaultQuantityInputErrorMessage );
+            int productQuantity = _validator.GetValidProductQuantityFromConsole( Messages.InputProductQuantityMessage, Messages.DefaultQuantityInputErrorMessage );
             string customerName = _validator.GetValidInputFromConsole( Messages.InputCustomerNameMessage, Messages.DefaultStringInputErrorMessage );
-            string address = _validator.GetValidInputFromConsole( Messages.InputAddressMessage, Messages.DefaultStringInputErrorMessage );
+            string deliveryAddress = _validator.GetValidInputFromConsole( Messages.InputAddressMessage, Messages.DefaultStringInputErrorMessage );
 
-            UserCommand selectedUserCommand = _orderHandler.ConfirmOrder( productName, productQuantity, customerName, address );
+            Messages.PrintConfirmationMessage(
+                productName,
+                productQuantity,
+                customerName,
+                deliveryAddress );
+
+            UserCommand selectedUserCommand = ConfirmOrder();
+
+            while ( selectedUserCommand.Equals( UserCommand.UnknownCommand ) )
+            {
+                Console.WriteLine( Messages.UnknownSelectedCommandErrorMessage );
+                selectedUserCommand = ConfirmOrder();
+            }
 
             switch ( selectedUserCommand )
             {
                 case UserCommand.Yes:
-                    Order order = _orderHandler.CreateOrder( productName, productQuantity, customerName, address );
-                    _orderHandler.PrintOrderConfirmation( order );
+                    Order order = CreateOrder( productName, productQuantity, customerName, deliveryAddress );
+
+                    Messages.PrintOrderConfirmation( order );
 
                     isOrderCreatedOrCancelled = true;
                     break;
@@ -43,9 +56,52 @@ public class OrderManager : IOrderManager
 
                 case UserCommand.Cancel:
                     Console.WriteLine( Messages.CancelOrderMessage );
+
                     isOrderCreatedOrCancelled = true;
                     break;
             }
         }
     }
+
+    private UserCommand ConfirmOrder()
+    {
+        UserCommand selectedCommand;
+
+        string userSelectedCommand = _validator.GetValidUserCommandFromConsole( Messages.AskUserCommandMessage, Messages.UnknownSelectedCommandErrorMessage );
+
+        switch ( userSelectedCommand )
+        {
+            case "yes":
+                selectedCommand = UserCommand.Yes;
+                break;
+
+            case "no":
+                selectedCommand = UserCommand.No;
+                break;
+
+            case "cancel":
+                selectedCommand = UserCommand.Cancel;
+                break;
+
+            default:
+                selectedCommand = UserCommand.UnknownCommand;
+                break;
+        }
+
+        return selectedCommand;
+    }
+
+    private Order CreateOrder(
+        string productName,
+        int productQuantity,
+        string customerName,
+        string deliveryAddress )
+    {
+        DateTime deliveryDate = DateTime.Now.AddDays( DeliveryDays );
+
+        Order order = new Order( productName, productQuantity, customerName, deliveryAddress, deliveryDate );
+
+        return order;
+    }
+
 }

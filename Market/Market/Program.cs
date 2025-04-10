@@ -9,13 +9,12 @@ public class Program
     public static void Main()
     {
         ICustomValidator validator = new CustomValidator();
-        IOrderHandler orderHandler = new OrderHandler( validator );
 
-        IOrderManager orderManager = new OrderManager( validator, orderHandler );
+        IOrderManager orderManager = new OrderManager( validator );
 
         Console.WriteLine( Messages.GreetingMessage );
 
-        orderManager.InitOrderManager();
+        orderManager.ProcessOrder();
 
         Console.WriteLine( Messages.FarewellMessage );
     }

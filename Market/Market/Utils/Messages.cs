@@ -1,4 +1,6 @@
-﻿namespace Market.Utils;
+﻿using Market.Model;
+
+namespace Market.Utils;
 
 public class Messages
 {
@@ -16,4 +18,30 @@ public class Messages
     public const string UnknownSelectedCommandErrorMessage = "Введена неизвестная команда.";
 
     public const string CancelOrderMessage = "Ваш заказ отменен.";
+
+    public static void PrintOrderConfirmation( Order order )
+    {
+        string successfulMessage = $"""
+            {order.CustomerName}!
+            Ваш заказ {order.ProductName} в количестве {order.ProductQuantity} шт. оформлен!
+            Ожидайте доставку по адресу {order.DeliveryAddress} {order.DeliveryDate:d MMMM yyyy}г.
+            """;
+
+        Console.WriteLine( $"\n{successfulMessage}" );
+    }
+
+    public static void PrintConfirmationMessage(
+        string productName,
+        int productQuantity,
+        string customerName,
+        string deliveryAddress )
+    {
+        string confirmationMessage = $"""
+            Здравствуйте, {customerName}!
+            Вы заказали {productName} в количестве {productQuantity} шт. по адресу {deliveryAddress}
+            Все данные указаны верно? (yes/no/cancel)
+            """;
+
+        Console.WriteLine( $"\n{confirmationMessage}" );
+    }
 }

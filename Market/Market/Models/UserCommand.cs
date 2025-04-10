@@ -4,5 +4,6 @@ public enum UserCommand
 {
     No,
     Yes,
-    Cancel
+    Cancel,
+    UnknownCommand
 }
