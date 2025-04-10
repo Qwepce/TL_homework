@@ -32,12 +32,12 @@ public class OrderManager : IOrderManager
                 customerName,
                 deliveryAddress );
 
-            UserCommand selectedUserCommand = ConfirmOrder();
+            UserCommand selectedUserCommand = RequestUserComfirmationCommand();
 
             while ( selectedUserCommand.Equals( UserCommand.UnknownCommand ) )
             {
                 Console.WriteLine( Messages.UnknownSelectedCommandErrorMessage );
-                selectedUserCommand = ConfirmOrder();
+                selectedUserCommand = RequestUserComfirmationCommand();
             }
 
             switch ( selectedUserCommand )
@@ -62,7 +62,7 @@ public class OrderManager : IOrderManager
         }
     }
 
-    private UserCommand ConfirmOrder()
+    private UserCommand RequestUserComfirmationCommand()
     {
         UserCommand selectedCommand;
 
