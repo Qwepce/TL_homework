@@ -24,16 +24,14 @@ public class CustomValidator : ICustomValidator
     public string GetValidUserInput( string askUserInput )
     {
         Console.Write( askUserInput );
-        string userInput = Console.ReadLine();
+        string userInput;
 
-        while ( string.IsNullOrEmpty( userInput ) )
+        while ( string.IsNullOrEmpty( userInput = Console.ReadLine()?.Trim().ToLower() ) )
         {
             Console.WriteLine( Messages.InvalidUserInput );
             Console.Write( askUserInput );
-
-            userInput = Console.ReadLine();
         }
 
-        return userInput.Trim().ToLower(); ;
+        return userInput;
     }
 }
