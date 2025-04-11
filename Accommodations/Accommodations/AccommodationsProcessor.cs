@@ -32,17 +32,17 @@ public static class AccommodationsProcessor
             {
                 Console.WriteLine( $"Error: {ex.Message}" );
             }
-            //Добавил обработку исключения из TryParseDate и TryParseGuid
+            // Added exception handling from TryParseDate and TryParseGuid
             catch ( FormatException ex )
             {
                 Console.WriteLine( $"Error: {ex.Message}" );
             }
-            //Добавил обработку исключения, если пытаемся выполнить undo, когда список команд пуст
+            // Added exception handling for undo when executed commands list is empty
             catch ( KeyNotFoundException ex )
             {
                 Console.WriteLine( $"Error: {ex.Message}" );
             }
-            //Обработка исключения для команд, которые не поддерживают операцию undo
+            // Added exception handling for commands that don't support undo operation
             catch ( NotSupportedException ex )
             {
                 Console.WriteLine( $"Error: {ex.Message}" );
@@ -66,7 +66,7 @@ public static class AccommodationsProcessor
                     return;
                 }
 
-                // Кастомизировал сообщение об ошибке при неудачном парсинге
+                // Customized the error message in case of unsuccessful parsing
                 if ( !Enum.TryParse( typeof( CurrencyDto ), parts[ 5 ], ignoreCase: true, out object? currency ) )
                 {
                     throw new ArgumentException( $"Invalid currency {parts[ 5 ]}" );
@@ -75,7 +75,7 @@ public static class AccommodationsProcessor
                 startDate = TryParseDate( parts[ 3 ] );
                 endDate = TryParseDate( parts[ 4 ] );
 
-                // При создании нового бронирования дата заезда не может быть раньше текущей даты
+                // When create a new booking, start date cannot be earlier than the current date.
                 if ( startDate < DateTime.Now.Date )
                 {
                     throw new ArgumentException( "Start date cannot be earlier than today" );
@@ -111,7 +111,8 @@ public static class AccommodationsProcessor
                 break;
 
             case "undo":
-                //Добавил проверку на длину списка команд
+
+                // Added a check for the length of executed commands list 
                 if ( _executedCommands.Count == 0 )
                 {
                     throw new KeyNotFoundException( "The history of commands is empty. There's nothing to undo" );
@@ -131,7 +132,7 @@ public static class AccommodationsProcessor
                     return;
                 }
 
-                //Добавил проверку на валидность введённого ID
+                // Added a check for valid entered bookingId
                 Guid id = TryParseGuid( parts[ 1 ] );
 
                 FindBookingByIdCommand findCommand = new( _bookingService, id );
@@ -160,7 +161,7 @@ public static class AccommodationsProcessor
         }
     }
 
-    // Вынес парсинг даты в отдельный метод. Добавил проверку: если не можем спарсить в нужном формате, то выбрасываем ошибку
+    // Made date parsing a separate method. Added a check: if we can't parse it in the right format, then we throw FormatException.
     private static DateTime TryParseDate( string stringDate )
     {
         if ( !DateTime.TryParse( stringDate, CultureInfo.GetCultureInfo( "en-US" ), out DateTime parsedDate ) )
@@ -171,7 +172,7 @@ public static class AccommodationsProcessor
         return parsedDate;
     }
 
-    // Вынес парсинг GUID в отдельный метод. Добавил проверку: если не можем спарсить в нужном формате, то выбрасываем ошибку
+    // Made guid parsing a separate method. Added a check: if we can't parse it in the right format, then we throw FormatException.
     private static Guid TryParseGuid( string stringGuid )
     {
         if ( !Guid.TryParse( stringGuid, out Guid parsedGuid ) )
