@@ -8,21 +8,24 @@ public class TranslatorManager
 {
     public static void Run( ITranslatorService translatorService, ICustomValidator validator )
     {
-        bool isExitCommandExecuted = false;
-
-        while ( !isExitCommandExecuted )
+        while ( true )
         {
             Console.Write( Messages.AskUserChoiceMessage );
-            int userCommandChoice = validator.GetValidUserChoice();
+            UserCommand userCommandChoice = ( UserCommand )validator.GetValidUserChoice();
 
-            isExitCommandExecuted = ExecuteCommand(
-                ( UserCommand )userCommandChoice,
+            if ( userCommandChoice.Equals( UserCommand.Exit ) )
+            {
+                break;
+            }
+
+            ProcessCommand(
+                userCommandChoice,
                 translatorService,
                 validator );
         }
     }
 
-    private static bool ExecuteCommand(
+    private static void ProcessCommand(
         UserCommand command,
         ITranslatorService translatorService,
         ICustomValidator validator )
@@ -64,14 +67,9 @@ public class TranslatorManager
 
                 break;
 
-            case UserCommand.Exit:
-                return true;
-
             default:
                 Console.WriteLine( Messages.UnknownSelectedCommand );
                 break;
         }
-
-        return false;
     }
 }
