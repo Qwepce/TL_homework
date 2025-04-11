@@ -6,7 +6,7 @@ public class FindBookingByIdCommand( IBookingService bookingService, Guid bookin
 {
     public void Execute()
     {
-        // Поменял booking.RoomCategory на booking.RoomCategory.Name
+        // Changed booking.RoomCategory to booking.RoomCategory.Name
         Booking? booking = bookingService.FindBookingById( bookingId );
         Console.WriteLine( booking != null
             ? $"Booking found: {booking.RoomCategory.Name} for User {booking.UserId}"

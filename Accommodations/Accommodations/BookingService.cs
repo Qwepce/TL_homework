@@ -23,7 +23,7 @@ public class BookingService : IBookingService
 
     public Booking Book( int userId, string categoryName, DateTime startDate, DateTime endDate, Currency currency )
     {
-        // Изменил проверку с < на <= для проверки дат на равенство
+        // Changed the check from < to <= to check the dates for equality
         if ( endDate <= startDate )
         {
             throw new ArgumentException( "End date cannot be earlier or equal than start date" );
@@ -75,7 +75,7 @@ public class BookingService : IBookingService
             throw new ArgumentException( $"Booking with id: '{bookingId}' does not exist" );
         }
 
-        //Изменил логику сравнения
+        // Changed the comparison logic
         if ( booking.StartDate < DateTime.Now.Date )
         {
             throw new ArgumentException( "Start date cannot be earlier than now date" );
@@ -87,7 +87,7 @@ public class BookingService : IBookingService
         category.AvailableRooms++;
     }
 
-    //Убрал неиспользуемый аргумент userId
+    // Removed the unused userId argument
     private static decimal CalculateDiscount()
     {
         return 0.1m;
@@ -100,7 +100,7 @@ public class BookingService : IBookingService
 
     public IEnumerable<Booking> SearchBookings( DateTime startDate, DateTime endDate, string categoryName )
     {
-        // Добавил проверку
+        // Added a check that end date is not earlier or eqaul than start date
         if ( endDate <= startDate )
         {
             throw new ArgumentException( "End date cannot be equal or earlier than start date" );
@@ -129,10 +129,10 @@ public class BookingService : IBookingService
 
         decimal currencyRate = GetCurrencyRate( booking.Currency );
 
-        // Изменил логику (поменял местами и считаю дни без учета часов)
+        // Changed the logic (reversed the positions and count the days without counting the hours)
         int daysBeforeArrival = ( booking.StartDate - DateTime.Now.Date ).Days;
 
-        // Изменил рассчет стоимости штрафа относительно валюты
+        // Changed the calculation of cancellation penalty amount relative to the currency
         return daysBeforeArrival switch
         {
             0 => 5000m / currencyRate,
@@ -154,10 +154,10 @@ public class BookingService : IBookingService
         return currencyRate;
     }
 
-    //Убрал неиспользуемый аргумент метода userId
+    // Removed the unused userId argument
     private static decimal CalculateBookingCost( decimal baseRate, int days, decimal currencyRate )
     {
-        // Изменил логику расчёта
+        // Changed the calculation logic
         decimal cost = ( baseRate * days ) / currencyRate;
         decimal totalCost = cost - cost * CalculateDiscount();
         return totalCost;
