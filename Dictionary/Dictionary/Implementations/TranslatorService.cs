@@ -17,7 +17,7 @@ public class TranslatorService : ITranslatorService
 
     private static Dictionary<string, string> LoadData( string filePath )
     {
-        var translations = new Dictionary<string, string>();
+        Dictionary<string, string> translations = new Dictionary<string, string>();
 
         try
         {
