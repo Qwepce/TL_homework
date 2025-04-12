@@ -5,7 +5,7 @@ namespace Dictionary.Implementations;
 
 public class TranslatorService : ITranslatorService
 {
-    private Dictionary<string, string> _dictionary = new Dictionary<string, string>();
+    private Dictionary<string, string> _dictionary = [];
 
     private readonly string _filePath;
 
@@ -21,7 +21,7 @@ public class TranslatorService : ITranslatorService
 
         try
         {
-            using ( StreamReader reader = new StreamReader( filePath ) )
+            using ( StreamReader reader = new( filePath ) )
             {
                 string line;
 
@@ -41,16 +41,13 @@ public class TranslatorService : ITranslatorService
         }
         catch ( FileNotFoundException )
         {
-            using ( File.CreateText( filePath ) )
-            {
-
-            }
+            using ( File.CreateText( filePath ) ) ;
         }
 
         return translations;
     }
 
-    public void GetAllTranslations()
+    public void PrintAllTranslations()
     {
         foreach ( KeyValuePair<string, string> pair in _dictionary )
         {
@@ -58,7 +55,7 @@ public class TranslatorService : ITranslatorService
         }
     }
 
-    public void GetTranslation( string word, bool isEnglishToRussian )
+    public void PrintTranslation( string word, bool isEnglishToRussian )
     {
         string? translation = isEnglishToRussian
             ? _dictionary.GetValueOrDefault( word )

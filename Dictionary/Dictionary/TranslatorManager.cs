@@ -4,14 +4,14 @@ using Dictionary.Utils;
 
 namespace Dictionary;
 
-public class TranslatorManager
+public static class TranslatorManager
 {
     public static void Run( ITranslatorService translatorService, ICustomValidator validator )
     {
         while ( true )
         {
             Console.Write( Messages.AskUserChoiceMessage );
-            UserCommand userCommandChoice = ( UserCommand )validator.GetValidUserChoice();
+            UserCommand userCommandChoice = ( UserCommand )validator.GetValidUserCommand();
 
             if ( userCommandChoice.Equals( UserCommand.Exit ) )
             {
@@ -39,13 +39,13 @@ public class TranslatorManager
             case UserCommand.RussianToEnglish:
                 word = validator.GetValidUserInput( Messages.AskUserInputMessage );
 
-                translatorService.GetTranslation( word, isEnglishToRussian: false );
+                translatorService.PrintTranslation( word, isEnglishToRussian: false );
                 break;
 
             case UserCommand.EnglishToRussian:
                 word = validator.GetValidUserInput( Messages.AskUserInputMessage );
 
-                translatorService.GetTranslation( word, isEnglishToRussian: true );
+                translatorService.PrintTranslation( word, isEnglishToRussian: true );
                 break;
 
             case UserCommand.AddNewRussianWord:
@@ -63,7 +63,7 @@ public class TranslatorManager
                 break;
 
             case UserCommand.GetAllTranslations:
-                translatorService.GetAllTranslations();
+                translatorService.PrintAllTranslations();
 
                 break;
 

@@ -2,7 +2,7 @@
 
 public interface ICustomValidator
 {
-    int GetValidUserChoice();
+    int GetValidUserCommand();
 
     string GetValidUserInput( string askUserInput );
 }

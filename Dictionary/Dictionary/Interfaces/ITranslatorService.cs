@@ -2,9 +2,9 @@
 
 public interface ITranslatorService
 {
-    void GetAllTranslations();
+    void PrintAllTranslations();
 
-    void GetTranslation( string word, bool isEnglishToRussian );
+    void PrintTranslation( string word, bool isEnglishToRussian );
 
     void AddNewTranslation( string word, string translation );
 }

@@ -5,7 +5,7 @@ namespace Dictionary.Implementations;
 
 public class CustomValidator : ICustomValidator
 {
-    public int GetValidUserChoice()
+    public int GetValidUserCommand()
     {
         string userCommandInput = Console.ReadLine();
 
