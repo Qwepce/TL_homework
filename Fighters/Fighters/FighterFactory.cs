@@ -16,7 +16,8 @@ public static class FighterFactory
     {
         SetValidator( validator );
 
-        string fighterName = s_validator.GetValidUserInput( Messages.AskFighterNameMessage );
+        Console.Write( Messages.AskFighterNameMessage );
+        string fighterName = s_validator.GetValidUserInput();
 
         IRace race = SelectAvailableOption(
             FighterOption.Races,
@@ -61,7 +62,7 @@ public static class FighterFactory
 
         do
         {
-            userSelectedOption = s_validator.GetPositiveIntegerInput( Messages.UnknownOptionSelected );
+            userSelectedOption = s_validator.GetPositiveIntegerInput();
 
             if ( !options.ContainsKey( userSelectedOption ) )
             {

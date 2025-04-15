@@ -18,7 +18,7 @@ public class Messages
 
     public const string UnknownOptionSelected = "Выбрана неизвестная опция. Повторите ввод: ";
     public const string InvalidUserNumberInput = "Ввод должен быть в формате целого числа положительного числа. Повторите ввод: ";
-    public const string InvalidUserInput = "Введены некорректные данные, строка не может быть пустой. Повторите ввод.";
+    public const string InvalidUserInput = "Введены некорректные данные, строка не может быть пустой. Повторите ввод: ";
     public const string InvalidNumberOfFighters = "Для начала боёв количество бойцов должно быть больше или равно 2. Повторите ввод: ";
 
     public const string RaceOptionsMessage = """

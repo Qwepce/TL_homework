@@ -33,7 +33,7 @@ public static class GameManager
         Console.Write( Messages.AskUserInputNumberOfFighters );
         int numberOfFighters;
 
-        while ( ( numberOfFighters = validator.GetPositiveIntegerInput( Messages.InvalidNumberOfFighters ) ) < 2 )
+        while ( ( numberOfFighters = validator.GetPositiveIntegerInput() ) < 2 )
         {
             Console.Write( Messages.InvalidNumberOfFighters );
         }

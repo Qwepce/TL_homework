@@ -4,7 +4,7 @@ namespace Fighters.Validator;
 
 public class CustomValidator : ICustomValidator
 {
-    public int GetPositiveIntegerInput( string errorMessage )
+    public int GetPositiveIntegerInput()
     {
         string userCommandInput = Console.ReadLine();
 
@@ -20,15 +20,13 @@ public class CustomValidator : ICustomValidator
         return userCommandChoice;
     }
 
-    public string GetValidUserInput( string message )
+    public string GetValidUserInput()
     {
-        Console.Write( message );
         string userInput;
 
         while ( string.IsNullOrEmpty( userInput = Console.ReadLine()?.Trim() ) )
         {
-            Console.WriteLine( Messages.InvalidUserInput );
-            Console.Write( message );
+            Console.Write( Messages.InvalidUserInput );
         }
 
         return userInput;

@@ -2,7 +2,7 @@
 
 public interface ICustomValidator
 {
-    int GetPositiveIntegerInput( string errorMessage );
+    int GetPositiveIntegerInput();
 
-    string GetValidUserInput( string message );
+    string GetValidUserInput();
 }
