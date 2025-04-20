@@ -4,7 +4,6 @@ namespace CarFactory.Models.BodyShape;
 
 public class BodyShape : IBodyShape
 {
-
     public string Name { get; }
 
     public double DragCoefficient { get; }
