@@ -32,8 +32,7 @@ public class CarManager
         switch ( command )
         {
             case UserCommand.Add:
-                Car newCar = CarsFactory.CreateCar();
-                _cars.Add( newCar );
+                AddNewConfiguration();
                 Console.WriteLine( Messages.NewCarAddedSuccessfully );
                 break;
 
@@ -50,6 +49,12 @@ public class CarManager
                 Console.WriteLine( Messages.UnknownCommandSelected );
                 break;
         }
+    }
+
+    private void AddNewConfiguration()
+    {
+        Car newCar = CarsFactory.CreateCar();
+        _cars.Add( newCar );
     }
 
     private void PrintAllCars()

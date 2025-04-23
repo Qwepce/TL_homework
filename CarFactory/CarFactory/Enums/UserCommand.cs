@@ -2,8 +2,8 @@
 
 public enum UserCommand
 {
-    Add,
-    List,
-    Clear,
-    Exit
+    Add = 1,
+    List = 2,
+    Clear = 3,
+    Exit = 4
 }
