@@ -6,18 +6,21 @@ using Fighters.Models.Weapons;
 using Fighters.Utils;
 using Fighters.Validator;
 
-namespace Fighters;
+namespace Fighters.Factory;
 
-public static class FighterFactory
+public class FighterFactory : IFighterFactory
 {
-    private static ICustomValidator s_validator;
+    private readonly ICustomValidator _validator;
 
-    public static IFighter CreateFighter( ICustomValidator validator )
+    public FighterFactory( ICustomValidator validator )
     {
-        SetValidator( validator );
+        _validator = validator;
+    }
 
+    public IFighter CreateFighter()
+    {
         Console.Write( Messages.AskFighterNameMessage );
-        string fighterName = s_validator.GetValidUserInput();
+        string fighterName = _validator.GetValidUserInput();
 
         IRace race = SelectAvailableOption(
             FighterOption.Races,
@@ -49,7 +52,7 @@ public static class FighterFactory
         return createdFighter;
     }
 
-    private static T SelectAvailableOption<T>(
+    private T SelectAvailableOption<T>(
         Dictionary<int, T> options,
         string askUserSelectOption,
         string optionsMenuMessage )
@@ -58,24 +61,15 @@ public static class FighterFactory
         Console.WriteLine( optionsMenuMessage );
 
         Console.Write( Messages.AskUserSelectOption );
-        int userSelectedOption;
+        int userSelectedOption = _validator.GetPositiveIntegerInput();
 
-        do
+        while ( !options.ContainsKey( userSelectedOption ) )
         {
-            userSelectedOption = s_validator.GetPositiveIntegerInput();
+            Console.Write( Messages.UnknownOptionSelected );
+            userSelectedOption = _validator.GetPositiveIntegerInput();
 
-            if ( !options.ContainsKey( userSelectedOption ) )
-            {
-                Console.Write( Messages.UnknownOptionSelected );
-            }
-
-        } while ( !options.ContainsKey( userSelectedOption ) );
+        }
 
         return options[ userSelectedOption ];
-    }
-
-    private static void SetValidator( ICustomValidator validator )
-    {
-        s_validator = validator;
     }
 }

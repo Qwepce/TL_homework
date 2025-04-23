@@ -6,7 +6,7 @@ public class Messages
 {
     public const string GreetingMessage = "Добро пожаловать на безжалостную арену гладиаторов!";
 
-    public const string AskUserInputNumberOfFighters = "Введите количество бойцов: ";
+    public const string AskUserInputNumberOfFighters = "Введите количество бойцов (2 и более): ";
 
     public const string AskFighterNameMessage = "Введите имя бойца: ";
     public const string SelectRaceMessage = "Выберите расу бойца:";
@@ -97,5 +97,10 @@ public class Messages
     public static void PrintMessageAboutFightersDeath( IFighter fighter )
     {
         Console.WriteLine( $"Боец {fighter.GetName()} погибает" );
+    }
+
+    public static void PrintInvalidUserIntegerInput( int lowerLimit )
+    {
+        Console.Write( $"Ввод должен быть в формате целого числа больше или равно {lowerLimit}. Повторите ввод: " );
     }
 }

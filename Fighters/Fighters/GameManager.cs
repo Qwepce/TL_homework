@@ -1,123 +1,99 @@
 ﻿using Fighters.Extensions;
+using Fighters.Factory;
 using Fighters.Models.Fighters;
 using Fighters.Utils;
 using Fighters.Validator;
 
 namespace Fighters;
 
-public static class GameManager
+public class GameManager
 {
-    public static IFighter PlayGame( ICustomValidator validator )
+    private readonly IFighterFactory _fighterFactory;
+    private readonly ICustomValidator _validator;
+
+    private List<IFighter> _fighters = [];
+    private int _roundNumber = 1;
+
+    public GameManager( IFighterFactory fighterFactory, ICustomValidator validator )
     {
-        List<IFighter> fighters = InitFighters( validator );
+        _fighterFactory = fighterFactory;
+        _validator = validator;
+    }
 
-        int roundCounter = 1;
+    public IFighter PlayGame()
+    {
+        InitFighters();
 
-        while ( fighters.Count > 1 )
+        while ( _fighters.Count > 1 )
         {
-            PlayRound( fighters, roundCounter++ );
+            PlayRound();
         }
 
-        return fighters[ 0 ];
+        return _fighters[ 0 ];
     }
 
-    private static List<IFighter> InitFighters( ICustomValidator validator )
-    {
-        List<IFighter> fighters = AskUserCreateFighters( validator );
-
-        return fighters;
-    }
-
-    private static List<IFighter> AskUserCreateFighters( ICustomValidator validator )
+    private void InitFighters()
     {
         Console.Write( Messages.AskUserInputNumberOfFighters );
-        int numberOfFighters;
-
-        while ( ( numberOfFighters = validator.GetPositiveIntegerInput() ) < 2 )
-        {
-            Console.Write( Messages.InvalidNumberOfFighters );
-        }
-
-        List<IFighter> fighters = [];
+        int numberOfFighters = _validator.GetPositiveIntegerInput( 2 );
 
         for ( int i = 1; i <= numberOfFighters; i++ )
         {
-            IFighter newFighter = FighterFactory.CreateFighter( validator );
+            IFighter newFighter = _fighterFactory.CreateFighter();
 
-            fighters.Add( newFighter );
+            _fighters.Add( newFighter );
 
             Messages.PrintSuccessfullFighterCreation( i, newFighter );
         }
-
-        return fighters;
     }
 
-    private static void PlayRound( List<IFighter> fighters, int roundNumber )
+    private void PlayRound()
     {
-        Random random = new Random();
+        List<int> randomFightersIndices = Enumerable.Range( 0, _fighters.Count )
+            .OrderBy( x => Random.Shared.Next() )
+            .Take( 2 )
+            .ToList();
 
-        int firstFighterIndex = random.Next( fighters.Count );
-        int secondFighterIndex;
+        int firstFighterIndex = randomFightersIndices[ 0 ];
+        int secondFighterIndex = randomFightersIndices[ 1 ];
 
-        do
-        {
-            secondFighterIndex = random.Next( fighters.Count );
-        } while ( secondFighterIndex == firstFighterIndex );
+        IFighter firstFighter = _fighters[ firstFighterIndex ];
+        IFighter secondFighter = _fighters[ secondFighterIndex ];
 
-        IFighter firstFighter = fighters[ firstFighterIndex ];
-        IFighter secondFighter = fighters[ secondFighterIndex ];
+        ProcessBattleBetweenFighters( firstFighter, secondFighter );
 
-        ProcessBattleBetweenFighters(
-            fighters,
-            firstFighter,
-            secondFighter,
-            roundNumber );
-
+        _roundNumber++;
     }
 
-    private static void ProcessBattleBetweenFighters(
-        List<IFighter> fighters,
+    private void ProcessBattleBetweenFighters(
         IFighter firstFighter,
-        IFighter secondFighter,
-        int roundNumber )
+        IFighter secondFighter )
     {
-        Thread.Sleep( 1000 );
-        Messages.PrintFightersNameAndRoundNumber( roundNumber, firstFighter, secondFighter );
+        Messages.PrintFightersNameAndRoundNumber( _roundNumber, firstFighter, secondFighter );
 
-        bool secondFighterDied = AttackAndCheckDefenderDeath( fighters, firstFighter, secondFighter );
+        ProcessAttack( attacker: firstFighter, defender: secondFighter );
 
-        if ( secondFighterDied )
+        if ( !secondFighter.IsAlive() )
         {
             Messages.PrintMessageAboutFightersDeath( secondFighter );
-            fighters.Remove( secondFighter );
+            _fighters.Remove( secondFighter );
             return;
         }
 
-        bool firstFighterDied = AttackAndCheckDefenderDeath( fighters, secondFighter, firstFighter );
+        ProcessAttack( attacker: secondFighter, defender: firstFighter );
 
-        if ( firstFighterDied )
+        if ( !firstFighter.IsAlive() )
         {
             Messages.PrintMessageAboutFightersDeath( firstFighter );
-            fighters.Remove( firstFighter );
+            _fighters.Remove( firstFighter );
         }
     }
 
-    private static bool AttackAndCheckDefenderDeath(
-        List<IFighter> fighters,
-        IFighter attacker,
-        IFighter defender )
+    private void ProcessAttack( IFighter attacker, IFighter defender )
     {
         int damage = attacker.CalculateDamage();
         defender.TakeDamage( damage );
 
-        Thread.Sleep( 1000 );
         Messages.PrintInfoAboutFighterAfterRound( defender, damage );
-
-        if ( !defender.IsAlive() )
-        {
-            return true;
-        }
-
-        return false;
     }
 }

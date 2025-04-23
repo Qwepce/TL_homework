@@ -4,15 +4,15 @@ namespace Fighters.Validator;
 
 public class CustomValidator : ICustomValidator
 {
-    public int GetPositiveIntegerInput()
+    public int GetPositiveIntegerInput( int lowerLimit = 1 )
     {
         string userCommandInput = Console.ReadLine();
 
         int userCommandChoice;
 
-        while ( !int.TryParse( userCommandInput, out userCommandChoice ) || userCommandChoice <= 0 )
+        while ( !int.TryParse( userCommandInput, out userCommandChoice ) || userCommandChoice < lowerLimit )
         {
-            Console.Write( Messages.InvalidUserNumberInput );
+            Messages.PrintInvalidUserIntegerInput( lowerLimit );
 
             userCommandInput = Console.ReadLine();
         }
