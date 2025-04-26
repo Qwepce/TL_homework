@@ -1,4 +1,4 @@
-﻿using CarFactory.ConsoleReader;
+﻿using CarFactory.ConsoleInputReader;
 using CarFactory.Factory;
 using CarFactory.Utils;
 
@@ -8,9 +8,9 @@ public class Program
 {
     public static void Main()
     {
-        IInputReader consoleInputReader = new ConsoleInputReader();
-        ICarsFactory carsFactory = new CarsFactory( consoleInputReader );
-        ICarManager carManager = new CarManager( consoleInputReader, carsFactory );
+        IInputReader consoleInputReader = new InputReader();
+        ICarFactory carFactory = new Factory.CarFactory( consoleInputReader );
+        ICarManager carManager = new CarManager( consoleInputReader, carFactory );
 
         Console.WriteLine( Messages.GreetingMessage );
 

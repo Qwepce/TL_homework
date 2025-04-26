@@ -1,9 +1,9 @@
 ﻿using CarFactory.Enums;
 using CarFactory.Utils;
 
-namespace CarFactory.ConsoleReader;
+namespace CarFactory.ConsoleInputReader;
 
-public class ConsoleInputReader : IInputReader
+public class InputReader : IInputReader
 {
     public int GetValidUserOption()
     {

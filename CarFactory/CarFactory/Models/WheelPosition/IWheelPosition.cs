@@ -1,5 +1,5 @@
 ﻿namespace CarFactory.Models.WheelPosition;
 
-public interface IWheelPosition : IHaveName
+public interface IWheelPosition : IHasName
 {
 }

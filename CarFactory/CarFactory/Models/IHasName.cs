@@ -1,6 +1,6 @@
 ﻿namespace CarFactory.Models;
 
-public interface IHaveName
+public interface IHasName
 {
     public string Name { get; }
 }

@@ -1,4 +1,4 @@
-﻿using CarFactory.ConsoleReader;
+﻿using CarFactory.ConsoleInputReader;
 using CarFactory.Models;
 using CarFactory.Models.BodyShapes;
 using CarFactory.Models.Brand;
@@ -15,13 +15,13 @@ using CarFactory.Utils;
 
 namespace CarFactory.Factory;
 
-public class CarsFactory : ICarsFactory
+public class CarFactory : ICarFactory
 {
     private readonly IInputReader _inputReader;
 
-    public CarsFactory( IInputReader consoleInputReader )
+    public CarFactory( IInputReader inputReader )
     {
-        _inputReader = consoleInputReader;
+        _inputReader = inputReader;
     }
 
     public ICar CreateCar()
@@ -71,7 +71,7 @@ public class CarsFactory : ICarsFactory
 
     private T SelectAvailableOptions<T>(
         IReadOnlyDictionary<int, T> options,
-        string optionsMessage ) where T : IHaveName
+        string optionsMessage ) where T : IHasName
     {
         int userOptionChoice;
 

@@ -2,7 +2,7 @@
 
 namespace CarFactory.Models.Transmissions;
 
-public interface ITransmission : IHaveName
+public interface ITransmission : IHasName
 {
     int GearsCount { get; }
 

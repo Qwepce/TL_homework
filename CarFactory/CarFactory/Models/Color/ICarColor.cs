@@ -1,5 +1,5 @@
 ﻿namespace CarFactory.Models.Colors;
 
-public interface ICarColor : IHaveName
+public interface ICarColor : IHasName
 {
 }

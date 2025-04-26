@@ -1,4 +1,4 @@
-﻿using CarFactory.ConsoleReader;
+﻿using CarFactory.ConsoleInputReader;
 using CarFactory.Enums;
 using CarFactory.Factory;
 using CarFactory.Models.Car;
@@ -9,14 +9,14 @@ namespace CarFactory;
 public class CarManager : ICarManager
 {
     private readonly IInputReader _inputReader;
-    private readonly ICarsFactory _carsFactory;
+    private readonly ICarFactory _carFactory;
 
     private List<ICar> _cars = [];
 
-    public CarManager( IInputReader consoleReader, ICarsFactory carsFactory )
+    public CarManager( IInputReader inputReader, ICarFactory carFactory )
     {
-        _inputReader = consoleReader;
-        _carsFactory = carsFactory;
+        _inputReader = inputReader;
+        _carFactory = carFactory;
     }
 
     public void Run()
@@ -62,7 +62,7 @@ public class CarManager : ICarManager
 
     private void AddNewCarConfiguration()
     {
-        ICar newCar = _carsFactory.CreateCar();
+        ICar newCar = _carFactory.CreateCar();
         _cars.Add( newCar );
     }
 

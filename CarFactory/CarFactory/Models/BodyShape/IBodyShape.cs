@@ -1,6 +1,6 @@
 ﻿namespace CarFactory.Models.BodyShapes;
 
-public interface IBodyShape : IHaveName
+public interface IBodyShape : IHasName
 {
     public double DragCoefficient { get; }
 

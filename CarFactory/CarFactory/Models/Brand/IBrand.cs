@@ -2,7 +2,7 @@
 
 namespace CarFactory.Models.Brand;
 
-public interface IBrand : IHaveName
+public interface IBrand : IHasName
 {
     IReadOnlyDictionary<int, IModel> GetBrandModels();
 }

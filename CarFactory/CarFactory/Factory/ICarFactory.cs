@@ -2,7 +2,7 @@
 
 namespace CarFactory.Factory;
 
-public interface ICarsFactory
+public interface ICarFactory
 {
     ICar CreateCar();
 }
