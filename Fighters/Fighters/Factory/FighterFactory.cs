@@ -1,26 +1,26 @@
-﻿using Fighters.Models.Armors;
+﻿using Fighters.ConsoleReader;
+using Fighters.Models.Armors;
 using Fighters.Models.Classes;
 using Fighters.Models.Fighters;
 using Fighters.Models.Races;
 using Fighters.Models.Weapons;
 using Fighters.Utils;
-using Fighters.Validator;
 
 namespace Fighters.Factory;
 
 public class FighterFactory : IFighterFactory
 {
-    private readonly ICustomValidator _validator;
+    private readonly IConsoleInputReader _consoleReader;
 
-    public FighterFactory( ICustomValidator validator )
+    public FighterFactory( IConsoleInputReader consoleReader )
     {
-        _validator = validator;
+        _consoleReader = consoleReader;
     }
 
     public IFighter CreateFighter()
     {
         Console.Write( Messages.AskFighterNameMessage );
-        string fighterName = _validator.GetValidUserInput();
+        string fighterName = _consoleReader.GetValidUserStringInput();
 
         IRace race = SelectAvailableOption(
             FighterOption.Races,
@@ -61,13 +61,13 @@ public class FighterFactory : IFighterFactory
         Console.WriteLine( optionsMenuMessage );
 
         Console.Write( Messages.AskUserSelectOption );
-        int userSelectedOption = _validator.GetPositiveIntegerInput();
+
+        int userSelectedOption = _consoleReader.GetValidPositiveIntegerInput();
 
         while ( !options.ContainsKey( userSelectedOption ) )
         {
             Console.Write( Messages.UnknownOptionSelected );
-            userSelectedOption = _validator.GetPositiveIntegerInput();
-
+            userSelectedOption = _consoleReader.GetValidPositiveIntegerInput();
         }
 
         return options[ userSelectedOption ];

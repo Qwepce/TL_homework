@@ -1,10 +1,10 @@
 ﻿using Fighters.Utils;
 
-namespace Fighters.Validator;
+namespace Fighters.ConsoleReader;
 
-public class CustomValidator : ICustomValidator
+public class ConsoleInputReader : IConsoleInputReader
 {
-    public int GetPositiveIntegerInput( int lowerLimit = 1 )
+    public int GetValidPositiveIntegerInput( int lowerLimit = 1 )
     {
         string userCommandInput = Console.ReadLine();
 
@@ -20,7 +20,7 @@ public class CustomValidator : ICustomValidator
         return userCommandChoice;
     }
 
-    public string GetValidUserInput()
+    public string GetValidUserStringInput()
     {
         string userInput;
 

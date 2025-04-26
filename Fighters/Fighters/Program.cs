@@ -1,7 +1,7 @@
-﻿using Fighters.Factory;
+﻿using Fighters.ConsoleReader;
+using Fighters.Factory;
 using Fighters.Models.Fighters;
 using Fighters.Utils;
-using Fighters.Validator;
 
 namespace Fighters;
 
@@ -9,9 +9,9 @@ public class Program
 {
     public static void Main()
     {
-        ICustomValidator validator = new CustomValidator();
-        IFighterFactory fighterFactory = new FighterFactory( validator );
-        GameManager gameManager = new GameManager( fighterFactory, validator );
+        IConsoleInputReader consoleReader = new ConsoleInputReader();
+        IFighterFactory fighterFactory = new FighterFactory( consoleReader );
+        IGameManager gameManager = new GameManager( fighterFactory, consoleReader );
 
         Console.WriteLine( Messages.GreetingMessage );
 
