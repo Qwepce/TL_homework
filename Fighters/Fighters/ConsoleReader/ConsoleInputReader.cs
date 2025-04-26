@@ -6,18 +6,18 @@ public class ConsoleInputReader : IConsoleInputReader
 {
     public int GetValidPositiveIntegerInput( int lowerLimit = 1 )
     {
-        string userCommandInput = Console.ReadLine();
+        string userInput = Console.ReadLine();
 
-        int userCommandChoice;
+        int parsedIntegerFromUserInput;
 
-        while ( !int.TryParse( userCommandInput, out userCommandChoice ) || userCommandChoice < lowerLimit )
+        while ( !int.TryParse( userInput, out parsedIntegerFromUserInput ) || parsedIntegerFromUserInput < lowerLimit )
         {
             Messages.PrintInvalidUserIntegerInput( lowerLimit );
 
-            userCommandInput = Console.ReadLine();
+            userInput = Console.ReadLine();
         }
 
-        return userCommandChoice;
+        return parsedIntegerFromUserInput;
     }
 
     public string GetValidUserStringInput()
