@@ -9,16 +9,16 @@ namespace Fighters;
 public class GameManager : IGameManager
 {
     private readonly IFighterFactory _fighterFactory;
-    private readonly IConsoleInputReader _validator;
+    private readonly IConsoleInputReader _consoleReader;
 
     private List<IFighter> _fighters = [];
     private int _roundNumber = 1;
     private const int FightersCountInBattleRound = 2;
 
-    public GameManager( IFighterFactory fighterFactory, IConsoleInputReader validator )
+    public GameManager( IFighterFactory fighterFactory, IConsoleInputReader consoleReader )
     {
         _fighterFactory = fighterFactory;
-        _validator = validator;
+        _consoleReader = consoleReader;
     }
 
     public IFighter PlayGame()
@@ -36,7 +36,7 @@ public class GameManager : IGameManager
     private void InitFighters()
     {
         Console.Write( Messages.AskUserInputNumberOfFighters );
-        int numberOfFighters = _validator.GetValidPositiveIntegerInput( lowerLimit: 2 );
+        int numberOfFighters = _consoleReader.GetValidPositiveIntegerInput( lowerLimit: 2 );
 
         for ( int i = 1; i <= numberOfFighters; i++ )
         {
