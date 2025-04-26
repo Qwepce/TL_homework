@@ -1,4 +1,5 @@
-﻿using CarFactory.Models;
+﻿using CarFactory.ConsoleReader;
+using CarFactory.Models;
 using CarFactory.Models.BodyShapes;
 using CarFactory.Models.Brand;
 using CarFactory.Models.Car;
@@ -11,13 +12,19 @@ using CarFactory.Models.Transmissions;
 using CarFactory.Models.WheelPosition;
 using CarFactory.Store;
 using CarFactory.Utils;
-using CarFactory.Validator;
 
 namespace CarFactory.Factory;
 
-public static class CarsFactory
+public class CarsFactory : ICarsFactory
 {
-    public static Car CreateCar()
+    private readonly IInputReader _inputReader;
+
+    public CarsFactory( IInputReader consoleInputReader )
+    {
+        _inputReader = consoleInputReader;
+    }
+
+    public ICar CreateCar()
     {
         IBrand carBrand = SelectAvailableOptions(
             CarOptionsStore.Brands,
@@ -51,7 +58,7 @@ public static class CarsFactory
 
         ICarBody carBody = new CarBody( carBodyShape, carColor );
 
-        Car newCar = new Car(
+        ICar newCar = new Car(
             carBrand,
             carModel,
             carEngine,
@@ -62,7 +69,7 @@ public static class CarsFactory
         return newCar;
     }
 
-    private static T SelectAvailableOptions<T>(
+    private T SelectAvailableOptions<T>(
         IReadOnlyDictionary<int, T> options,
         string optionsMessage ) where T : IHaveName
     {
@@ -79,7 +86,7 @@ public static class CarsFactory
 
         while ( true )
         {
-            userOptionChoice = CustomValidator.GetValidUserOption();
+            userOptionChoice = _inputReader.GetValidUserOption();
 
             if ( options.ContainsKey( userOptionChoice ) )
             {

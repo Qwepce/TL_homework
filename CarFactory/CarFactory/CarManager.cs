@@ -1,14 +1,23 @@
-﻿using CarFactory.Enums;
+﻿using CarFactory.ConsoleReader;
+using CarFactory.Enums;
 using CarFactory.Factory;
 using CarFactory.Models.Car;
 using CarFactory.Utils;
-using CarFactory.Validator;
 
 namespace CarFactory;
 
-public class CarManager
+public class CarManager : ICarManager
 {
-    private List<Car> _cars = [];
+    private readonly IInputReader _inputReader;
+    private readonly ICarsFactory _carsFactory;
+
+    private List<ICar> _cars = [];
+
+    public CarManager( IInputReader consoleReader, ICarsFactory carsFactory )
+    {
+        _inputReader = consoleReader;
+        _carsFactory = carsFactory;
+    }
 
     public void Run()
     {
@@ -16,7 +25,7 @@ public class CarManager
 
         while ( true )
         {
-            UserCommand userCommand = CustomValidator.GetValidUserCommand();
+            UserCommand userCommand = _inputReader.GetValidUserCommand();
 
             if ( userCommand.Equals( UserCommand.Exit ) )
             {
@@ -53,7 +62,7 @@ public class CarManager
 
     private void AddNewCarConfiguration()
     {
-        Car newCar = CarsFactory.CreateCar();
+        ICar newCar = _carsFactory.CreateCar();
         _cars.Add( newCar );
     }
 

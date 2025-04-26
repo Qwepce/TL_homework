@@ -1,11 +1,11 @@
 ﻿using CarFactory.Enums;
 using CarFactory.Utils;
 
-namespace CarFactory.Validator;
+namespace CarFactory.ConsoleReader;
 
-public static class CustomValidator
+public class ConsoleInputReader : IInputReader
 {
-    public static int GetValidUserOption()
+    public int GetValidUserOption()
     {
         while ( true )
         {
@@ -18,7 +18,7 @@ public static class CustomValidator
         }
     }
 
-    public static UserCommand GetValidUserCommand()
+    public UserCommand GetValidUserCommand()
     {
         while ( true )
         {
