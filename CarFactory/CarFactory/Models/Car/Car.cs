@@ -2,7 +2,7 @@
 using CarFactory.Models.CarBody;
 using CarFactory.Models.Engine;
 using CarFactory.Models.Model;
-using CarFactory.Models.Transmissions;
+using CarFactory.Models.Transmission;
 using CarFactory.Models.WheelPosition;
 
 namespace CarFactory.Models.Car;

@@ -1,7 +1,6 @@
 ﻿using CarFactory.Enums;
-using CarFactory.Utils;
 
-namespace CarFactory.ConsoleInputReader;
+namespace CarFactory.Utils.UserInputReader;
 
 public class InputReader : IInputReader
 {

@@ -1,6 +1,4 @@
-﻿using CarFactory.Models.Colors;
-
-namespace CarFactory.Models.Color;
+﻿namespace CarFactory.Models.Color;
 
 public class CarColor : ICarColor
 {

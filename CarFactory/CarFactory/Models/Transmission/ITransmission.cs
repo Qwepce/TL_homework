@@ -1,6 +1,6 @@
 ﻿using CarFactory.Enums;
 
-namespace CarFactory.Models.Transmissions;
+namespace CarFactory.Models.Transmission;
 
 public interface ITransmission : IHasName
 {

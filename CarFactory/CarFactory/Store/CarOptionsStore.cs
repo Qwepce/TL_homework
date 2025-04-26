@@ -1,13 +1,10 @@
 ﻿using System.Collections.Frozen;
 using CarFactory.Enums;
 using CarFactory.Models.BodyShape;
-using CarFactory.Models.BodyShapes;
 using CarFactory.Models.Brand;
 using CarFactory.Models.Color;
-using CarFactory.Models.Colors;
 using CarFactory.Models.Engine;
 using CarFactory.Models.Transmission;
-using CarFactory.Models.Transmissions;
 using CarFactory.Models.WheelPosition;
 
 namespace CarFactory.Store;

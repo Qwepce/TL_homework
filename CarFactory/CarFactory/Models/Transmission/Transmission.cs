@@ -1,5 +1,4 @@
 ﻿using CarFactory.Enums;
-using CarFactory.Models.Transmissions;
 
 namespace CarFactory.Models.Transmission;
 

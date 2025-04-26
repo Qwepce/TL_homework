@@ -1,4 +1,4 @@
-﻿namespace CarFactory.Models.BodyShapes;
+﻿namespace CarFactory.Models.BodyShape;
 
 public interface IBodyShape : IHasName
 {

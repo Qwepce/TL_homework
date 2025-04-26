@@ -1,6 +1,6 @@
-﻿using CarFactory.ConsoleInputReader;
-using CarFactory.Factory;
+﻿using CarFactory.Factory;
 using CarFactory.Utils;
+using CarFactory.Utils.UserInputReader;
 
 namespace CarFactory;
 
@@ -8,9 +8,9 @@ public class Program
 {
     public static void Main()
     {
-        IInputReader consoleInputReader = new InputReader();
-        ICarFactory carFactory = new Factory.CarFactory( consoleInputReader );
-        ICarManager carManager = new CarManager( consoleInputReader, carFactory );
+        IInputReader inputReader = new InputReader();
+        ICarFactory carFactory = new Factory.CarFactory( inputReader );
+        ICarManager carManager = new CarManager( inputReader, carFactory );
 
         Console.WriteLine( Messages.GreetingMessage );
 

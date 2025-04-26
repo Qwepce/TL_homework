@@ -1,17 +1,16 @@
-﻿using CarFactory.ConsoleInputReader;
-using CarFactory.Models;
-using CarFactory.Models.BodyShapes;
+﻿using CarFactory.Models;
+using CarFactory.Models.BodyShape;
 using CarFactory.Models.Brand;
 using CarFactory.Models.Car;
 using CarFactory.Models.CarBody;
-using CarFactory.Models.Colors;
+using CarFactory.Models.Color;
 using CarFactory.Models.Engine;
-using CarFactory.Models.IBody;
 using CarFactory.Models.Model;
-using CarFactory.Models.Transmissions;
+using CarFactory.Models.Transmission;
 using CarFactory.Models.WheelPosition;
 using CarFactory.Store;
 using CarFactory.Utils;
+using CarFactory.Utils.UserInputReader;
 
 namespace CarFactory.Factory;
 

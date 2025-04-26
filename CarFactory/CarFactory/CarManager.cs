@@ -1,8 +1,8 @@
-﻿using CarFactory.ConsoleInputReader;
-using CarFactory.Enums;
+﻿using CarFactory.Enums;
 using CarFactory.Factory;
 using CarFactory.Models.Car;
 using CarFactory.Utils;
+using CarFactory.Utils.UserInputReader;
 
 namespace CarFactory;
 

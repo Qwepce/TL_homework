@@ -1,8 +1,7 @@
-﻿using CarFactory.Models.BodyShapes;
-using CarFactory.Models.CarBody;
-using CarFactory.Models.Colors;
+﻿using CarFactory.Models.BodyShape;
+using CarFactory.Models.Color;
 
-namespace CarFactory.Models.IBody;
+namespace CarFactory.Models.CarBody;
 
 public class CarBody : ICarBody
 {

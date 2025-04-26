@@ -1,5 +1,5 @@
-﻿using CarFactory.Models.BodyShapes;
-using CarFactory.Models.Colors;
+﻿using CarFactory.Models.BodyShape;
+using CarFactory.Models.Color;
 
 namespace CarFactory.Models.CarBody;
 
