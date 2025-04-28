@@ -10,7 +10,12 @@ public class Program
     public static void Main()
     {
         IConsoleInputReader consoleReader = new ConsoleInputReader();
-        IFighterFactory fighterFactory = new FighterFactory( consoleReader );
+        IFighterFactory fighterFactory = new FighterFactory(
+            consoleReader,
+            FighterOption.Races,
+            FighterOption.Weapons,
+            FighterOption.Armors,
+            FighterOption.FighterClasses );
         IGameManager gameManager = new GameManager( fighterFactory, consoleReader );
 
         Console.WriteLine( Messages.GreetingMessage );

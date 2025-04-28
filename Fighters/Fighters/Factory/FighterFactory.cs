@@ -11,10 +11,23 @@ namespace Fighters.Factory;
 public class FighterFactory : IFighterFactory
 {
     private readonly IConsoleInputReader _consoleReader;
+    private readonly Dictionary<int, IRace> _races;
+    private readonly Dictionary<int, IWeapon> _weapons;
+    private readonly Dictionary<int, IArmor> _armors;
+    private readonly Dictionary<int, IFighterClass> _fighterClasses;
 
-    public FighterFactory( IConsoleInputReader consoleReader )
+    public FighterFactory(
+        IConsoleInputReader consoleReader,
+        Dictionary<int, IRace> races,
+        Dictionary<int, IWeapon> weapons,
+        Dictionary<int, IArmor> armors,
+        Dictionary<int, IFighterClass> fighterClasses )
     {
         _consoleReader = consoleReader;
+        _races = races;
+        _weapons = weapons;
+        _armors = armors;
+        _fighterClasses = fighterClasses;
     }
 
     public IFighter CreateFighter()
@@ -23,22 +36,22 @@ public class FighterFactory : IFighterFactory
         string fighterName = _consoleReader.GetValidUserStringInput();
 
         IRace race = SelectAvailableOption(
-            FighterOption.Races,
+            _races,
             Messages.SelectRaceMessage,
             Messages.RaceOptionsMessage );
 
         IWeapon weapon = SelectAvailableOption(
-            FighterOption.Weapons,
+            _weapons,
             Messages.SelectWeaponMessage,
             Messages.WeaponOptionsMessage );
 
         IArmor armor = SelectAvailableOption(
-            FighterOption.Armors,
+            _armors,
             Messages.SelectArmorMessage,
             Messages.ArmorOptionsMessage );
 
         IFighterClass fighterClass = SelectAvailableOption(
-            FighterOption.FighterClasses,
+            _fighterClasses,
             Messages.SelectFighterClassMessage,
             Messages.FighterClassesOptionsMessage );
 
