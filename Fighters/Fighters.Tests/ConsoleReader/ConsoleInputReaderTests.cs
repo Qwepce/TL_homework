@@ -10,7 +10,7 @@ public class ConsoleInputReaderTests
         // Arrange
         var mockReader = new Mock<ConsoleInputReader>();
         mockReader
-            .Setup( c => c.ReadLine() )
+            .Setup( r => r.ReadLine() )
             .Returns( "10" );
 
         var reader = mockReader.Object;

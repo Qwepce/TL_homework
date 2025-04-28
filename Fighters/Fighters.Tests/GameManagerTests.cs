@@ -8,10 +8,11 @@ namespace Fighters.Tests;
 
 public class GameManagerTests
 {
+    private readonly GameManager _gameManager;
     private readonly Mock<IFighterFactory> _fighterFactory;
     private readonly Mock<IConsoleInputReader> _consoleReader;
 
-    private readonly GameManager _gameManager;
+    private const int lowerLimit = 2;
 
     public GameManagerTests()
     {
@@ -22,32 +23,21 @@ public class GameManagerTests
     }
 
     [Fact]
-    public void PlayGame_WithTwoFighters_ShouldReturnsWinner()
+    public void PlayGame_WithTwoFighters_ShouldReturnWinner()
     {
         // Arrange
-        var firstFigher = new Mock<IFighter>();
-        var secondFighter = new Mock<IFighter>();
+        var fighters = CreateMockFightersList( fightersCount: 2 );
+        SetupConsoleAndFactoryMocks( fightersCount: 2, fighters );
 
-        int lowerLimit = 2;
-
-        _consoleReader
-            .Setup( r => r.GetValidPositiveIntegerInput( lowerLimit ) )
-            .Returns( 2 );
-
-        _fighterFactory
-            .SetupSequence( f => f.CreateFighter() )
-            .Returns( firstFigher.Object )
-            .Returns( secondFighter.Object );
-
-        firstFigher
+        fighters[ 0 ]
             .Setup( f => f.CalculateDamage() )
             .Returns( 100 );
 
-        secondFighter
+        fighters[ 1 ]
             .Setup( f => f.GetCurrentHealth() )
             .Returns( 0 );
 
-        firstFigher
+        fighters[ 0 ]
             .Setup( f => f.GetCurrentHealth() )
             .Returns( 100 );
 
@@ -55,10 +45,86 @@ public class GameManagerTests
         IFighter winner = _gameManager.PlayGame();
 
         // Assert
-        Assert.False( secondFighter.Object.IsAlive() );
-        Assert.True( firstFigher.Object.IsAlive() );
-        secondFighter.Verify( f => f.TakeDamage( It.IsAny<int>() ), Times.Once );
+        Assert.False( fighters[ 1 ].Object.IsAlive() );
+        Assert.True( fighters[ 0 ].Object.IsAlive() );
+        Assert.Equal( expected: fighters[ 0 ].Object, actual: winner );
+
+        fighters[ 1 ].Verify( f => f.TakeDamage( 100 ), Times.Once );
         _consoleReader.Verify( r => r.GetValidPositiveIntegerInput( lowerLimit ), Times.Once );
         _fighterFactory.Verify( f => f.CreateFighter(), Times.Exactly( 2 ) );
+    }
+
+    [Fact]
+    public void PlayGame_WithMultipleFighters_ShouldReturnOnlyOneWinner()
+    {
+        // Arrange
+        var fighters = CreateMockFightersList( fightersCount: 3 );
+        SetupConsoleAndFactoryMocks( fightersCount: 3, fighters );
+
+        fighters[ 0 ]
+            .Setup( f => f.GetCurrentHealth() )
+            .Returns( 0 );
+
+        fighters[ 1 ]
+            .Setup( f => f.GetCurrentHealth() )
+            .Returns( 100 );
+
+        fighters[ 2 ]
+            .Setup( f => f.GetCurrentHealth() )
+            .Returns( 0 );
+
+        fighters[ 1 ]
+            .Setup( f => f.CalculateDamage() )
+            .Returns( 100 );
+
+        // Act
+        var winner = _gameManager.PlayGame();
+
+        // Assert
+        Assert.NotNull( winner );
+        Assert.Equal( expected: fighters[ 1 ].Object, winner );
+        Assert.False( fighters[ 0 ].Object.IsAlive() );
+        Assert.False( fighters[ 2 ].Object.IsAlive() );
+        Assert.True( fighters[ 1 ].Object.IsAlive() );
+
+        fighters[ 0 ].Verify( f => f.TakeDamage( 100 ), Times.Once );
+        fighters[ 2 ].Verify( f => f.TakeDamage( 100 ), Times.Once );
+        _fighterFactory.Verify( f => f.CreateFighter(), Times.Exactly( 3 ) );
+    }
+
+    [Fact]
+    public void InitFighters_ShouldInitializeSpecifiedNumberOfFighters()
+    {
+        // Arrange
+        var fighters = CreateMockFightersList( 4 );
+        SetupConsoleAndFactoryMocks( 4, fighters );
+
+        // Act
+        var winner = _gameManager.PlayGame();
+
+        // Assert
+        _consoleReader.Verify( r => r.GetValidPositiveIntegerInput( lowerLimit ), Times.Once );
+        _fighterFactory.Verify( ff => ff.CreateFighter(), Times.Exactly( 4 ) );
+    }
+
+
+    private List<Mock<IFighter>> CreateMockFightersList( int fightersCount )
+    {
+        return Enumerable.Range( 0, fightersCount )
+            .Select( f => new Mock<IFighter>() )
+            .ToList();
+    }
+
+    private void SetupConsoleAndFactoryMocks( int fightersCount, List<Mock<IFighter>> fighters )
+    {
+        _consoleReader
+            .Setup( r => r.GetValidPositiveIntegerInput( lowerLimit ) )
+            .Returns( fightersCount );
+
+        var sequence = _fighterFactory.SetupSequence( ff => ff.CreateFighter() );
+        foreach ( var fighter in fighters )
+        {
+            sequence.Returns( fighter.Object );
+        }
     }
 }

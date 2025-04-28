@@ -9,7 +9,8 @@ namespace Fighters.Tests.Models;
 
 public class FighterTests
 {
-    private readonly IFighter _fighter;
+    private readonly Fighter _fighter;
+
     private readonly Mock<IRace> _race;
     private readonly Mock<IWeapon> _weapon;
     private readonly Mock<IArmor> _armor;

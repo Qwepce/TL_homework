@@ -11,8 +11,8 @@ namespace Fighters.Tests.Factory;
 
 public class FighterFactoryTests
 {
-    private readonly Mock<IConsoleInputReader> _consoleReader;
     private readonly FighterFactory _factory;
+    private readonly Mock<IConsoleInputReader> _consoleReader;
 
     private readonly Dictionary<int, IRace> _races = new()
     {
