@@ -54,11 +54,6 @@ public class FighterFactoryTests
     public void CreateFighter_InputsAreValid_ShouldCreateNewFighter()
     {
         // Arrange
-        IRace expectedRace = new Human();
-        IWeapon expectedWeapon = new NoWeapon();
-        IArmor expectedArmor = new NoArmor();
-        IFighterClass expectedFighterClass = new Knight();
-
         const int lowerLimit = 1;
 
         _consoleReader
@@ -94,7 +89,7 @@ public class FighterFactoryTests
         const int lowerLimit = 1;
 
         _consoleReader
-            .SetupSequence( c => c.GetValidUserStringInput() )
+            .Setup( c => c.GetValidUserStringInput() )
             .Returns( "Тестовый боец" );
 
         _consoleReader
