@@ -14,6 +14,8 @@ public class FighterFactoryTests
     private readonly FighterFactory _factory;
     private readonly Mock<IConsoleInputReader> _consoleReader;
 
+    private const int LowerLimit = 1;
+
     private readonly Dictionary<int, IRace> _races = new()
     {
         { 1, new Human() },
@@ -54,14 +56,12 @@ public class FighterFactoryTests
     public void CreateFighter_InputsAreValid_ShouldCreateNewFighter()
     {
         // Arrange
-        const int lowerLimit = 1;
-
         _consoleReader
             .SetupSequence( c => c.GetValidUserStringInput() )
             .Returns( "Боец 1" );
 
         _consoleReader
-            .SetupSequence( c => c.GetValidPositiveIntegerInput( lowerLimit ) )
+            .SetupSequence( c => c.GetValidPositiveIntegerInput( LowerLimit ) )
             .Returns( 1 )
             .Returns( 1 )
             .Returns( 1 )
@@ -79,21 +79,19 @@ public class FighterFactoryTests
         Assert.IsType<NoArmor>( createdFighter.GetArmor() );
         Assert.IsType<Knight>( createdFighter.GetFighterClass() );
 
-        _consoleReader.Verify( r => r.GetValidPositiveIntegerInput( lowerLimit ), Times.Exactly( 4 ) );
+        _consoleReader.Verify( r => r.GetValidPositiveIntegerInput( LowerLimit ), Times.Exactly( 4 ) );
     }
 
     [Fact]
     public void CreateFighter_SelectInvalidOptions_ShouldRetriesUntilAllOptionAreValidAndCreateFighter()
     {
         // Arrange
-        const int lowerLimit = 1;
-
         _consoleReader
             .Setup( c => c.GetValidUserStringInput() )
             .Returns( "Тестовый боец" );
 
         _consoleReader
-            .SetupSequence( c => c.GetValidPositiveIntegerInput( lowerLimit ) )
+            .SetupSequence( c => c.GetValidPositiveIntegerInput( LowerLimit ) )
             .Returns( 666 )
             .Returns( 1 )
             .Returns( 1 )
@@ -112,6 +110,6 @@ public class FighterFactoryTests
         Assert.IsType<NoArmor>( createdFighter.GetArmor() );
         Assert.IsType<Knight>( createdFighter.GetFighterClass() );
 
-        _consoleReader.Verify( r => r.GetValidPositiveIntegerInput( lowerLimit ), Times.Exactly( 5 ) );
+        _consoleReader.Verify( r => r.GetValidPositiveIntegerInput( LowerLimit ), Times.Exactly( 5 ) );
     }
 }

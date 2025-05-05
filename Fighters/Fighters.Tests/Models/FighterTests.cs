@@ -16,6 +16,20 @@ public class FighterTests
     private readonly Mock<IArmor> _armor;
     private readonly Mock<IFighterClass> _fighterClass;
 
+    private const int RaceHealth = 100;
+    private const int RaceDamage = 10;
+    private const int RaceArmor = 5;
+
+    private const int WeaponDamage = 50;
+
+    private const int ArmorValue = 50;
+    private const int FighterClassHealth = 50;
+    private const int FighterClassDamage = 10;
+
+    private int MaxHealth => RaceHealth + FighterClassHealth;
+    private int MaxArmor => ArmorValue + RaceArmor;
+    private int BaseDamage => RaceDamage + WeaponDamage + FighterClassDamage;
+
     public FighterTests()
     {
         _race = new Mock<IRace>();
@@ -23,16 +37,16 @@ public class FighterTests
         _armor = new Mock<IArmor>();
         _fighterClass = new Mock<IFighterClass>();
 
-        _race.Setup( r => r.Health ).Returns( 100 );
-        _race.Setup( r => r.Damage ).Returns( 10 );
-        _race.Setup( r => r.Armor ).Returns( 5 );
+        _race.Setup( r => r.Health ).Returns( RaceHealth );
+        _race.Setup( r => r.Damage ).Returns( RaceDamage );
+        _race.Setup( r => r.Armor ).Returns( RaceArmor );
 
-        _weapon.Setup( w => w.Damage ).Returns( 25 );
+        _weapon.Setup( w => w.Damage ).Returns( WeaponDamage );
 
-        _armor.Setup( a => a.Armor ).Returns( 50 );
+        _armor.Setup( a => a.Armor ).Returns( ArmorValue );
 
-        _fighterClass.Setup( fc => fc.Health ).Returns( 50 );
-        _fighterClass.Setup( fc => fc.Damage ).Returns( 10 );
+        _fighterClass.Setup( fc => fc.Health ).Returns( FighterClassHealth );
+        _fighterClass.Setup( fc => fc.Damage ).Returns( FighterClassDamage );
 
         _fighter = new Fighter(
             "Боец 1",
@@ -51,7 +65,7 @@ public class FighterTests
         int fighterBaseDamage = _fighter.GetBaseDamage();
 
         // Assert
-        Assert.Equal( expected: 45, actual: fighterBaseDamage );
+        Assert.Equal( expected: BaseDamage, actual: fighterBaseDamage );
     }
 
     [Fact]
@@ -63,7 +77,7 @@ public class FighterTests
         int fighterMaxArmor = _fighter.GetMaxArmor();
 
         // Assert
-        Assert.Equal( expected: 55, actual: fighterMaxArmor );
+        Assert.Equal( expected: MaxArmor, actual: fighterMaxArmor );
     }
 
     [Fact]
@@ -75,7 +89,7 @@ public class FighterTests
         int fighterMaxHealth = _fighter.GetMaxHealth();
 
         // Assert
-        Assert.Equal( expected: 150, actual: fighterMaxHealth );
+        Assert.Equal( expected: MaxHealth, actual: fighterMaxHealth );
     }
 
     [Fact]
@@ -98,8 +112,8 @@ public class FighterTests
         int damage = fighterMock.Object.CalculateDamage();
 
         // Assert
-        double minDamage = 45 * 0.8;
-        double maxDamage = 45 * 1.1;
+        double minDamage = BaseDamage * 0.8;
+        double maxDamage = BaseDamage * 1.1;
         Assert.InRange( damage, ( int )minDamage, ( int )maxDamage );
     }
 
@@ -123,8 +137,8 @@ public class FighterTests
         int damage = fighterMock.Object.CalculateDamage();
 
         // Assert
-        double minDamage = 45 * 0.8 * 1.5;
-        double maxDamage = 45 * 1.1 * 1.5;
+        double minDamage = BaseDamage * 0.8 * 1.5;
+        double maxDamage = BaseDamage * 1.1 * 1.5;
         Assert.InRange( actual: damage, ( int )minDamage, ( int )maxDamage );
     }
 
@@ -132,35 +146,40 @@ public class FighterTests
     public void TakeDamage_DamageLessThanArmorAmount_ShouldDecreaseOnlyArmor()
     {
         // Arrange
+        int damage = 10;
+        int expectedRemainingArmor = MaxArmor - damage;
+        int expectedRemainingHealth = MaxHealth;
 
         // Act
-        _fighter.TakeDamage( 10 );
+        _fighter.TakeDamage( damage );
 
         // Assert
-        Assert.Equal( expected: 45, actual: _fighter.GetCurrentArmor() );
-        Assert.Equal( expected: 150, actual: _fighter.GetCurrentHealth() );
+        Assert.Equal( expected: expectedRemainingArmor, actual: _fighter.GetCurrentArmor() );
+        Assert.Equal( expected: expectedRemainingHealth, actual: _fighter.GetCurrentHealth() );
     }
 
     [Fact]
     public void TakeDamage_DamageEqualToArmor_ShouldBeZeroArmorAndFullHealth()
     {
         // Arrange
+        int damage = MaxArmor;
 
         // Act
-        _fighter.TakeDamage( 55 );
+        _fighter.TakeDamage( damage );
 
         // Assert
         Assert.Equal( expected: 0, actual: _fighter.GetCurrentArmor() );
-        Assert.Equal( expected: 150, actual: _fighter.GetCurrentHealth() );
+        Assert.Equal( expected: MaxHealth, actual: _fighter.GetCurrentHealth() );
     }
 
     [Fact]
     public void TakeDamage_DamageEqualToArmorAndHealth_ShouldBeZeroArmorAndZeroHealth()
     {
         // Arrange
+        int damage = MaxArmor + MaxHealth;
 
         // Act
-        _fighter.TakeDamage( 205 );
+        _fighter.TakeDamage( damage );
 
         // Assert
         Assert.Equal( expected: 0, actual: _fighter.GetCurrentArmor() );
@@ -171,15 +190,16 @@ public class FighterTests
     public void TakeDamage_DamageMoreThanArmorAmount_ShouldDecreasedHealthAndArmor()
     {
         // Arrange
+        int damage = MaxArmor + 50;
 
         // Act
-        _fighter.TakeDamage( 105 );
+        _fighter.TakeDamage( damage );
 
         // Assert
-        Assert.Equal( expected: 55, actual: _fighter.GetMaxArmor() );
+        Assert.Equal( expected: MaxArmor, actual: _fighter.GetMaxArmor() );
         Assert.Equal( expected: 0, actual: _fighter.GetCurrentArmor() );
-        Assert.Equal( expected: 150, actual: _fighter.GetMaxHealth() );
-        Assert.Equal( expected: 100, actual: _fighter.GetCurrentHealth() );
+        Assert.Equal( expected: MaxHealth, actual: _fighter.GetMaxHealth() );
+        Assert.Equal( expected: MaxHealth - 50, actual: _fighter.GetCurrentHealth() );
     }
 
     [Fact]
@@ -188,7 +208,7 @@ public class FighterTests
         // Arrange
 
         // Act
-        _fighter.TakeDamage( 2_147_483_647 );
+        _fighter.TakeDamage( int.MaxValue );
 
         // Assert
         Assert.Equal( expected: 0, actual: _fighter.GetCurrentArmor() );

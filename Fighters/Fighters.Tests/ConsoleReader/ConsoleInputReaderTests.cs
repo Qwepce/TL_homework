@@ -4,16 +4,22 @@ using Moq;
 namespace Fighters.Tests.ConsoleReader;
 public class ConsoleInputReaderTests
 {
+    private readonly Mock<ConsoleInputReader> _mockReader;
+
+    public ConsoleInputReaderTests()
+    {
+        _mockReader = new Mock<ConsoleInputReader>();
+    }
+
     [Fact]
     public void GetValidPositiveIntegerInput_InputIsValid_ShouldReturnParsedIntegerInput()
     {
         // Arrange
-        var mockReader = new Mock<ConsoleInputReader>();
-        mockReader
+        _mockReader
             .Setup( r => r.ReadLine() )
             .Returns( "10" );
 
-        var reader = mockReader.Object;
+        var reader = _mockReader.Object;
 
         // Act
         int result = reader.GetValidPositiveIntegerInput();
@@ -26,13 +32,12 @@ public class ConsoleInputReaderTests
     public void GetValidPositiveIntegerInput_InputIsInvalidFormat_ShouldRetriesUntilValid()
     {
         // Arrange
-        var mockReader = new Mock<ConsoleInputReader>();
-        mockReader
+        _mockReader
             .SetupSequence( r => r.ReadLine() )
             .Returns( "abc" )
             .Returns( "10" );
 
-        var reader = mockReader.Object;
+        var reader = _mockReader.Object;
 
         // Act
         int result = reader.GetValidPositiveIntegerInput();
@@ -45,13 +50,12 @@ public class ConsoleInputReaderTests
     public void GetValidPositiveIntegerInput_IntegerIsLowerThanDefaultLowerLimit_ShoudRetriesUntilValid()
     {
         // Arrange
-        var mockReader = new Mock<ConsoleInputReader>();
-        mockReader
+        _mockReader
             .SetupSequence( r => r.ReadLine() )
             .Returns( "-2" )
             .Returns( "50" );
 
-        var reader = mockReader.Object;
+        var reader = _mockReader.Object;
 
         // Act
         int result = reader.GetValidPositiveIntegerInput();
@@ -64,13 +68,12 @@ public class ConsoleInputReaderTests
     public void GetValidPositiveIntegerInput_IntegerIsLowerThanCustomLowerLimit_ShoudRetriesUntilValid()
     {
         // Arrange
-        var mockReader = new Mock<ConsoleInputReader>();
-        mockReader
+        _mockReader
             .SetupSequence( r => r.ReadLine() )
             .Returns( "5" )
             .Returns( "50" );
 
-        var reader = mockReader.Object;
+        var reader = _mockReader.Object;
 
         // Act
         int result = reader.GetValidPositiveIntegerInput( lowerLimit: 10 );
@@ -83,12 +86,11 @@ public class ConsoleInputReaderTests
     public void GetValidUserStringInput_InputIsValid_ShouldReturnValidString()
     {
         // Arrange
-        var mockReader = new Mock<ConsoleInputReader>();
-        mockReader
+        _mockReader
             .Setup( r => r.ReadLine() )
             .Returns( "valid input" );
 
-        var reader = mockReader.Object;
+        var reader = _mockReader.Object;
 
         // Act
         string result = reader.GetValidUserStringInput();
@@ -101,14 +103,13 @@ public class ConsoleInputReaderTests
     public void GetValidUserStringInput_InputIsEmptyOrWhiteSpaces_ShouldRetriesUntilValid()
     {
         // Arrange
-        var mockReader = new Mock<ConsoleInputReader>();
-        mockReader
+        _mockReader
             .SetupSequence( r => r.ReadLine() )
             .Returns( "" )
             .Returns( "      " )
             .Returns( "valid input" );
 
-        var reader = mockReader.Object;
+        var reader = _mockReader.Object;
 
         // Act
         string result = reader.GetValidUserStringInput();
