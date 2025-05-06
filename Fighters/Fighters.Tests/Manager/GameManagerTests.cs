@@ -26,7 +26,7 @@ public class GameManagerTests
     public void PlayGame_WithTwoFighters_ShouldReturnWinner()
     {
         // Arrange
-        var fighters = CreateMockFightersList( fightersCount: 2 );
+        List<Mock<IFighter>> fighters = CreateMockFightersList( fightersCount: 2 );
         SetupConsoleAndFactoryMocks( fightersCount: 2, fighters );
 
         fighters[ 0 ]
@@ -58,7 +58,7 @@ public class GameManagerTests
     public void PlayGame_WithMultipleFighters_ShouldReturnOnlyOneWinner()
     {
         // Arrange
-        var fighters = CreateMockFightersList( fightersCount: 3 );
+        List<Mock<IFighter>> fighters = CreateMockFightersList( fightersCount: 3 );
         SetupConsoleAndFactoryMocks( fightersCount: 3, fighters );
 
         fighters[ 0 ].Setup( f => f.GetCurrentHealth() ).Returns( 100 );
@@ -74,7 +74,7 @@ public class GameManagerTests
             .Callback( () => fighters[ 2 ].Setup( f => f.GetCurrentHealth() ).Returns( 0 ) );
 
         // Act
-        var winner = _gameManager.PlayGame();
+        IFighter winner = _gameManager.PlayGame();
 
         // Assert
         Assert.NotNull( winner );
@@ -89,17 +89,16 @@ public class GameManagerTests
     public void PlayGame_ShouldInitializeSpecifiedNumberOfFighters()
     {
         // Arrange
-        var fighters = CreateMockFightersList( 4 );
+        List<Mock<IFighter>> fighters = CreateMockFightersList( 4 );
         SetupConsoleAndFactoryMocks( 4, fighters );
 
         // Act
-        var winner = _gameManager.PlayGame();
+        IFighter winner = _gameManager.PlayGame();
 
         // Assert
         _consoleReader.Verify( r => r.GetValidPositiveIntegerInput( LowerLimit ), Times.Once );
         _fighterFactory.Verify( ff => ff.CreateFighter(), Times.Exactly( 4 ) );
     }
-
 
     private static List<Mock<IFighter>> CreateMockFightersList( int fightersCount )
     {

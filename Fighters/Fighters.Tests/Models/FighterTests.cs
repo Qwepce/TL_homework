@@ -26,9 +26,13 @@ public class FighterTests
     private const int FighterClassHealth = 50;
     private const int FighterClassDamage = 10;
 
-    private int MaxHealth => RaceHealth + FighterClassHealth;
-    private int MaxArmor => ArmorValue + RaceArmor;
-    private int BaseDamage => RaceDamage + WeaponDamage + FighterClassDamage;
+    private const double MinDamageMultiplicator = 0.8;
+    private const double MaxDamageMultiplicator = 1.1;
+    private const double CriticalHitMultiplicator = 1.5;
+
+    private static int MaxHealth => RaceHealth + FighterClassHealth;
+    private static int MaxArmor => ArmorValue + RaceArmor;
+    private static int BaseDamage => RaceDamage + WeaponDamage + FighterClassDamage;
 
     public FighterTests()
     {
@@ -112,8 +116,8 @@ public class FighterTests
         int damage = fighterMock.Object.CalculateDamage();
 
         // Assert
-        double minDamage = BaseDamage * 0.8;
-        double maxDamage = BaseDamage * 1.1;
+        double minDamage = BaseDamage * MinDamageMultiplicator;
+        double maxDamage = BaseDamage * MaxDamageMultiplicator;
         Assert.InRange( damage, ( int )minDamage, ( int )maxDamage );
     }
 
@@ -137,8 +141,8 @@ public class FighterTests
         int damage = fighterMock.Object.CalculateDamage();
 
         // Assert
-        double minDamage = BaseDamage * 0.8 * 1.5;
-        double maxDamage = BaseDamage * 1.1 * 1.5;
+        double minDamage = BaseDamage * MinDamageMultiplicator * CriticalHitMultiplicator;
+        double maxDamage = BaseDamage * MaxDamageMultiplicator * CriticalHitMultiplicator;
         Assert.InRange( actual: damage, ( int )minDamage, ( int )maxDamage );
     }
 
