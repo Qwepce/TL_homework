@@ -6,7 +6,7 @@ public class ConsoleInputReader : IConsoleInputReader
 {
     public int GetValidPositiveIntegerInput( int lowerLimit = 1 )
     {
-        string userInput = Console.ReadLine();
+        string userInput = ReadLine();
 
         int parsedIntegerFromUserInput;
 
@@ -14,7 +14,7 @@ public class ConsoleInputReader : IConsoleInputReader
         {
             Messages.PrintInvalidUserIntegerInput( lowerLimit );
 
-            userInput = Console.ReadLine();
+            userInput = ReadLine();
         }
 
         return parsedIntegerFromUserInput;
@@ -24,11 +24,13 @@ public class ConsoleInputReader : IConsoleInputReader
     {
         string userInput;
 
-        while ( string.IsNullOrEmpty( userInput = Console.ReadLine()?.Trim() ) )
+        while ( string.IsNullOrEmpty( userInput = ReadLine()?.Trim() ) )
         {
             Console.Write( Messages.InvalidUserInput );
         }
 
         return userInput;
     }
+
+    internal virtual string ReadLine() => Console.ReadLine();
 }

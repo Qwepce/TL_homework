@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Compile Remove="Models\IFighter.cs" />
+    <InternalsVisibleTo Include="Fighters.Tests" />
   </ItemGroup>
 
 </Project>

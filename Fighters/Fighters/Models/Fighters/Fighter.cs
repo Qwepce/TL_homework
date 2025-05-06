@@ -36,6 +36,14 @@ public class Fighter : IFighter
         _currentArmor = GetMaxArmor();
     }
 
+    public IRace GetRace() => _race;
+
+    public IWeapon GetWeapon() => _weapon;
+
+    public IArmor GetArmor() => _armor;
+
+    public IFighterClass GetFighterClass() => _fighterClass;
+
     public string GetName() => _name;
 
     public int GetBaseDamage() => _race.Damage + _fighterClass.Damage + _weapon.Damage;
@@ -50,14 +58,14 @@ public class Fighter : IFighter
 
     public int CalculateDamage()
     {
-        double randomRoll = Random.Shared.NextDouble();
+        double randomRoll = GetNextDouble();
 
         double randomDamageMultiplicator = MinDamageMultiplicator
             + ( randomRoll * ( MaxDamageMultiplicator - MinDamageMultiplicator ) );
 
         int totalDamage = ( int )( GetBaseDamage() * randomDamageMultiplicator );
 
-        if ( randomRoll < CriticalHitChance )
+        if ( randomRoll <= CriticalHitChance )
         {
             totalDamage = ( int )( totalDamage * 1.5 );
         }
@@ -78,4 +86,6 @@ public class Fighter : IFighter
             _currentHealth = Math.Max( _currentHealth - damageToHealth, 0 );
         }
     }
+
+    internal virtual double GetNextDouble() => Random.Shared.NextDouble();
 }
