@@ -1,0 +1,148 @@
+======================== PROPERTIES ========================
+
+{
+  "name": "Grand Hotel",
+  "country": "France",
+  "city": "Paris",
+  "address": "123 Champs-Élysées",
+  "latitude": 48.8698,
+  "longitude": 2.3079
+}
+
+{
+  "name": "Mountain Lodge",
+  "country": "Switzerland",
+  "city": "Zermatt",
+  "address": "45 Alpine Way",
+  "latitude": 46.0207,
+  "longitude": 7.7491
+}
+
+{
+  "name": "Beach Resort",
+  "country": "Spain",
+  "city": "Barcelona",
+  "address": "78 Costa Brava",
+  "latitude": 41.3851,
+  "longitude": 2.1734
+}
+
+{
+  "name": "Business Hotel",
+  "country": "Germany",
+  "city": "Berlin",
+  "address": "10 Friedrichstraße",
+  "latitude": 52.5200,
+  "longitude": 13.4050
+}
+
+{
+  "name": "Desert Oasis",
+  "country": "UAE",
+  "city": "Dubai",
+  "address": "5 Palm Jumeirah",
+  "latitude": 25.1106,
+  "longitude": 55.1376
+}
+
+======================== ROOM TYPES ========================
+
+{
+  "name": "Economy Room",
+  "dailyPrice": 80,
+  "currency": "EUR",
+  "minPersonCount": 1,
+  "maxPersonCount": 2,
+  "totalRoomsCount": 12,
+  "roomServices": ["Weekly cleaning"],
+  "roomAmenities": ["Wi-Fi", "Heating"]
+}
+
+{
+  "name": "Mountain View Room",
+  "dailyPrice": 150,
+  "currency": "USD",
+  "minPersonCount": 1,
+  "maxPersonCount": 2,
+  "totalRoomsCount": 6,
+  "roomServices": ["Daily cleaning", "Breakfast delivery"],
+  "roomAmenities": ["Wi-Fi", "Heating", "TV", "Balcony"]
+}
+
+{
+  "name": "Family Suite",
+  "dailyPrice": 220,
+  "currency": "EUR",
+  "minPersonCount": 2,
+  "maxPersonCount": 5,
+  "totalRoomsCount": 4,
+  "roomServices": ["Daily cleaning", "Breakfast delivery"],
+  "roomAmenities": ["Wi-Fi", "Heating", "TV", "Kitchenette", "Balcony"]
+}
+
+{
+  "name": "Garden View Room",
+  "dailyPrice": 90,
+  "currency": "EUR",
+  "minPersonCount": 1,
+  "maxPersonCount": 2,
+  "totalRoomsCount": 20,
+  "roomServices": ["Daily cleaning", "Beach towel service"],
+  "roomAmenities": ["Wi-Fi", "TV", "Air conditioning"]
+}
+
+{
+  "name": "VIP Bungalow",
+  "dailyPrice": 300,
+  "currency": "EUR",
+  "minPersonCount": 1,
+  "maxPersonCount": 4,
+  "totalRoomsCount": 5,
+  "roomServices": ["Daily cleaning", "Private concierge", "Free minibar refill"],
+  "roomAmenities": ["Wi-Fi", "TV", "Air conditioning", "Private pool", "Kitchen"]
+}
+
+{
+  "name": "Single Room",
+  "dailyPrice": 100,
+  "currency": "EUR",
+  "minPersonCount": 1,
+  "maxPersonCount": 1,
+  "totalRoomsCount": 15,
+  "roomServices": ["Daily cleaning", "Express laundry"],
+  "roomAmenities": ["Wi-Fi", "TV", "Desk", "Air conditioning"]
+}
+
+{
+  "name": "Executive Suite",
+  "dailyPrice": 250,
+  "currency": "EUR",
+  "minPersonCount": 1,
+  "maxPersonCount": 2,
+  "totalRoomsCount": 5,
+  "roomServices": ["Daily cleaning", "Express laundry", "Newspaper delivery", "Private check-in"],
+  "roomAmenities": ["Wi-Fi", "TV", "Desk", "Air conditioning", "Coffee machine", "Separate living area"]
+}
+
+{
+  "name": "Standard Room",
+  "dailyPrice": 180,
+  "currency": "USD",
+  "minPersonCount": 1,
+  "maxPersonCount": 2,
+  "totalRoomsCount": 25,
+  "roomServices": ["Daily cleaning", "Turndown service"],
+  "roomAmenities": ["Wi-Fi", "TV", "Minibar", "Air conditioning"]
+}
+
+{
+  "name": "Royal Suite",
+  "dailyPrice": 800,
+  "currency": "USD",
+  "minPersonCount": 1,
+  "maxPersonCount": 4,
+  "totalRoomsCount": 3,
+  "roomServices": ["24/7 butler", "Private chef", "Limo service"],
+  "roomAmenities": ["Wi-Fi", "TV", "Minibar", "Air conditioning", "Private pool", "Jacuzzi", "Sauna"]
+}
+
