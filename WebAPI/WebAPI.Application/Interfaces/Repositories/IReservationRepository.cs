@@ -5,14 +5,13 @@ using WebAPI.Domain.Models.Entities;
 namespace WebAPI.Application.Interfaces.Repositories;
 
 public interface IReservationRepository :
-    ICreateEntityRepository<Reservation>,
-    IDeleteEntityRepository<Reservation>
+    IAddEntityRepository<Reservation>,
+    IDeleteEntityRepository<Reservation>,
+    IGetEntityByIdRepository<Reservation>
 {
-    Task<Reservation?> GetById( int reservationId );
-
     Task<IReadOnlyList<Reservation>> GetAll( SearchReservationsFilter filter );
 
-    Task<int> GetOverlappingReservationsCount(
+    Task<int> GetReservationsCountByCategoryAndDates(
         int roomTypeId,
         DateOnly arrivalDate,
         DateOnly departureDate );

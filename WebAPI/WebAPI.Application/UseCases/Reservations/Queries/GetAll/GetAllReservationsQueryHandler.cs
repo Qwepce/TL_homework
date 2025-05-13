@@ -1,6 +1,6 @@
 ﻿using Mapster;
 using WebAPI.Application.Filters;
-using WebAPI.Application.Interfaces.CQRSInterfaces;
+using WebAPI.Application.Interfaces.CQRS.HandlersInterfaces;
 using WebAPI.Application.Interfaces.Repositories;
 using WebAPI.Application.ResultPattern;
 using WebAPI.Application.UseCases.Reservations.Dto;

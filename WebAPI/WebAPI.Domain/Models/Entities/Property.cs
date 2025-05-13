@@ -1,6 +1,6 @@
 ﻿namespace WebAPI.Domain.Models.Entities;
 
-public class Property : IEntityId<int>
+public class Property : IEntityId
 {
     public int Id { get; init; }
 

@@ -1,6 +1,6 @@
 ﻿namespace WebAPI.Domain.Models.Entities;
 
-public class RoomService : IEntityId<int>
+public class RoomService : IEntityId
 {
     public int Id { get; init; }
 

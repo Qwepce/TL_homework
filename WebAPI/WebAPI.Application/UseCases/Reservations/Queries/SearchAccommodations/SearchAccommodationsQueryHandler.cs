@@ -1,6 +1,6 @@
 ﻿using Mapster;
 using WebAPI.Application.Filters;
-using WebAPI.Application.Interfaces.CQRSInterfaces;
+using WebAPI.Application.Interfaces.CQRS.HandlersInterfaces;
 using WebAPI.Application.Interfaces.Repositories;
 using WebAPI.Application.ResultPattern;
 using WebAPI.Application.UseCases.Reservations.Dto;
@@ -16,24 +16,23 @@ public class SearchAccommodationsQueryHandler : IQueryHandler<SearchAccommodatio
     private readonly IPropertyRepository _propertyRepository;
     private readonly IRoomTypeRepository _roomTypeRepository;
     private readonly IReservationRepository _reservationRepository;
-    private readonly IPriceCalculator _calculator;
 
     public SearchAccommodationsQueryHandler(
         IPropertyRepository propertyRepository,
         IRoomTypeRepository roomTypeRepository,
-        IReservationRepository reservationRepository,
-        IPriceCalculator calculator )
+        IReservationRepository reservationRepository )
     {
         _propertyRepository = propertyRepository;
         _roomTypeRepository = roomTypeRepository;
         _reservationRepository = reservationRepository;
-        _calculator = calculator;
     }
 
     public async Task<Result<List<SearchResultDto>>> Handle( SearchAccommodationsQuery query, CancellationToken cancellationToken )
     {
-        IReadOnlyList<Property> properties = await _propertyRepository.GetAllByCity( query.City );
-        List<SearchResultDto> searchResults = new List<SearchResultDto>();
+        IReadOnlyCollection<Property> properties = string.IsNullOrWhiteSpace( query.City )
+            ? await _propertyRepository.GetAll()
+            : await _propertyRepository.GetAllByCity( query.City );
+        List<SearchResultDto> searchResults = [];
 
         foreach ( Property property in properties )
         {
@@ -57,16 +56,17 @@ public class SearchAccommodationsQueryHandler : IQueryHandler<SearchAccommodatio
     }
 
     private async Task<List<RoomType>> GetAvailableRoomTypesForProperty(
-    Property property,
-    SearchAccommodationsQuery query )
+        Property property,
+        SearchAccommodationsQuery query )
     {
-        SearchRoomTypesFilter filter = new()
+        SearchRoomTypesFilter roomTypesFilter = new()
         {
-            GuestsNumber = query.GuestsNumber
+            PropertyId = property.Id,
+            GuestsCount = query.GuestsNumber
         };
-        List<RoomType> roomTypes = await _roomTypeRepository.GetByFilters( property.Id, filter );
+        List<RoomType> roomTypes = await _roomTypeRepository.GetByFilters( roomTypesFilter );
 
-        List<RoomType> availableRoomTypes = new List<RoomType>();
+        List<RoomType> availableRoomTypes = [];
         foreach ( RoomType roomType in roomTypes )
         {
             if ( await IsRoomTypeAvailable( roomType, query ) )
@@ -109,7 +109,7 @@ public class SearchAccommodationsQueryHandler : IQueryHandler<SearchAccommodatio
         }
 
         int totalDays = departureDate.DayNumber - arrivalDate.DayNumber;
-        decimal roomTypeTotalPrice = _calculator.CalculateTotalPrice(
+        decimal roomTypeTotalPrice = PriceCalculator.CalculateTotalPrice(
             totalDays,
             roomType.DailyPrice,
             roomType.Currency,
@@ -123,7 +123,7 @@ public class SearchAccommodationsQueryHandler : IQueryHandler<SearchAccommodatio
         DateOnly arrivalDate,
         DateOnly departureDate )
     {
-        int overlappingReservations = await _reservationRepository.GetOverlappingReservationsCount(
+        int overlappingReservations = await _reservationRepository.GetReservationsCountByCategoryAndDates(
             roomType.Id,
             arrivalDate,
             departureDate );

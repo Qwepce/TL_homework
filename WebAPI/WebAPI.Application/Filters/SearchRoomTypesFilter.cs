@@ -2,5 +2,7 @@
 
 public class SearchRoomTypesFilter
 {
-    public int? GuestsNumber { get; init; }
+    public int? PropertyId { get; init; }
+
+    public int? GuestsCount { get; init; }
 }

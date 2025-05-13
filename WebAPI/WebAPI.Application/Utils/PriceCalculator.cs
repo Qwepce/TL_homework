@@ -2,9 +2,9 @@
 
 namespace WebAPI.Application.Utils;
 
-public class PriceCalculator : IPriceCalculator
+public static class PriceCalculator
 {
-    public decimal CalculateTotalPrice(
+    public static decimal CalculateTotalPrice(
         int days,
         decimal baseRate,
         Currency roomTypeCurrency,

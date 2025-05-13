@@ -2,7 +2,7 @@
 
 namespace WebAPI.Domain.Models.Entities;
 
-public class RoomType : IEntityId<int>
+public class RoomType : IEntityId
 {
     public int Id { get; init; }
 
@@ -18,7 +18,7 @@ public class RoomType : IEntityId<int>
 
     public int MaxPersonCount { get; set; }
 
-    public List<RoomService> Services { get; set; }
+    public List<RoomService> RoomServices { get; set; }
 
     public List<Amenity> Amenities { get; set; }
 
@@ -40,7 +40,7 @@ public class RoomType : IEntityId<int>
         MinPersonCount = minPersonCount;
         MaxPersonCount = maxPersonCount;
         TotalRoomsCount = totalRoomsCount;
-        Services = [];
+        RoomServices = [];
         Amenities = [];
     }
 }

@@ -1,5 +1,5 @@
 ﻿namespace WebAPI.Domain.Models;
-public interface IEntityId<T> where T : struct
+public interface IEntityId
 {
-    public T Id { get; init; }
+    public int Id { get; init; }
 }

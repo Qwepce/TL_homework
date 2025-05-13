@@ -13,7 +13,7 @@ public class DecimalRangeAttribute : ValidationAttribute
         _max = ( decimal )max;
     }
 
-    protected override ValidationResult? IsValid( object? value, ValidationContext validationContext )
+    protected override ValidationResult IsValid( object value, ValidationContext validationContext )
     {
         if ( value is decimal decimalValue )
         {

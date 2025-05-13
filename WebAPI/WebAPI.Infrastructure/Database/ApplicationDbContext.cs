@@ -1,6 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebAPI.Domain.Models.Entities;
-using WebAPI.Infrastructure.Database.Configurations;
+using WebAPI.Infrastructure.Database.Amenities;
+using WebAPI.Infrastructure.Database.Properties;
+using WebAPI.Infrastructure.Database.Reservations;
+using WebAPI.Infrastructure.Database.RoomServices;
+using WebAPI.Infrastructure.Database.RoomTypes;
 
 namespace WebAPI.Infrastructure.Database;
 public class ApplicationDbContext : DbContext
@@ -11,18 +15,10 @@ public class ApplicationDbContext : DbContext
     public DbSet<RoomService> RoomServices { get; set; }
     public DbSet<Reservation> Reservations { get; set; }
 
-    public ApplicationDbContext() : base()
+    public ApplicationDbContext( DbContextOptions options ) : base( options )
     {
 
     }
-
-    protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder )
-    {
-        base.OnConfiguring( optionsBuilder );
-
-        optionsBuilder.UseSqlServer( "Server=localhost;Database=WebAPI;Trusted_Connection=True;TrustServerCertificate=true;" );
-    }
-
 
     protected override void OnModelCreating( ModelBuilder modelBuilder )
     {

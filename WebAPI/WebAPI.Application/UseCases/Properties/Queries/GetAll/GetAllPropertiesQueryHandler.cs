@@ -1,5 +1,5 @@
 ﻿using Mapster;
-using WebAPI.Application.Interfaces.CQRSInterfaces;
+using WebAPI.Application.Interfaces.CQRS.HandlersInterfaces;
 using WebAPI.Application.Interfaces.Repositories;
 using WebAPI.Application.ResultPattern;
 using WebAPI.Application.UseCases.Properties.Dto;
@@ -18,7 +18,7 @@ public class GetAllPropertiesQueryHandler : IQueryHandler<GetAllPropertiesQuery,
 
     public async Task<Result<List<PropertyDto>>> Handle( GetAllPropertiesQuery query, CancellationToken cancellationToken )
     {
-        IEnumerable<Property> properties = await _propertyRepository.GetAll();
+        IReadOnlyCollection<Property> properties = await _propertyRepository.GetAll();
 
         List<PropertyDto> propertiesDto = properties.Adapt<List<PropertyDto>>();
 

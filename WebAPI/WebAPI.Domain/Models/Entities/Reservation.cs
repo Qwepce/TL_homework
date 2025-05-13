@@ -2,7 +2,7 @@
 
 namespace WebAPI.Domain.Models.Entities;
 
-public class Reservation : IEntityId<int>
+public class Reservation : IEntityId
 {
     public int Id { get; init; }
 

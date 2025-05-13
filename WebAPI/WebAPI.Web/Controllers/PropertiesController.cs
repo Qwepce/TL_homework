@@ -1,6 +1,6 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Application.Interfaces.CQRSInterfaces;
+using WebAPI.Application.Interfaces.CQRS.HandlersInterfaces;
 using WebAPI.Application.ResultPattern;
 using WebAPI.Application.UseCases.Properties.Commands.CreateProperty;
 using WebAPI.Application.UseCases.Properties.Commands.DeleteProperty;
@@ -10,7 +10,7 @@ using WebAPI.Application.UseCases.Properties.Queries.GetAll;
 using WebAPI.Application.UseCases.Properties.Queries.GetById;
 using WebAPI.Application.UseCases.RoomTypes.Commands.CreateRoomType;
 using WebAPI.Application.UseCases.RoomTypes.Dto;
-using WebAPI.Application.UseCases.RoomTypes.Queries.GetByPropertyId;
+using WebAPI.Application.UseCases.RoomTypes.Queries.GetRoomTypesInfoByPropertyId;
 using WebAPI.Web.Contracts.PropertyContracts;
 using WebAPI.Web.Contracts.RoomTypeContracts;
 
@@ -73,7 +73,7 @@ public class PropertiesController : ControllerBase
         return CreatedAtAction(
             nameof( GetPropertyById ),
             new { propertyId = result.Value },
-            new { message = "Property was create successfully!" } );
+            new { } );
     }
 
     [HttpPut( "{propertyId:int}" )]
@@ -92,7 +92,7 @@ public class PropertiesController : ControllerBase
             return BadRequest( new { errors = result.Errors } );
         }
 
-        return Ok( new { message = "Property was update successfully!" } );
+        return Ok();
     }
 
     [HttpDelete( "{propertyId:int}" )]
@@ -112,16 +112,16 @@ public class PropertiesController : ControllerBase
             return NotFound( new { message = result.Errors } );
         }
 
-        return Ok( new { message = "Property was delete successfully!" } );
+        return NoContent();
     }
 
     [HttpGet( "{propertyId:int}/roomtypes" )]
     public async Task<IActionResult> GetRoomTypesByPropertyId(
         [FromRoute] int propertyId,
-        [FromServices] IQueryHandler<GetRoomTypesByPropertyIdQuery, IReadOnlyList<RoomTypeDto>> queryHandler,
+        [FromServices] IQueryHandler<GetRoomTypesInfoByPropertyIdQuery, IReadOnlyList<RoomTypeDto>> queryHandler,
         CancellationToken cancellationToken )
     {
-        GetRoomTypesByPropertyIdQuery query = new()
+        GetRoomTypesInfoByPropertyIdQuery query = new()
         {
             PropertyId = propertyId
         };
@@ -158,7 +158,7 @@ public class PropertiesController : ControllerBase
             nameof( RoomTypesController.GetRoomTypeById ),
             controllerName: "RoomTypes",
             new { roomTypeId = result.Value },
-            new { message = "Room type was create successfully!" }
+            new { }
         );
     }
 }

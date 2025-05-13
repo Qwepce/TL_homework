@@ -1,33 +1,32 @@
-﻿using WebAPI.Application.Interfaces.CQRSInterfaces;
+﻿using WebAPI.Application.Interfaces.CQRS.BaseHandlers;
+using WebAPI.Application.Interfaces.CQRS.ValidatorInterface;
 using WebAPI.Application.Interfaces.Repositories;
 using WebAPI.Application.ResultPattern;
 using WebAPI.Domain.Models.Entities;
 
 namespace WebAPI.Application.UseCases.Properties.Commands.DeleteProperty;
 
-public class DeletePropertyCommandHandler : ICommandHandler<DeletePropertyCommand>
+public class DeletePropertyCommandHandler : BaseCommandHandler<DeletePropertyCommand>
 {
     private readonly IPropertyRepository _propertyRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public DeletePropertyCommandHandler( IPropertyRepository propertyRepository, IUnitOfWork unitOfWork )
+    public DeletePropertyCommandHandler(
+        IPropertyRepository propertyRepository,
+        IUnitOfWork unitOfWork,
+        IRequestValidator<DeletePropertyCommand> validator ) : base( validator )
     {
         _propertyRepository = propertyRepository;
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Result> Handle( DeletePropertyCommand command, CancellationToken cancellationToken )
+    protected override async Task<Result> HandleCommand( DeletePropertyCommand command, CancellationToken cancellationToken )
     {
-        Property? existingProperty = await _propertyRepository.GetById( command.PropertyId );
-
-        if ( existingProperty is null )
-        {
-            return Result.Failure( new Error( $"Property with id {command.PropertyId} was not found!" ) );
-        }
+        Property property = await _propertyRepository.GetById( command.PropertyId );
 
         try
         {
-            await _propertyRepository.Delete( existingProperty );
+            await _propertyRepository.Delete( property );
             await _unitOfWork.CommitChangesAsync();
         }
         catch ( Exception )

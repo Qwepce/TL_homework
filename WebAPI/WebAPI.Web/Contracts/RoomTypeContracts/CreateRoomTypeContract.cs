@@ -12,7 +12,7 @@ public class CreateRoomTypeContract
     public decimal DailyPrice { get; init; }
 
     [Required]
-    [Length( minimumLength: 3, maximumLength: 3, ErrorMessage = "Currency must be in format XXX and length must be equals {0} characters" )]
+    [Length( minimumLength: 3, maximumLength: 3, ErrorMessage = "Currency must be in format 'CUR' and length must be equals {0} characters" )]
     public string Currency { get; init; }
 
     [Required]
@@ -25,8 +25,8 @@ public class CreateRoomTypeContract
     public int TotalRoomsCount { get; init; }
 
     [Required]
-    public List<string> RoomServices { get; init; } = [];
+    public List<string> RoomServices { get; init; }
 
     [Required]
-    public List<string> RoomAmenities { get; init; } = [];
+    public List<string> RoomAmenities { get; init; }
 }

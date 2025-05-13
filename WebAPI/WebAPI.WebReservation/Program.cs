@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Application;
-using WebAPI.Application.Bindings.Reservations;
+using WebAPI.Application.UseCases.Reservations;
 using WebAPI.Infrastructure;
 using WebAPI.WebReservation.Mappings;
 
@@ -26,7 +26,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddApplicationLayerBindings();
-builder.Services.AddInfrastructureLayerBindings();
+builder.Services.AddInfrastructureLayerBindings( builder.Configuration );
 builder.Services.AddWebMappingBindings();
 
 builder.Services.AddReservationBindings();

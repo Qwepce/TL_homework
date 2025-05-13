@@ -6,7 +6,7 @@ public class Result<T>
 
     public bool IsFailure { get; }
 
-    public IEnumerable<Error>? Errors { get; }
+    public IEnumerable<Error> Errors { get; }
 
     public Result( T value )
     {

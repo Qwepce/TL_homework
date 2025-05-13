@@ -4,13 +4,13 @@ public class UpdatePropertyCommand : IPropertyCommand
 {
     public int PropertyId { get; set; }
 
-    public string Name { get; init; } = string.Empty;
+    public string Name { get; init; }
 
-    public string Country { get; init; } = string.Empty;
+    public string Country { get; init; }
 
-    public string City { get; init; } = string.Empty;
+    public string City { get; init; }
 
-    public string Address { get; init; } = string.Empty;
+    public string Address { get; init; }
 
     public decimal Latitude { get; init; }
 

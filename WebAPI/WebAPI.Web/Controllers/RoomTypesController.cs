@@ -1,6 +1,6 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Application.Interfaces.CQRSInterfaces;
+using WebAPI.Application.Interfaces.CQRS.HandlersInterfaces;
 using WebAPI.Application.ResultPattern;
 using WebAPI.Application.UseCases.RoomTypes.Commands.DeleteRoomType;
 using WebAPI.Application.UseCases.RoomTypes.Commands.UpdateRoomType;
@@ -50,7 +50,7 @@ public class RoomTypesController : ControllerBase
             return BadRequest( new { errors = result.Errors } );
         }
 
-        return Ok( new { message = "Room type was update successfully!" } );
+        return Ok();
     }
 
     [HttpDelete( "{roomTypeId:int}" )]
@@ -70,6 +70,6 @@ public class RoomTypesController : ControllerBase
             return BadRequest( new { errors = result.Errors } );
         }
 
-        return Ok( new { message = "Room type was delete successfully!" } );
+        return Ok();
     }
 }

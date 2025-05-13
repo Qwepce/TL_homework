@@ -1,36 +1,28 @@
-﻿using WebAPI.Application.Interfaces.CQRSInterfaces;
+﻿using WebAPI.Application.Interfaces.CQRS.BaseHandlers;
+using WebAPI.Application.Interfaces.CQRS.ValidatorInterface;
 using WebAPI.Application.Interfaces.Repositories;
 using WebAPI.Application.ResultPattern;
 using WebAPI.Domain.Models.Entities;
 
 namespace WebAPI.Application.UseCases.Reservations.Commands.Delete;
 
-public class DeleteReservationByIdCommandHandler : ICommandHandler<DeleteReservationByIdCommand>
+public class DeleteReservationByIdCommandHandler : BaseCommandHandler<DeleteReservationByIdCommand>
 {
     private readonly IReservationRepository _reservationRepository;
-    private readonly IRoomTypeRepository _roomTypeRepository;
     private readonly IUnitOfWork _unitOfWork;
 
     public DeleteReservationByIdCommandHandler(
+        IRequestValidator<DeleteReservationByIdCommand> validator,
         IReservationRepository reservationRepository,
-        IUnitOfWork unitOfWork,
-        IRoomTypeRepository roomTypeRepository )
+        IUnitOfWork unitOfWork ) : base( validator )
     {
         _reservationRepository = reservationRepository;
         _unitOfWork = unitOfWork;
-        _roomTypeRepository = roomTypeRepository;
     }
 
-    public async Task<Result> Handle( DeleteReservationByIdCommand command, CancellationToken cancellationToken )
+    protected override async Task<Result> HandleCommand( DeleteReservationByIdCommand command, CancellationToken cancellationToken )
     {
-        Reservation? existingReservation = await _reservationRepository.GetById( command.ReservationId );
-
-        if ( existingReservation is null )
-        {
-            return Result.Failure( new Error( $"Reservation with id {command.ReservationId} was not found" ) );
-        }
-
-        RoomType existingRoomType = ( await _roomTypeRepository.GetById( existingReservation.RoomTypeId ) )!;
+        Reservation existingReservation = await _reservationRepository.GetById( command.ReservationId );
 
         await _reservationRepository.Delete( existingReservation );
         await _unitOfWork.CommitChangesAsync();

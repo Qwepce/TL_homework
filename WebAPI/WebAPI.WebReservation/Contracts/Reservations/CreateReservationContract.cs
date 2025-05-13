@@ -31,6 +31,6 @@ public class CreateReservationContract
     public int GuestsCount { get; init; }
 
     [Required]
-    [Length( minimumLength: 3, maximumLength: 3, ErrorMessage = "Currency must be in format XXX and length must be equals {0} characters" )]
+    [Length( minimumLength: 3, maximumLength: 3, ErrorMessage = "Currency must be in format 'CUR' and length must be equals {0} characters" )]
     public string Currency { get; init; }
 }

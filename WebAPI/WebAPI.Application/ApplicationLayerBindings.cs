@@ -1,10 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using WebAPI.Application.Bindings.Amenities;
-using WebAPI.Application.Bindings.Properties;
-using WebAPI.Application.Bindings.RoomServices;
-using WebAPI.Application.Bindings.RoomTypes;
-using WebAPI.Application.Utils;
-using WebAPI.Application.Validation;
+using WebAPI.Application.UseCases.Amenities;
+using WebAPI.Application.UseCases.Properties;
+using WebAPI.Application.UseCases.RoomServices;
+using WebAPI.Application.UseCases.RoomTypes;
 
 namespace WebAPI.Application;
 
@@ -16,8 +14,6 @@ public static class ApplicationLayerBindings
         services.AddRoomTypeBindings();
         services.AddAmenityBindings();
         services.AddRoomServiceBindings();
-        services.AddValidationBindings();
-        services.AddScoped<IPriceCalculator, PriceCalculator>();
 
         return services;
     }

@@ -1,25 +1,28 @@
-﻿using WebAPI.Application.Interfaces.CQRSInterfaces;
+﻿using WebAPI.Application.Interfaces.CQRS.BaseHandlers;
+using WebAPI.Application.Interfaces.CQRS.ValidatorInterface;
 using WebAPI.Application.Interfaces.Repositories;
 using WebAPI.Application.ResultPattern;
 using WebAPI.Domain.Models.Entities;
 
 namespace WebAPI.Application.UseCases.RoomServices.GetOrCreate;
 
-public class GetOrCreateRoomServicesCommandHandler : ICommandHandlerWithResult<GetOrCreateRoomServicesCommand, List<RoomService>>
+public class GetOrCreateRoomServicesCommandHandler : BaseCommandHandlerWithResult<GetOrCreateRoomServicesCommand, List<RoomService>>
 {
     private readonly IRoomServiceRepository _roomServiceRepository;
 
-    public GetOrCreateRoomServicesCommandHandler( IRoomServiceRepository roomServiceRepository )
+    public GetOrCreateRoomServicesCommandHandler(
+        IRoomServiceRepository roomServiceRepository,
+        IRequestValidator<GetOrCreateRoomServicesCommand> validator ) : base( validator )
     {
         _roomServiceRepository = roomServiceRepository;
     }
 
-    public async Task<Result<List<RoomService>>> Handle( GetOrCreateRoomServicesCommand command, CancellationToken cancellationToken )
+    protected override async Task<Result<List<RoomService>>> HandleCommand( GetOrCreateRoomServicesCommand command, CancellationToken cancellationToken )
     {
         IReadOnlyList<RoomService> existingRoomServices = await _roomServiceRepository.GetAllByNames( command.RoomServiceNames );
 
         List<string> newRoomServicesNames = command.RoomServiceNames
-            .Except( existingRoomServices.Select( a => a.Name ) )
+            .Except( existingRoomServices.Select( a => a.Name ), StringComparer.OrdinalIgnoreCase )
             .ToList();
 
         List<RoomService> newRoomServices = newRoomServicesNames.Select( name => new RoomService
@@ -29,7 +32,7 @@ public class GetOrCreateRoomServicesCommandHandler : ICommandHandlerWithResult<G
 
         if ( newRoomServices.Any() )
         {
-            await _roomServiceRepository.CreateRangeAsync( newRoomServices );
+            await _roomServiceRepository.AddRangeAsync( newRoomServices );
         }
 
         List<RoomService> resultList = existingRoomServices

@@ -1,6 +1,6 @@
-﻿using FluentValidation;
-using FluentValidation.Results;
-using WebAPI.Application.Interfaces.CQRSInterfaces;
+﻿using WebAPI.Application.Interfaces.CQRS.BaseHandlers;
+using WebAPI.Application.Interfaces.CQRS.HandlersInterfaces;
+using WebAPI.Application.Interfaces.CQRS.ValidatorInterface;
 using WebAPI.Application.Interfaces.Repositories;
 using WebAPI.Application.ResultPattern;
 using WebAPI.Application.UseCases.Amenities.GetOrCreate;
@@ -10,57 +10,49 @@ using WebAPI.Domain.Models.Enums;
 
 namespace WebAPI.Application.UseCases.RoomTypes.Commands.CreateRoomType;
 
-public class CreateRoomTypeCommandHandler : ICommandHandlerWithResult<CreateRoomTypeCommand, int>
+public class CreateRoomTypeCommandHandler : BaseCommandHandlerWithResult<CreateRoomTypeCommand, int>
 {
     private readonly IRoomTypeRepository _roomTypeRepository;
     private readonly ICommandHandlerWithResult<GetOrCreateRoomServicesCommand, List<RoomService>> _roomServiceCommandHandler;
     private readonly ICommandHandlerWithResult<GetOrCreateAmenitiesCommand, List<Amenity>> _amenityCommandHandler;
-    private readonly IValidator<CreateRoomTypeCommand> _validator;
     private readonly IUnitOfWork _unitOfWork;
 
     public CreateRoomTypeCommandHandler(
         IRoomTypeRepository roomTypeRepository,
         IUnitOfWork unitOfWork,
-        IAmenityRepository amenityRepository,
-        IRoomServiceRepository roomServiceRepository,
-        IValidator<CreateRoomTypeCommand> validator,
+        IRequestValidator<CreateRoomTypeCommand> validator,
         ICommandHandlerWithResult<GetOrCreateAmenitiesCommand, List<Amenity>> amenityCommandHandler,
-        ICommandHandlerWithResult<GetOrCreateRoomServicesCommand, List<RoomService>> roomServiceCommandHandler )
+        ICommandHandlerWithResult<GetOrCreateRoomServicesCommand, List<RoomService>> roomServiceCommandHandler ) : base( validator )
     {
         _roomTypeRepository = roomTypeRepository;
         _unitOfWork = unitOfWork;
-        _validator = validator;
         _amenityCommandHandler = amenityCommandHandler;
         _roomServiceCommandHandler = roomServiceCommandHandler;
     }
 
-    public async Task<Result<int>> Handle( CreateRoomTypeCommand command, CancellationToken cancellationToken )
+    protected override async Task<Result<int>> HandleCommand( CreateRoomTypeCommand command, CancellationToken cancellationToken )
     {
-        ValidationResult validationResult = await _validator.ValidateAsync( command, cancellationToken );
-        if ( !validationResult.IsValid )
-        {
-            List<Error> errors = validationResult.Errors
-                .Select( error => new Error( error.ErrorMessage ) )
-                .ToList();
-
-            return Result<int>.Failure( errors );
-        }
-
         GetOrCreateRoomServicesCommand roomServicesCommand = new()
         {
-            RoomServiceNames = command.RoomServices.Distinct()
+            RoomServiceNames = command.RoomServices.Distinct( StringComparer.OrdinalIgnoreCase )
         };
-
         Result<List<RoomService>> roomServicesResult = await _roomServiceCommandHandler.Handle( roomServicesCommand, cancellationToken );
+        if ( roomServicesResult.IsFailure )
+        {
+            return Result<int>.Failure( roomServicesResult.Errors );
+        }
         List<RoomService> roomServices = roomServicesResult.Value;
 
         GetOrCreateAmenitiesCommand amenitiesCommand = new()
         {
-            AmenityNames = command.RoomAmenities.Distinct()
+            AmenityNames = command.RoomAmenities.Distinct( StringComparer.OrdinalIgnoreCase )
         };
-
         Result<List<Amenity>> amenitiesResult = await _amenityCommandHandler.Handle( amenitiesCommand, cancellationToken );
-        List<Amenity> amenities = amenitiesResult.Value;
+        if ( amenitiesResult.IsFailure )
+        {
+            return Result<int>.Failure( amenitiesResult.Errors );
+        }
+        List<Amenity> roomAmenities = amenitiesResult.Value;
 
         RoomType roomType = new(
             command.PropertyId,
@@ -70,10 +62,10 @@ public class CreateRoomTypeCommandHandler : ICommandHandlerWithResult<CreateRoom
             command.MinPersonCount,
             command.MaxPersonCount,
             command.TotalRoomsCount );
-        roomType.Services = roomServices;
-        roomType.Amenities = amenities;
+        roomType.Amenities = roomAmenities;
+        roomType.RoomServices = roomServices;
 
-        await _roomTypeRepository.Create( roomType );
+        await _roomTypeRepository.Add( roomType );
         await _unitOfWork.CommitChangesAsync();
 
         return Result<int>.Success( roomType.Id );

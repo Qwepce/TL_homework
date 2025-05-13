@@ -6,5 +6,5 @@ public interface IAmenityRepository
 {
     Task<IReadOnlyList<Amenity>> GetAllByNames( IEnumerable<string> names );
 
-    Task CreateRangeAsync( IEnumerable<Amenity> roomAmenities );
+    Task AddRangeAsync( IEnumerable<Amenity> roomAmenities );
 }

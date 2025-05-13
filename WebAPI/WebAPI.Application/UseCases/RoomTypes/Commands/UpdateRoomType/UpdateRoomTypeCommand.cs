@@ -16,7 +16,7 @@ public class UpdateRoomTypeCommand : IRoomTypeCommand
 
     public int TotalRoomsCount { get; init; }
 
-    public List<string> RoomServices { get; init; }
+    public List<string> RoomServices { get; init; } = [];
 
-    public List<string> RoomAmenities { get; init; }
+    public List<string> RoomAmenities { get; init; } = [];
 }

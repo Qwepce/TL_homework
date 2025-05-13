@@ -1,6 +1,6 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Application.Interfaces.CQRSInterfaces;
+using WebAPI.Application.Interfaces.CQRS.HandlersInterfaces;
 using WebAPI.Application.ResultPattern;
 using WebAPI.Application.UseCases.Reservations.Commands.Create;
 using WebAPI.Application.UseCases.Reservations.Commands.Delete;
@@ -79,7 +79,7 @@ public class ReservationsController : ControllerBase
         return CreatedAtAction(
             nameof( GetReservationById ),
             new { reservationId = result.Value },
-            new { message = "Reservation was create successfully!" } );
+            new { } );
     }
 
     [HttpDelete( "{reservationId:int}" )]
@@ -96,6 +96,6 @@ public class ReservationsController : ControllerBase
             return NotFound( new { message = result.Errors } );
         }
 
-        return Ok( new { message = "Reservation was delete successfully!" } );
+        return NoContent();
     }
 }

@@ -6,5 +6,5 @@ public interface IRoomServiceRepository
 {
     Task<IReadOnlyList<RoomService>> GetAllByNames( IEnumerable<string> names );
 
-    Task CreateRangeAsync( IEnumerable<RoomService> roomServices );
+    Task AddRangeAsync( IEnumerable<RoomService> roomServices );
 }

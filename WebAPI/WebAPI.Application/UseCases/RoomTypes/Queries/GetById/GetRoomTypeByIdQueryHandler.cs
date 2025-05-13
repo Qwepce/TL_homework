@@ -1,5 +1,6 @@
 ﻿using Mapster;
-using WebAPI.Application.Interfaces.CQRSInterfaces;
+using WebAPI.Application.Interfaces.CQRS.BaseHandlers;
+using WebAPI.Application.Interfaces.CQRS.ValidatorInterface;
 using WebAPI.Application.Interfaces.Repositories;
 using WebAPI.Application.ResultPattern;
 using WebAPI.Application.UseCases.RoomTypes.Dto;
@@ -7,22 +8,20 @@ using WebAPI.Domain.Models.Entities;
 
 namespace WebAPI.Application.UseCases.RoomTypes.Queries.GetById;
 
-public class GetRoomTypeByIdQueryHandler : IQueryHandler<GetRoomTypeByIdQuery, RoomTypeDto>
+public class GetRoomTypeByIdQueryHandler : BaseQueryHandler<GetRoomTypeByIdQuery, RoomTypeDto>
 {
     private readonly IRoomTypeRepository _roomTypeRepository;
 
-    public GetRoomTypeByIdQueryHandler( IRoomTypeRepository roomTypeRepository )
+    public GetRoomTypeByIdQueryHandler(
+        IRoomTypeRepository roomTypeRepository,
+        IRequestValidator<GetRoomTypeByIdQuery> validator ) : base( validator )
     {
         _roomTypeRepository = roomTypeRepository;
     }
 
-    public async Task<Result<RoomTypeDto>> Handle( GetRoomTypeByIdQuery query, CancellationToken cancellationToken )
+    protected override async Task<Result<RoomTypeDto>> HandleQuery( GetRoomTypeByIdQuery query, CancellationToken cancellationToken )
     {
-        RoomType? roomType = await _roomTypeRepository.GetById( query.RoomTypeId );
-        if ( roomType is null )
-        {
-            return Result<RoomTypeDto>.Failure( new Error( $"Room type with id {query.RoomTypeId} was not found" ) );
-        }
+        RoomType roomType = await _roomTypeRepository.GetById( query.RoomTypeId );
 
         RoomTypeDto roomTypeDto = roomType.Adapt<RoomTypeDto>();
 

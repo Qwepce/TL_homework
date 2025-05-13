@@ -5,13 +5,12 @@ using WebAPI.Domain.Models.Entities;
 namespace WebAPI.Application.Interfaces.Repositories;
 
 public interface IRoomTypeRepository :
-    ICreateEntityRepository<RoomType>,
+    IAddEntityRepository<RoomType>,
     IDeleteEntityRepository<RoomType>,
-    IUpdateEntityRepository<RoomType>
+    IUpdateEntityRepository<RoomType>,
+    IGetEntityByIdRepository<RoomType>
 {
-    Task<IReadOnlyList<RoomType>> GetAllByPropertyId( int propertyId );
+    Task<IReadOnlyList<RoomType>> GetAllRoomTypesInfoByPropertyId( int propertyId );
 
-    Task<RoomType?> GetById( int roomTypeId );
-
-    Task<List<RoomType>> GetByFilters( int propertyId, SearchRoomTypesFilter filter );
+    Task<List<RoomType>> GetByFilters( SearchRoomTypesFilter filter );
 }

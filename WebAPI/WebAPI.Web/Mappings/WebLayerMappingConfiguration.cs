@@ -1,4 +1,4 @@
-﻿using WebAPI.Application.MappingConfigurations.RoomTypes;
+﻿using WebAPI.Application.UseCases.RoomTypes;
 using WebAPI.Web.Mappings.Property;
 
 namespace WebAPI.Web.Mappings;

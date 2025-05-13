@@ -25,7 +25,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddApplicationLayerBindings();
-builder.Services.AddInfrastructureLayerBindings();
+builder.Services.AddInfrastructureLayerBindings( builder.Configuration );
 builder.Services.AddWebMappingBindings();
 
 builder.Services.AddRouting( options =>

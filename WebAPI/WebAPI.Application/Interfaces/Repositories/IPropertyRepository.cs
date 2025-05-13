@@ -4,13 +4,12 @@ using WebAPI.Domain.Models.Entities;
 namespace WebAPI.Application.Interfaces.Repositories;
 
 public interface IPropertyRepository :
-    ICreateEntityRepository<Property>,
+    IAddEntityRepository<Property>,
     IDeleteEntityRepository<Property>,
-    IUpdateEntityRepository<Property>
+    IUpdateEntityRepository<Property>,
+    IGetEntityByIdRepository<Property>
 {
     Task<IReadOnlyCollection<Property>> GetAll();
 
-    Task<Property?> GetById( int propertyId );
-
-    Task<IReadOnlyList<Property>> GetAllByCity( string city );
+    Task<IReadOnlyCollection<Property>> GetAllByCity( string city );
 }
