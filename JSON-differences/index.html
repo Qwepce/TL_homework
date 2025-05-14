@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/styles/style.css" />
+    <title>JSON diff</title>
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <div class="header__logo">
+          <a href="#" class="header__logo-link">Json-diff</a>
+        </div>
+        <div class="header__login">
+          <div class="header__logged-in hidden">
+            <span>Hello, <span id="username"></span>!</span>
+            <button class="logout-button">Log out</button>
+          </div>
+          <button class="header__login-button" type="button">Log in</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrapper">
+      <section class="promo-section">
+        <p>
+          Compare <span>two JSON objects</span> and see the
+          <span>differences</span>
+        </p>
+        <a href="#" class="promo-link hidden">Start</a>
+      </section>
+
+      <section class="login-section hidden">
+        <div class="content">
+          <div class="login">
+            <p class="login-title">Login Form</p>
+            <form class="login-form">
+              <label for="login">Login</label>
+              <div class="input-block-with-error">
+                <input type="text" id="login" />
+                <span class="hidden">Обязательное поле</span>
+              </div>
+              <button class="login-button button">Sign in</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="main-form-section hidden">
+        <div class="content">
+          <form class="main-form">
+            <label for="oldJson">Old JSON</label>
+            <div class="input-block-with-error">
+              <textarea id="oldJson" rows="10" cols="50"></textarea>
+              <span class="hidden"></span>
+            </div>
+            <label for="newJson">New JSON</label>
+            <div class="input-block-with-error">
+              <textarea id="newJson" rows="10" cols="50"></textarea>
+              <span class="hidden"></span>
+            </div>
+            <button class="button">Show difference</button>
+          </form>
+          <div class="result hidden"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Copyright 2025 ©</p>
+    </footer>
+
+    <script src="src/js/index.js" type="module"></script>
+  </body>
+</html>
