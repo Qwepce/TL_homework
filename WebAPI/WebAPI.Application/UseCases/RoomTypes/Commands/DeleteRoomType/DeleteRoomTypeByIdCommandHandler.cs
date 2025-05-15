@@ -14,7 +14,8 @@ public class DeleteRoomTypeByIdCommandHandler : BaseCommandHandler<DeleteRoomTyp
     public DeleteRoomTypeByIdCommandHandler(
         IRoomTypeRepository roomTypeRepository,
         IUnitOfWork unitOfWork,
-        IRequestValidator<DeleteRoomTypeByIdCommand> validator ) : base( validator )
+        IRequestValidator<DeleteRoomTypeByIdCommand> validator )
+        : base( validator )
     {
         _roomTypeRepository = roomTypeRepository;
         _unitOfWork = unitOfWork;

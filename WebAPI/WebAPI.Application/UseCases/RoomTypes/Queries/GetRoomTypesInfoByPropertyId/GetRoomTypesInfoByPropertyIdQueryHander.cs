@@ -16,7 +16,8 @@ public class GetRoomTypesInfoByPropertyIdQueryHander : BaseQueryHandler<GetRoomT
     public GetRoomTypesInfoByPropertyIdQueryHander(
         IRoomTypeRepository roomTypeRepository,
         IPropertyRepository implicitPropertyRepository,
-        IRequestValidator<GetRoomTypesInfoByPropertyIdQuery> validator ) : base( validator )
+        IRequestValidator<GetRoomTypesInfoByPropertyIdQuery> validator )
+        : base( validator )
     {
         _roomTypeRepository = roomTypeRepository;
         _propertyRepository = implicitPropertyRepository;

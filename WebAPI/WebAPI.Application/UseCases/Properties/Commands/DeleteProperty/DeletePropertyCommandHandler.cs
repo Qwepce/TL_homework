@@ -14,7 +14,8 @@ public class DeletePropertyCommandHandler : BaseCommandHandler<DeletePropertyCom
     public DeletePropertyCommandHandler(
         IPropertyRepository propertyRepository,
         IUnitOfWork unitOfWork,
-        IRequestValidator<DeletePropertyCommand> validator ) : base( validator )
+        IRequestValidator<DeletePropertyCommand> validator )
+        : base( validator )
     {
         _propertyRepository = propertyRepository;
         _unitOfWork = unitOfWork;

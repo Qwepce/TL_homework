@@ -7,6 +7,11 @@ public class GetOrCreateAmenitiesCommandValidator : IRequestValidator<GetOrCreat
 {
     public Task<Result> Validate( GetOrCreateAmenitiesCommand command )
     {
+        if ( command.AmenityNames.Count() == 0 )
+        {
+            return Task.FromResult( Result.Failure( new Error( "Amenities list can not be empty" ) ) );
+        }
+
         foreach ( string amenityName in command.AmenityNames )
         {
             if ( string.IsNullOrWhiteSpace( amenityName ) )

@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using WebAPI.Application.Interfaces.CQRS.BaseHandlers;
+﻿using WebAPI.Application.Interfaces.CQRS.BaseHandlers;
 using WebAPI.Application.Interfaces.CQRS.HandlersInterfaces;
 using WebAPI.Application.Interfaces.CQRS.ValidatorInterface;
 using WebAPI.Application.Interfaces.Repositories;
@@ -22,7 +21,8 @@ public class CreateReservationCommandHandler : BaseCommandHandlerWithResult<Crea
         IReservationRepository reservationRepository,
         IRequestValidator<CreateReservationCommand> validator,
         IUnitOfWork unitOfWork,
-        IQueryHandler<GetRoomTypeByIdQuery, RoomTypeDto> roomTypeQueryHandler ) : base( validator )
+        IQueryHandler<GetRoomTypeByIdQuery, RoomTypeDto> roomTypeQueryHandler )
+        : base( validator )
     {
         _reservationRepository = reservationRepository;
         _unitOfWork = unitOfWork;

@@ -12,7 +12,8 @@ public class GetOrCreateRoomServicesCommandHandler : BaseCommandHandlerWithResul
 
     public GetOrCreateRoomServicesCommandHandler(
         IRoomServiceRepository roomServiceRepository,
-        IRequestValidator<GetOrCreateRoomServicesCommand> validator ) : base( validator )
+        IRequestValidator<GetOrCreateRoomServicesCommand> validator )
+        : base( validator )
     {
         _roomServiceRepository = roomServiceRepository;
     }

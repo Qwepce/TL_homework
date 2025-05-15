@@ -14,7 +14,8 @@ public class CreatePropertyCommandHandler : BaseCommandHandlerWithResult<CreateP
     public CreatePropertyCommandHandler(
         IPropertyRepository propertyRepository,
         IUnitOfWork unitOfWork,
-        IRequestValidator<CreatePropertyCommand> validator ) : base( validator )
+        IRequestValidator<CreatePropertyCommand> validator )
+        : base( validator )
     {
         _propertyRepository = propertyRepository;
         _unitOfWork = unitOfWork;

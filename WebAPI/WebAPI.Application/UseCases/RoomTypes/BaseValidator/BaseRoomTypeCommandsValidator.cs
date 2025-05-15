@@ -16,11 +16,15 @@ public abstract class BaseRoomTypeCommandsValidator<TCommand> : IRequestValidato
 
         ApplyNumbersChecks( new()
         {
-            { "Daily price", (int)command.DailyPrice },
             { "Minimum persons", command.MinPersonCount },
             { "Maximum persons", command.MaxPersonCount },
             { "Total rooms", command.TotalRoomsCount }
         } );
+
+        if ( command.DailyPrice <= 0m )
+        {
+            _errors.Add( new Error( "Daily price must be more than zero" ) );
+        }
 
         if ( !Enum.TryParse( typeof( Currency ), command.Currency, ignoreCase: true, out object _ ) )
         {

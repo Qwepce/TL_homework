@@ -14,7 +14,8 @@ public class GetPropertyByIdQueryHandler : BaseQueryHandler<GetPropertyByIdQuery
 
     public GetPropertyByIdQueryHandler(
         IPropertyRepository propertyRepository,
-        IRequestValidator<GetPropertyByIdQuery> validator ) : base( validator )
+        IRequestValidator<GetPropertyByIdQuery> validator )
+        : base( validator )
     {
         _propertyRepository = propertyRepository;
     }

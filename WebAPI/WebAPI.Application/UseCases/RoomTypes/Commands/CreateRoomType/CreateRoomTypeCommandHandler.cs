@@ -22,7 +22,8 @@ public class CreateRoomTypeCommandHandler : BaseCommandHandlerWithResult<CreateR
         IUnitOfWork unitOfWork,
         IRequestValidator<CreateRoomTypeCommand> validator,
         ICommandHandlerWithResult<GetOrCreateAmenitiesCommand, List<Amenity>> amenityCommandHandler,
-        ICommandHandlerWithResult<GetOrCreateRoomServicesCommand, List<RoomService>> roomServiceCommandHandler ) : base( validator )
+        ICommandHandlerWithResult<GetOrCreateRoomServicesCommand, List<RoomService>> roomServiceCommandHandler )
+        : base( validator )
     {
         _roomTypeRepository = roomTypeRepository;
         _unitOfWork = unitOfWork;

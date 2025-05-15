@@ -14,7 +14,8 @@ public class GetRoomTypeByIdQueryHandler : BaseQueryHandler<GetRoomTypeByIdQuery
 
     public GetRoomTypeByIdQueryHandler(
         IRoomTypeRepository roomTypeRepository,
-        IRequestValidator<GetRoomTypeByIdQuery> validator ) : base( validator )
+        IRequestValidator<GetRoomTypeByIdQuery> validator )
+        : base( validator )
     {
         _roomTypeRepository = roomTypeRepository;
     }

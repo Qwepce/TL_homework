@@ -9,15 +9,15 @@ using WebAPI.Application.Utils;
 using WebAPI.Domain.Models.Entities;
 using WebAPI.Domain.Models.Enums;
 
-namespace WebAPI.Application.UseCases.Reservations.Queries.SearchAccommodations;
+namespace WebAPI.Application.UseCases.Reservations.Queries.SearchAvailableReservations;
 
-public class SearchAccommodationsQueryHandler : IQueryHandler<SearchAccommodationsQuery, List<SearchResultDto>>
+public class SearchAvailableReservationsQueryHandler : IQueryHandler<SearchAvailableReservationsQuery, List<SearchResultDto>>
 {
     private readonly IPropertyRepository _propertyRepository;
     private readonly IRoomTypeRepository _roomTypeRepository;
     private readonly IReservationRepository _reservationRepository;
 
-    public SearchAccommodationsQueryHandler(
+    public SearchAvailableReservationsQueryHandler(
         IPropertyRepository propertyRepository,
         IRoomTypeRepository roomTypeRepository,
         IReservationRepository reservationRepository )
@@ -27,7 +27,7 @@ public class SearchAccommodationsQueryHandler : IQueryHandler<SearchAccommodatio
         _reservationRepository = reservationRepository;
     }
 
-    public async Task<Result<List<SearchResultDto>>> Handle( SearchAccommodationsQuery query, CancellationToken cancellationToken )
+    public async Task<Result<List<SearchResultDto>>> Handle( SearchAvailableReservationsQuery query, CancellationToken cancellationToken )
     {
         IReadOnlyCollection<Property> properties = string.IsNullOrWhiteSpace( query.City )
             ? await _propertyRepository.GetAll()
@@ -57,7 +57,7 @@ public class SearchAccommodationsQueryHandler : IQueryHandler<SearchAccommodatio
 
     private async Task<List<RoomType>> GetAvailableRoomTypesForProperty(
         Property property,
-        SearchAccommodationsQuery query )
+        SearchAvailableReservationsQuery query )
     {
         SearchRoomTypesFilter roomTypesFilter = new()
         {
@@ -78,7 +78,7 @@ public class SearchAccommodationsQueryHandler : IQueryHandler<SearchAccommodatio
         return availableRoomTypes;
     }
 
-    private async Task<bool> IsRoomTypeAvailable( RoomType roomType, SearchAccommodationsQuery query )
+    private async Task<bool> IsRoomTypeAvailable( RoomType roomType, SearchAvailableReservationsQuery query )
     {
         if ( !query.ArrivalDate.HasValue )
         {
@@ -98,7 +98,7 @@ public class SearchAccommodationsQueryHandler : IQueryHandler<SearchAccommodatio
 
     private bool IsWithinPriceRange(
         RoomType roomType,
-        SearchAccommodationsQuery query,
+        SearchAvailableReservationsQuery query,
         DateOnly arrivalDate,
         DateOnly departureDate )
     {

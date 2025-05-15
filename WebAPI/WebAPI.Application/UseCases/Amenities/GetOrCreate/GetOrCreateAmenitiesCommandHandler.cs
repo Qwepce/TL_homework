@@ -12,7 +12,8 @@ public class GetOrCreateAmenitiesCommandHandler : BaseCommandHandlerWithResult<G
 
     public GetOrCreateAmenitiesCommandHandler(
         IAmenityRepository amenityRepository,
-        IRequestValidator<GetOrCreateAmenitiesCommand> validator ) : base( validator )
+        IRequestValidator<GetOrCreateAmenitiesCommand> validator )
+        : base( validator )
     {
         _amenityRepository = amenityRepository;
     }

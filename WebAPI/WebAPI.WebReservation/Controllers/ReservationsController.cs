@@ -7,9 +7,9 @@ using WebAPI.Application.UseCases.Reservations.Commands.Delete;
 using WebAPI.Application.UseCases.Reservations.Dto;
 using WebAPI.Application.UseCases.Reservations.Queries.GetAll;
 using WebAPI.Application.UseCases.Reservations.Queries.GetById;
-using WebAPI.Application.UseCases.Reservations.Queries.SearchAccommodations;
+using WebAPI.Application.UseCases.Reservations.Queries.SearchAvailableReservations;
 using WebAPI.WebReservation.Contracts.Reservations;
-using WebAPI.WebReservation.Filters.Accommodations;
+using WebAPI.WebReservation.Filters.AvailableReservations;
 using WebAPI.WebReservation.Filters.Reservations;
 
 namespace WebAPI.WebReservation.Controllers;
@@ -20,11 +20,11 @@ public class ReservationsController : ControllerBase
 {
     [HttpGet( "search" )]
     public async Task<IActionResult> SearchAvailableAccommodations(
-        [FromQuery] AccommodationsSearchFilter filters,
-        [FromServices] IQueryHandler<SearchAccommodationsQuery, List<SearchResultDto>> queryHandler,
+        [FromQuery] SearchAvailableReservationsFilter filters,
+        [FromServices] IQueryHandler<SearchAvailableReservationsQuery, List<SearchResultDto>> queryHandler,
         CancellationToken cancellationToken )
     {
-        SearchAccommodationsQuery query = filters.Adapt<SearchAccommodationsQuery>();
+        SearchAvailableReservationsQuery query = filters.Adapt<SearchAvailableReservationsQuery>();
         Result<List<SearchResultDto>> result = await queryHandler.Handle( query, cancellationToken );
 
         return Ok( result.Value );

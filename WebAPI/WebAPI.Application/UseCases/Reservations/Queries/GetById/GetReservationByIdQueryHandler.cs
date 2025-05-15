@@ -14,7 +14,8 @@ public class GetReservationByIdQueryHandler : BaseQueryHandler<GetReservationByI
 
     public GetReservationByIdQueryHandler(
         IRequestValidator<GetReservationByIdQuery> validator,
-        IReservationRepository reservationRepository ) : base( validator )
+        IReservationRepository reservationRepository )
+        : base( validator )
     {
         _reservationRepository = reservationRepository;
     }

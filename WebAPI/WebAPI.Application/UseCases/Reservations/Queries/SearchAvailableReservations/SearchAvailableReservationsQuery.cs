@@ -1,6 +1,6 @@
-﻿namespace WebAPI.WebReservation.Filters.Accommodations;
+﻿namespace WebAPI.Application.UseCases.Reservations.Queries.SearchAvailableReservations;
 
-public class AccommodationsSearchFilter
+public class SearchAvailableReservationsQuery
 {
     public string City { get; init; } = string.Empty;
 

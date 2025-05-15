@@ -21,7 +21,8 @@ public class UpdateRoomTypeCommandHandler : BaseCommandHandler<UpdateRoomTypeCom
         ICommandHandlerWithResult<GetOrCreateAmenitiesCommand, List<Amenity>> amenitiesCommandHandler,
         ICommandHandlerWithResult<GetOrCreateRoomServicesCommand, List<RoomService>> roomServicesCommandHandler,
         IRoomTypeRepository roomTypeRepository, IUnitOfWork unitOfWork,
-        IRequestValidator<UpdateRoomTypeCommand> validator ) : base( validator )
+        IRequestValidator<UpdateRoomTypeCommand> validator )
+        : base( validator )
     {
         _amenitiesCommandHandler = amenitiesCommandHandler;
         _roomServicesCommandHandler = roomServicesCommandHandler;

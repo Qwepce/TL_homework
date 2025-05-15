@@ -15,7 +15,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<RoomService> RoomServices { get; set; }
     public DbSet<Reservation> Reservations { get; set; }
 
-    public ApplicationDbContext( DbContextOptions options ) : base( options )
+    public ApplicationDbContext( DbContextOptions options )
+        : base( options )
     {
 
     }

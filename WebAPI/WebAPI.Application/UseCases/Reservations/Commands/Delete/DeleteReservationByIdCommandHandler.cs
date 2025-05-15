@@ -14,7 +14,8 @@ public class DeleteReservationByIdCommandHandler : BaseCommandHandler<DeleteRese
     public DeleteReservationByIdCommandHandler(
         IRequestValidator<DeleteReservationByIdCommand> validator,
         IReservationRepository reservationRepository,
-        IUnitOfWork unitOfWork ) : base( validator )
+        IUnitOfWork unitOfWork )
+        : base( validator )
     {
         _reservationRepository = reservationRepository;
         _unitOfWork = unitOfWork;

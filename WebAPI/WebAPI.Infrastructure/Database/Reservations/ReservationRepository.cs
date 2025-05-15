@@ -29,9 +29,10 @@ public class ReservationRepository : IReservationRepository
         DateOnly departureDate )
     {
         return await _dbContext.Reservations
-            .CountAsync( r => r.RoomTypeId == roomTypeId &&
-                            r.ArrivalDate < departureDate &&
-                            r.DepartureDate > arrivalDate );
+            .CountAsync( r =>
+                r.RoomTypeId == roomTypeId &&
+                r.ArrivalDate < departureDate &&
+                r.DepartureDate > arrivalDate );
     }
 
     public async Task<Reservation> GetById( int reservationId )

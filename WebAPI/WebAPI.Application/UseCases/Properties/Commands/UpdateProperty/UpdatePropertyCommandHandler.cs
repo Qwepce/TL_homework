@@ -15,7 +15,8 @@ public class UpdatePropertyCommandHandler : BaseCommandHandler<UpdatePropertyCom
     public UpdatePropertyCommandHandler(
         IPropertyRepository propertyRepository,
         IUnitOfWork unitOfWork,
-        IRequestValidator<UpdatePropertyCommand> validator ) : base( validator )
+        IRequestValidator<UpdatePropertyCommand> validator )
+        : base( validator )
     {
         _propertyRepository = propertyRepository;
         _unitOfWork = unitOfWork;
