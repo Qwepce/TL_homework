@@ -1,0 +1,84 @@
+import { useEffect, useState } from "react";
+import { useRef } from "react";
+import EmojiButtonsList from "../emojiButtonsList/EmojiButtonsList";
+import SubmitReviewButton from "../submitReviewButton/SubmitReviewButton";
+import styles from "./reviewForm.module.css";
+
+interface ReviewFormProps {
+  onSubmit: (data: {
+    rating: number;
+    username: string;
+    review: string;
+  }) => void;
+}
+
+export default function ReviewForm({ onSubmit }: ReviewFormProps) {
+  const [username, setUsername] = useState<string>("");
+  const [review, setReview] = useState<string>("");
+  const [rating, setRating] = useState<number>(0);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+  const adjustTextAreaHeight = () => {
+    if (textAreaRef.current) {
+      textAreaRef.current.style.height = "auto";
+      textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+    }
+  };
+
+  useEffect(() => {
+    adjustTextAreaHeight();
+  }, [review]);
+
+  const isFormValid: boolean =
+    !!username.trim() && !!review.trim() && rating > 0;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isFormValid) {
+      onSubmit({
+        rating,
+        username: username.trim(),
+        review: review.trim(),
+      });
+      setUsername("");
+      setReview("");
+      setRating(0);
+    }
+  };
+
+  return (
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <fieldset className={styles.fieldSet}>
+        <legend className={styles.title}>
+          Помогите нам сделать процесс бронирования лучше
+        </legend>
+        <div className={styles["buttons-list"]}>
+          <EmojiButtonsList
+            selectedRating={rating}
+            onRatingSelect={setRating}
+          />
+        </div>
+        <div className={styles.usernameContainer}>
+          <label htmlFor="username">*Имя</label>
+          <input
+            type="text"
+            id="username"
+            placeholder="Как вас зовут?"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <textarea
+          ref={textAreaRef}
+          id="review"
+          placeholder="Напишите, что понравилось, что было непонятно"
+          value={review}
+          onChange={(e) => setReview(e.target.value)}
+        ></textarea>
+      </fieldset>
+      <div className={styles["submit-button__container"]}>
+        <SubmitReviewButton isDisabled={!isFormValid} />
+      </div>
+    </form>
+  );
+}

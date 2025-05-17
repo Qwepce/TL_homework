@@ -1,0 +1,50 @@
+.container {
+  min-height: 181px;
+  max-width: 550px;
+  width: 100%;
+  display: grid;
+  grid-template-areas:
+    "avatar username rating"
+    ". review .";
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: min-content auto;
+  column-gap: 14px;
+  align-items: start;
+  color: var(--font-color);
+  word-wrap: break-word;
+  word-break: break-word;
+  letter-spacing: 0.015em;
+}
+
+.avatar {
+  border-radius: 50%;
+  grid-area: avatar;
+  width: 50px;
+  height: 50px;
+}
+
+.username {
+  grid-area: username;
+  align-self: center;
+  justify-self: start;
+  text-align: left;
+  font-weight: 500;
+  font-size: 16px;
+  padding-left: 8px;
+}
+
+.rating {
+  grid-area: rating;
+  font-weight: 500;
+  font-size: 24px;
+  align-self: center;
+}
+
+.review {
+  letter-spacing: -0.02em;
+  grid-area: review;
+  justify-self: start;
+  text-align: left;
+  white-space: pre-line;
+  padding-left: 8px;
+}
