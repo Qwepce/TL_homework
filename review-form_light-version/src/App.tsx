@@ -16,15 +16,15 @@ export default function App() {
       <div className="review-form-container">
         <ReviewForm onSubmit={handleFormSubmit} />
       </div>
-      <div className="review-display">
-        {dataFromForm && (
+      {dataFromForm && (
+        <div className="review-display">
           <UserReview
             rating={dataFromForm.rating}
             username={dataFromForm.username}
             review={dataFromForm.review}
           />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
