@@ -28,7 +28,7 @@
   text-align: left;
 }
 
-.buttons-list {
+.buttonsList {
   margin-top: 32px;
 }
 
@@ -77,7 +77,7 @@
   letter-spacing: 0.015em;
 }
 
-.submit-button__container {
+.submitButtonContainer {
   display: flex;
   justify-content: end;
   margin-top: 20px;
