@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 import { useRef } from "react";
+import type { ReviewData } from "../../types/ReviewData";
 import EmojiButtonsList from "../emojiButtonsList/EmojiButtonsList";
 import SubmitReviewButton from "../submitReviewButton/SubmitReviewButton";
 import styles from "./reviewForm.module.css";
 
 interface ReviewFormProps {
-  onSubmit: (data: {
-    rating: number;
-    username: string;
-    review: string;
-  }) => void;
+  onSubmit: (data: ReviewData) => void;
 }
 
 export default function ReviewForm({ onSubmit }: ReviewFormProps) {
@@ -52,7 +49,7 @@ export default function ReviewForm({ onSubmit }: ReviewFormProps) {
         <legend className={styles.title}>
           Помогите нам сделать процесс бронирования лучше
         </legend>
-        <div className={styles["buttons-list"]}>
+        <div className={styles.buttonsList}>
           <EmojiButtonsList
             selectedRating={rating}
             onRatingSelect={setRating}
@@ -76,7 +73,7 @@ export default function ReviewForm({ onSubmit }: ReviewFormProps) {
           onChange={(e) => setReview(e.target.value)}
         ></textarea>
       </fieldset>
-      <div className={styles["submit-button__container"]}>
+      <div className={styles.submitButtonContainer}>
         <SubmitReviewButton isDisabled={!isFormValid} />
       </div>
     </form>
