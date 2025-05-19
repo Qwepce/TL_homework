@@ -1,7 +1,7 @@
 ﻿using Mapster;
 using WebAPI.Application.Filters;
 using WebAPI.Application.UseCases.Reservations.Dto;
-using WebAPI.Application.UseCases.Reservations.Queries.GetAllReservations;
+using WebAPI.Application.UseCases.Reservations.Queries.GetAllQuery;
 using WebAPI.Domain.Models.Entities;
 
 namespace WebAPI.Application.UseCases.Reservations;

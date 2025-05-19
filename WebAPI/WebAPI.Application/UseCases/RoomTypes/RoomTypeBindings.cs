@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using WebAPI.Application.Interfaces.CQRS.HandlersInterfaces;
 using WebAPI.Application.Interfaces.CQRS.ValidatorInterface;
-using WebAPI.Application.UseCases.RoomTypes.Commands.CreateRoomType;
-using WebAPI.Application.UseCases.RoomTypes.Commands.DeleteRoomTypeById;
-using WebAPI.Application.UseCases.RoomTypes.Commands.UpdateRoomType;
+using WebAPI.Application.UseCases.RoomTypes.Commands.CreateCommand;
+using WebAPI.Application.UseCases.RoomTypes.Commands.DeleteByIdCommand;
+using WebAPI.Application.UseCases.RoomTypes.Commands.UpdateCommand;
 using WebAPI.Application.UseCases.RoomTypes.Dto;
-using WebAPI.Application.UseCases.RoomTypes.Queries.GetRoomTypeById;
-using WebAPI.Application.UseCases.RoomTypes.Queries.GetRoomTypesInfoByPropertyId;
+using WebAPI.Application.UseCases.RoomTypes.Queries.GetByIdQuery;
+using WebAPI.Application.UseCases.RoomTypes.Queries.GetByPropertyIdQuery;
 
 namespace WebAPI.Application.UseCases.RoomTypes;
 

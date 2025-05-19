@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using WebAPI.Application.Interfaces.CQRS.HandlersInterfaces;
 using WebAPI.Application.Interfaces.CQRS.ValidatorInterface;
-using WebAPI.Application.UseCases.RoomServices.GetOrCreateRoomServices;
+using WebAPI.Application.UseCases.RoomServices.GetOrCreateCommand;
 using WebAPI.Domain.Models.Entities;
 
 namespace WebAPI.Application.UseCases.RoomServices;

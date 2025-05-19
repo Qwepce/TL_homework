@@ -2,15 +2,15 @@
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Application.Interfaces.CQRS.HandlersInterfaces;
 using WebAPI.Application.ResultPattern;
-using WebAPI.Application.UseCases.Properties.Commands.CreateProperty;
-using WebAPI.Application.UseCases.Properties.Commands.DeletePropertyById;
-using WebAPI.Application.UseCases.Properties.Commands.UpdateProperty;
+using WebAPI.Application.UseCases.Properties.Commands.CreateCommand;
+using WebAPI.Application.UseCases.Properties.Commands.DeleteByIdCommand;
+using WebAPI.Application.UseCases.Properties.Commands.UpdateCommand;
 using WebAPI.Application.UseCases.Properties.Dto;
-using WebAPI.Application.UseCases.Properties.Queries.GetAllProperties;
-using WebAPI.Application.UseCases.Properties.Queries.GetPropertyById;
-using WebAPI.Application.UseCases.RoomTypes.Commands.CreateRoomType;
+using WebAPI.Application.UseCases.Properties.Queries.GetAllQuery;
+using WebAPI.Application.UseCases.Properties.Queries.GetByIdQuery;
+using WebAPI.Application.UseCases.RoomTypes.Commands.CreateCommand;
 using WebAPI.Application.UseCases.RoomTypes.Dto;
-using WebAPI.Application.UseCases.RoomTypes.Queries.GetRoomTypesInfoByPropertyId;
+using WebAPI.Application.UseCases.RoomTypes.Queries.GetByPropertyIdQuery;
 using WebAPI.Web.Contracts.PropertyContracts;
 using WebAPI.Web.Contracts.RoomTypeContracts;
 

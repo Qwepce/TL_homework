@@ -1,6 +1,6 @@
 ﻿using Mapster;
-using WebAPI.Application.UseCases.Properties.Commands.CreateProperty;
-using WebAPI.Application.UseCases.Properties.Commands.UpdateProperty;
+using WebAPI.Application.UseCases.Properties.Commands.CreateCommand;
+using WebAPI.Application.UseCases.Properties.Commands.UpdateCommand;
 using WebAPI.Application.UseCases.Properties.Dto;
 using WebAPI.Web.Contracts.PropertyContracts;
 

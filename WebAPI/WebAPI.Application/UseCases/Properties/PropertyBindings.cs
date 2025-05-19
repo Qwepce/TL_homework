@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using WebAPI.Application.Interfaces.CQRS.HandlersInterfaces;
 using WebAPI.Application.Interfaces.CQRS.ValidatorInterface;
-using WebAPI.Application.UseCases.Properties.Commands.CreateProperty;
-using WebAPI.Application.UseCases.Properties.Commands.DeletePropertyById;
-using WebAPI.Application.UseCases.Properties.Commands.UpdateProperty;
+using WebAPI.Application.UseCases.Properties.Commands.CreateCommand;
+using WebAPI.Application.UseCases.Properties.Commands.DeleteByIdCommand;
+using WebAPI.Application.UseCases.Properties.Commands.UpdateCommand;
 using WebAPI.Application.UseCases.Properties.Dto;
-using WebAPI.Application.UseCases.Properties.Queries.GetAllProperties;
-using WebAPI.Application.UseCases.Properties.Queries.GetPropertyById;
+using WebAPI.Application.UseCases.Properties.Queries.GetAllQuery;
+using WebAPI.Application.UseCases.Properties.Queries.GetByIdQuery;
 
 namespace WebAPI.Application.UseCases.Properties;
 

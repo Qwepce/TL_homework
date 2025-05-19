@@ -1,6 +1,6 @@
 ﻿using Mapster;
-using WebAPI.Application.UseCases.RoomTypes.Commands.CreateRoomType;
-using WebAPI.Application.UseCases.RoomTypes.Commands.UpdateRoomType;
+using WebAPI.Application.UseCases.RoomTypes.Commands.CreateCommand;
+using WebAPI.Application.UseCases.RoomTypes.Commands.UpdateCommand;
 using WebAPI.Application.UseCases.RoomTypes.Dto;
 using WebAPI.Web.Contracts.RoomTypeContracts;
 

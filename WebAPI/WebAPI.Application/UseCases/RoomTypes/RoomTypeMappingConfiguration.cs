@@ -1,5 +1,5 @@
 ﻿using Mapster;
-using WebAPI.Application.UseCases.RoomTypes.Commands.UpdateRoomType;
+using WebAPI.Application.UseCases.RoomTypes.Commands.UpdateCommand;
 using WebAPI.Application.UseCases.RoomTypes.Dto;
 using WebAPI.Domain.Models.Entities;
 

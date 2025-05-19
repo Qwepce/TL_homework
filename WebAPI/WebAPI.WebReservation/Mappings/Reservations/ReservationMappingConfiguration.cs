@@ -1,7 +1,7 @@
 ﻿using Mapster;
-using WebAPI.Application.UseCases.Reservations.Commands.CreateReservation;
+using WebAPI.Application.UseCases.Reservations.Commands.CreateCommand;
 using WebAPI.Application.UseCases.Reservations.Dto;
-using WebAPI.Application.UseCases.Reservations.Queries.GetAllReservations;
+using WebAPI.Application.UseCases.Reservations.Queries.GetAllQuery;
 using WebAPI.Application.UseCases.Reservations.Queries.SearchAvailableReservations;
 using WebAPI.WebReservation.Contracts.Reservations;
 using WebAPI.WebReservation.Filters.AvailableReservations;
