@@ -3,8 +3,8 @@ using WebAPI.Application.Interfaces.CQRS.HandlersInterfaces;
 using WebAPI.Application.Interfaces.CQRS.ValidatorInterface;
 using WebAPI.Application.Interfaces.Repositories;
 using WebAPI.Application.ResultPattern;
-using WebAPI.Application.UseCases.Amenities.GetOrCreate;
-using WebAPI.Application.UseCases.RoomServices.GetOrCreate;
+using WebAPI.Application.UseCases.Amenities.GetOrCreateAmenities;
+using WebAPI.Application.UseCases.RoomServices.GetOrCreateRoomServices;
 using WebAPI.Domain.Models.Entities;
 using WebAPI.Domain.Models.Enums;
 

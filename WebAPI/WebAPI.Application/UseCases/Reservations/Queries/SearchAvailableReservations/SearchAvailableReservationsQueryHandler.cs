@@ -29,9 +29,7 @@ public class SearchAvailableReservationsQueryHandler : IQueryHandler<SearchAvail
 
     public async Task<Result<List<SearchResultDto>>> Handle( SearchAvailableReservationsQuery query, CancellationToken cancellationToken )
     {
-        IReadOnlyCollection<Property> properties = string.IsNullOrWhiteSpace( query.City )
-            ? await _propertyRepository.GetAll()
-            : await _propertyRepository.GetAllByCity( query.City );
+        IReadOnlyCollection<Property> properties = await _propertyRepository.GetAll( query.City );
         List<SearchResultDto> searchResults = [];
 
         foreach ( Property property in properties )

@@ -9,7 +9,6 @@ public interface IPropertyRepository :
     IUpdateEntityRepository<Property>,
     IGetEntityByIdRepository<Property>
 {
-    Task<IReadOnlyCollection<Property>> GetAll();
+    Task<IReadOnlyCollection<Property>> GetAll( string city = "" );
 
-    Task<IReadOnlyCollection<Property>> GetAllByCity( string city );
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebAPI.Application.Extensions;
 using WebAPI.Application.Interfaces.Repositories;
 using WebAPI.Domain.Models.Entities;
 
@@ -13,17 +14,10 @@ public class PropertyRepository : IPropertyRepository
         _dbContext = dbContext;
     }
 
-    public async Task<IReadOnlyCollection<Property>> GetAll()
+    public async Task<IReadOnlyCollection<Property>> GetAll( string city = "" )
     {
         return await _dbContext.Properties
-            .AsNoTracking()
-            .ToListAsync();
-    }
-
-    public async Task<IReadOnlyCollection<Property>> GetAllByCity( string city )
-    {
-        return await _dbContext.Properties
-            .Where( p => p.City == city )
+            .ApplySearchByCityFilter( city )
             .AsNoTracking()
             .ToListAsync();
     }

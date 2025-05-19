@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using WebAPI.Application.Interfaces.CQRS.HandlersInterfaces;
 using WebAPI.Application.ResultPattern;
 using WebAPI.Application.UseCases.Properties.Commands.CreateProperty;
-using WebAPI.Application.UseCases.Properties.Commands.DeleteProperty;
+using WebAPI.Application.UseCases.Properties.Commands.DeletePropertyById;
 using WebAPI.Application.UseCases.Properties.Commands.UpdateProperty;
 using WebAPI.Application.UseCases.Properties.Dto;
-using WebAPI.Application.UseCases.Properties.Queries.GetAll;
-using WebAPI.Application.UseCases.Properties.Queries.GetById;
+using WebAPI.Application.UseCases.Properties.Queries.GetAllProperties;
+using WebAPI.Application.UseCases.Properties.Queries.GetPropertyById;
 using WebAPI.Application.UseCases.RoomTypes.Commands.CreateRoomType;
 using WebAPI.Application.UseCases.RoomTypes.Dto;
 using WebAPI.Application.UseCases.RoomTypes.Queries.GetRoomTypesInfoByPropertyId;
@@ -98,10 +98,10 @@ public class PropertiesController : ControllerBase
     [HttpDelete( "{propertyId:int}" )]
     public async Task<IActionResult> DeleteProperty(
         [FromRoute] int propertyId,
-        [FromServices] ICommandHandler<DeletePropertyCommand> commandHandler,
+        [FromServices] ICommandHandler<DeletePropertyByIdCommand> commandHandler,
         CancellationToken cancellationToken )
     {
-        DeletePropertyCommand command = new()
+        DeletePropertyByIdCommand command = new()
         {
             PropertyId = propertyId
         };

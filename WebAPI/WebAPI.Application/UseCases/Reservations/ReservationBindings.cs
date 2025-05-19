@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using WebAPI.Application.Interfaces.CQRS.HandlersInterfaces;
 using WebAPI.Application.Interfaces.CQRS.ValidatorInterface;
-using WebAPI.Application.UseCases.Reservations.Commands.Create;
-using WebAPI.Application.UseCases.Reservations.Commands.Delete;
+using WebAPI.Application.UseCases.Reservations.Commands.CreateReservation;
+using WebAPI.Application.UseCases.Reservations.Commands.DeleteReservationById;
 using WebAPI.Application.UseCases.Reservations.Dto;
-using WebAPI.Application.UseCases.Reservations.Queries.GetAll;
-using WebAPI.Application.UseCases.Reservations.Queries.GetById;
+using WebAPI.Application.UseCases.Reservations.Queries.GetAllReservations;
+using WebAPI.Application.UseCases.Reservations.Queries.GetReservationById;
 using WebAPI.Application.UseCases.Reservations.Queries.SearchAvailableReservations;
 
 namespace WebAPI.Application.UseCases.Reservations;

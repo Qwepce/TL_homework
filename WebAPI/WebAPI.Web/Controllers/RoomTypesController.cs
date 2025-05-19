@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Application.Interfaces.CQRS.HandlersInterfaces;
 using WebAPI.Application.ResultPattern;
-using WebAPI.Application.UseCases.RoomTypes.Commands.DeleteRoomType;
+using WebAPI.Application.UseCases.RoomTypes.Commands.DeleteRoomTypeById;
 using WebAPI.Application.UseCases.RoomTypes.Commands.UpdateRoomType;
 using WebAPI.Application.UseCases.RoomTypes.Dto;
-using WebAPI.Application.UseCases.RoomTypes.Queries.GetById;
+using WebAPI.Application.UseCases.RoomTypes.Queries.GetRoomTypeById;
 using WebAPI.Web.Contracts.RoomTypeContracts;
 
 namespace WebAPI.Web.Controllers;

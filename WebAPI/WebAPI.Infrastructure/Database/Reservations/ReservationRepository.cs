@@ -54,4 +54,16 @@ public class ReservationRepository : IReservationRepository
             _dbContext.Reservations.Remove( reservation );
         }
     }
+
+    public async Task<bool> IsPropertyUsedInReservations( int propertyId )
+    {
+        return await _dbContext.Reservations
+            .AnyAsync( r => r.PropertyId == propertyId );
+    }
+
+    public async Task<bool> IsRoomTypeUsedInReservations( int roomTypeId )
+    {
+        return await _dbContext.Reservations
+            .AnyAsync( r => r.RoomTypeId == roomTypeId );
+    }
 }

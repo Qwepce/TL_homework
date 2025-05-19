@@ -15,4 +15,8 @@ public interface IReservationRepository :
         int roomTypeId,
         DateOnly arrivalDate,
         DateOnly departureDate );
+
+    Task<bool> IsPropertyUsedInReservations( int propertyId );
+
+    Task<bool> IsRoomTypeUsedInReservations( int roomTypeId );
 }
