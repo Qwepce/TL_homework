@@ -1,4 +1,4 @@
-﻿namespace WebAPI.Application.UseCases.RoomServices.GetOrCreateCommand;
+﻿namespace WebAPI.Application.UseCases.RoomServices.Commands.GetOrCreateCommand;
 
 public class GetOrCreateRoomServicesCommand
 {

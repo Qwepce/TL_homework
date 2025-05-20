@@ -1,7 +1,7 @@
 ﻿using WebAPI.Application.Interfaces.CQRS.ValidatorInterface;
 using WebAPI.Application.ResultPattern;
 
-namespace WebAPI.Application.UseCases.Amenities.GetOrCreateCommand;
+namespace WebAPI.Application.UseCases.Amenities.Commands.GetOrCreateCommand;
 
 public class GetOrCreateAmenitiesCommandValidator : IRequestValidator<GetOrCreateAmenitiesCommand>
 {

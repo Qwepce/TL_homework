@@ -1,4 +1,4 @@
-﻿namespace WebAPI.Application.UseCases.Amenities.GetOrCreateCommand;
+﻿namespace WebAPI.Application.UseCases.Amenities.Commands.GetOrCreateCommand;
 
 public class GetOrCreateAmenitiesCommand
 {

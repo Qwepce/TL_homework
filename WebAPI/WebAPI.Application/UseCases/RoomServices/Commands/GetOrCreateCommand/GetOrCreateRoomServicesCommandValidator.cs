@@ -1,7 +1,7 @@
 ﻿using WebAPI.Application.Interfaces.CQRS.ValidatorInterface;
 using WebAPI.Application.ResultPattern;
 
-namespace WebAPI.Application.UseCases.RoomServices.GetOrCreateCommand;
+namespace WebAPI.Application.UseCases.RoomServices.Commands.GetOrCreateCommand;
 
 public class GetOrCreateRoomServicesCommandValidator : IRequestValidator<GetOrCreateRoomServicesCommand>
 {

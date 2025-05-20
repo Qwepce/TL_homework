@@ -4,7 +4,7 @@ using WebAPI.Application.Interfaces.Repositories;
 using WebAPI.Application.ResultPattern;
 using WebAPI.Domain.Models.Entities;
 
-namespace WebAPI.Application.UseCases.RoomServices.GetOrCreateCommand;
+namespace WebAPI.Application.UseCases.RoomServices.Commands.GetOrCreateCommand;
 
 public class GetOrCreateRoomServicesCommandHandler : BaseCommandHandlerWithResult<GetOrCreateRoomServicesCommand, List<RoomService>>
 {

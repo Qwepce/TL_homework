@@ -4,7 +4,7 @@ using WebAPI.Application.Interfaces.Repositories;
 using WebAPI.Application.ResultPattern;
 using WebAPI.Domain.Models.Entities;
 
-namespace WebAPI.Application.UseCases.Amenities.GetOrCreateCommand;
+namespace WebAPI.Application.UseCases.Amenities.Commands.GetOrCreateCommand;
 
 public class GetOrCreateAmenitiesCommandHandler : BaseCommandHandlerWithResult<GetOrCreateAmenitiesCommand, List<Amenity>>
 {

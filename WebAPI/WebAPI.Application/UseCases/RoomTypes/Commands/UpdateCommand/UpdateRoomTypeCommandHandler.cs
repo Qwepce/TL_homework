@@ -4,8 +4,8 @@ using WebAPI.Application.Interfaces.CQRS.HandlersInterfaces;
 using WebAPI.Application.Interfaces.CQRS.ValidatorInterface;
 using WebAPI.Application.Interfaces.Repositories;
 using WebAPI.Application.ResultPattern;
-using WebAPI.Application.UseCases.Amenities.GetOrCreateCommand;
-using WebAPI.Application.UseCases.RoomServices.GetOrCreateCommand;
+using WebAPI.Application.UseCases.Amenities.Commands.GetOrCreateCommand;
+using WebAPI.Application.UseCases.RoomServices.Commands.GetOrCreateCommand;
 using WebAPI.Domain.Models.Entities;
 
 namespace WebAPI.Application.UseCases.RoomTypes.Commands.UpdateCommand;
