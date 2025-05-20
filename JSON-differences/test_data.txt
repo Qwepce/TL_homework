@@ -1,0 +1,13 @@
+============ OLD JSON ============
+{
+  "timeout": 20,
+  "verbose": true,
+  "host": "google.com"
+}
+
+============ NEW JSON ============
+{
+  "timeout": 50,
+  "proxy": "888.888.88.88",
+  "host": "google.com"
+}
