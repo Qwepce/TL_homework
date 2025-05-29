@@ -49,7 +49,7 @@ button:hover {
   background-color: transparent;
 }
 
-.header__logo-link {
+.header-logo-link {
   color: #f5f5dc;
   text-decoration: none;
   font-size: 40px;
@@ -57,12 +57,12 @@ button:hover {
   font-weight: 600;
 }
 
-.header__login-button {
+.header-login-button {
   font-size: 30px;
   padding-block: 0;
 }
 
-.header__logged-in {
+.header-logged-in {
   display: flex;
   flex-direction: column;
   font-size: 20px;
@@ -127,7 +127,7 @@ button:hover {
 
 .result {
   margin-top: 20px;
-  background-color: #201C29;
+  background-color: #201c29;
   color: white;
   padding: 5px;
   overflow-y: auto;

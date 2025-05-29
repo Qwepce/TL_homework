@@ -1,5 +1,5 @@
 export const elements = {
-  headerLogo: document.querySelector(`.header__logo-link`),
+  headerLogo: document.querySelector(`.header-logo-link`),
 
   mainForm: document.querySelector(`.main-form-section`),
   textareaOld: document.getElementById(`oldJson`),
@@ -10,9 +10,9 @@ export const elements = {
   loginSection: document.querySelector(`.login-section`),
   usernameInput: document.getElementById(`login`),
 
-  loginButton: document.querySelector(`.header__login-button`),
+  loginButton: document.querySelector(`.header-login-button`),
   logoutButton: document.querySelector(`.logout-button`),
-  headerLoggedInContainer: document.querySelector(`.header__logged-in`),
+  headerLoggedInContainer: document.querySelector(`.header-logged-in`),
   headerUserName: document.getElementById(`username`),
 
   promoSection: document.querySelector(`.promo-section`),

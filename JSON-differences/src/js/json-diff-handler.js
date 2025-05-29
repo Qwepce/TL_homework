@@ -21,7 +21,8 @@ export function configureDiffHandler() {
       if (input.value === ``) {
         UI.showJsonError(input.errorElement, `Обязательное поле`);
         invalidInputs = true;
-      } else if (!JsonValidator.tryParse(input.value)) {
+      }
+      if (input.value !== `` && !JsonValidator.tryParse(input.value)) {
         UI.showJsonError(input.errorElement, `Некорректный JSON`);
         invalidInputs = true;
       }

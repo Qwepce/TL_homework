@@ -12,7 +12,7 @@ const logout = () => {
 };
 
 const getAuthState = () => {
-  const username = localStorage.getItem("username");
+  const username = localStorage.getItem(`username`);
   return { isAuthenticated: !!username, username };
 };
 
