@@ -48,7 +48,9 @@ export const Column = ({
 
   const handleDragOver = (e: React.DragEvent, idx: number) => {
     e.preventDefault();
-    if (!isDraggingActive) return;
+    if (!isDraggingActive) {
+      return;
+    }
     if (dragOver.columnId !== id || dragOver.cardIndex !== idx) {
       setDragOver({ columnId: id, cardIndex: idx });
     }
@@ -56,7 +58,9 @@ export const Column = ({
 
   const handleDragOverEmpty = (e: React.DragEvent) => {
     e.preventDefault();
-    if (!isDraggingActive) return;
+    if (!isDraggingActive) {
+      return;
+    }
     if (dragOver.columnId !== id || dragOver.cardIndex !== null) {
       setDragOver({ columnId: id, cardIndex: null });
     }
