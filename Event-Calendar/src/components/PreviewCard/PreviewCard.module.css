@@ -1,0 +1,5 @@
+.previewCard {
+  border: 2px dashed var(--card-preview-border-color);
+  background-color: var(--card-preview-bg-color);
+  border-radius: 8px;
+}

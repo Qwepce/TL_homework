@@ -1,0 +1,22 @@
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+  min-width: 180px;
+  border-radius: 8px;
+}
+
+.dropZone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+}
+
+.oldPlaceHighlight {
+  background-color: var(--card-old-place-bg-color);
+  border-radius: 4px;
+}
