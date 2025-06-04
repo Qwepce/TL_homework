@@ -1,5 +1,5 @@
 import { Authentication } from "./authentication.js";
-import { UI } from "./update-ui.js";
+import { UI } from "./UI.js";
 import { elements } from "./dom-elements.js";
 
 const updateAuthUI = () => {

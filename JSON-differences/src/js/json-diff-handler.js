@@ -1,5 +1,5 @@
 import { JsonDiff } from "./json-diff.js";
-import { UI } from "./update-ui.js";
+import { UI } from "./UI.js";
 import { elements } from "./dom-elements.js";
 import { JsonValidator } from "./json-validator.js";
 
