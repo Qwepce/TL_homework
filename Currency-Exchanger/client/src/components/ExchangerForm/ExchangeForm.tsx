@@ -1,0 +1,84 @@
+import styles from './ExchangeForm.module.css';
+import getFormattedDate from '../../utils/FormattedDate';
+import CurrencySelector from '../CurrencySelector/CurrencySelector';
+import AboutCurrency from '../AboutCurrency/AboutCurrency';
+import { useEffect, useState } from 'react';
+import { ShowInfoButton } from '../ShowInfoButton/ShowInfoButton';
+import CurrencyChart from '../CurrencyChart/CurrencyChart';
+import { useExchangeStore } from '../../stores/useExchangeStore';
+import ExchangeFilter from '../ExchangeFilter/ExchangeFilter';
+
+const ExchangeForm = () => {
+  const [toggle, setToggle] = useState<boolean>(false);
+  const {
+    incomingCurrency,
+    outcomingCurrency,
+    incomingCurrencyAmount,
+    outcomingCurrencyAmount,
+    exchangeData,
+    fetchExchangeData
+  } = useExchangeStore();
+
+  useEffect(() => {
+    fetchExchangeData();
+
+    const interval = setInterval(() => {
+      fetchExchangeData();
+    }, 10_000);
+
+    return () => clearInterval(interval);
+  }, [fetchExchangeData]);
+
+  const renderCurrencyInformation = () => {
+    if (incomingCurrency.code === outcomingCurrency.code) {
+      return <AboutCurrency {...incomingCurrency} />;
+    }
+
+    return (
+      <>
+        {incomingCurrency && <AboutCurrency {...incomingCurrency} />}
+        {outcomingCurrency && <AboutCurrency {...outcomingCurrency} />}
+      </>
+    );
+  };
+
+  const handleShowMoreInfoClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setToggle(!toggle);
+  };
+
+  return (
+    <form className={styles.exchangeForm}>
+      <div className={styles.container}>
+        <div className={styles.formInfo}>
+          <div className={styles.formTitle}>
+            <p className={styles.incomingCurrency}>{`${incomingCurrencyAmount} ${incomingCurrency.name} is`}</p>
+            <h1 className={styles.outcomingCurrency}>{`${outcomingCurrencyAmount.toFixed(2)} ${
+              outcomingCurrency.name
+            }`}</h1>
+          </div>
+          <div className={styles.date}>{getFormattedDate(new Date())}</div>
+          <div className={styles.selectors}>
+            <CurrencySelector key={`${incomingCurrency.code}-incoming`} selectorType="incoming" />
+            <CurrencySelector key={`${outcomingCurrency.code}-outcoming`} selectorType="outcoming" />
+          </div>
+        </div>
+        <div className={styles.chart}>
+          <ExchangeFilter />
+          <CurrencyChart data={exchangeData} />
+        </div>
+      </div>
+      <div className={styles.buttonContainer}>
+        <ShowInfoButton
+          currencies={`${incomingCurrency.code}/${outcomingCurrency.code}`}
+          isToggle={toggle}
+          onClick={handleShowMoreInfoClick}
+        />
+        <div className={styles.separatorLine}></div>
+      </div>
+      <div className={styles.currenciesInfo}>{toggle && renderCurrencyInformation()}</div>
+    </form>
+  );
+};
+
+export default ExchangeForm;

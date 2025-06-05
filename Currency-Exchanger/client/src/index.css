@@ -1,0 +1,57 @@
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: var(--page-background-color);
+
+  --fields-border-color: #ededed;
+  --page-background-color: #ebf4fb;
+  --form-background-color: #ffffff;
+  --font-color: #0d0208;
+  --font-color-alternate: #92989a;
+  --fetch-error-background-color: #ff696a;
+
+  --filter-btn-color: #3367d7;
+  --clean-filters-btn-color: #f73e3b;
+}
+
+button {
+  border: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
+  font-size: 16px;
+}
+
+select:hover {
+  cursor: pointer;
+}

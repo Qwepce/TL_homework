@@ -1,0 +1,9 @@
+node_modules
+.vscode
+.tscache
+vendor
+build
+tsd.json
+typings
+app/css/themes
+docs/**/*.html

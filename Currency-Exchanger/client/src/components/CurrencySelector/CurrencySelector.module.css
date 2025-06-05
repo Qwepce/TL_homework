@@ -1,0 +1,35 @@
+.container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 75px 1fr;
+  border: 1px solid var(--fields-border-color);
+  border-radius: 5px;
+}
+
+.frontBorder {
+  position: absolute;
+  border: 0.5px solid var(--fields-border-color);
+  height: 25px;
+  top: 5px;
+  left: 70px;
+}
+
+.currencyInput {
+  max-width: 60px;
+  padding-inline: 10px;
+}
+
+.selector {
+  min-width: 200px;
+  padding: 10px;
+}
+
+.container input,
+.container select {
+  border: none;
+}
+
+.container input:focus,
+.container select:focus {
+  outline: none;
+}

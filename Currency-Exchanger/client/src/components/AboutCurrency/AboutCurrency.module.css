@@ -1,0 +1,15 @@
+.container {
+    text-align: left;
+    margin-top: 30px;
+}
+
+.title {
+    margin: 0;
+    color: var(--font-color);
+}
+
+.subtitle {
+    margin: 0;
+    font-size: 14px;
+    color: var(--font-color-alternate);
+}
