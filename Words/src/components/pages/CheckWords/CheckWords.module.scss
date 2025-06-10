@@ -1,0 +1,19 @@
+.inputContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 40%;
+}
+
+.checkForm {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  background-color: #fff;
+  padding: 20px 20px;
+  border: 1px solid #d7dde7;
+}
+
+.checkBtn {
+    margin-top: 20px;
+}

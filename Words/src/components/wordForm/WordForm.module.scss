@@ -1,0 +1,32 @@
+.container {
+  background-color: #fff;
+  padding: 15px 20px;
+}
+
+.title {
+  color: #364963;
+  font-weight: 400;
+  font-size: 30px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  row-gap: 20px;
+}
+
+.textInputContainer {
+  display: flex;
+  max-width: 40%;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input {
+  padding: 10px;
+}
