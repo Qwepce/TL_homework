@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import type { Currency, ExchangeRate } from '../types/types';
-import { fetchCurrencies, fetchExchangeData } from '../api/exchangeService';
+import CurrencyService from '../api/CurrencyService';
 
 interface ExchangeState {
   currencies: Currency[];
@@ -23,6 +23,8 @@ interface ExchangeState {
   getExchangeRates: () => Promise<void>;
 }
 
+const currencyService = new CurrencyService();
+
 export const useExchangeStore = create<ExchangeState>((set, get) => ({
   currencies: [],
   loading: false,
@@ -37,7 +39,7 @@ export const useExchangeStore = create<ExchangeState>((set, get) => ({
   getCurrencies: async () => {
     set({ loading: true, error: null });
     try {
-      const data = await fetchCurrencies();
+      const data = await currencyService.fetchCurrencies();
 
       set({
         currencies: data,
@@ -86,7 +88,7 @@ export const useExchangeStore = create<ExchangeState>((set, get) => ({
     }
 
     try {
-      const data = await fetchExchangeData(incomingCurrency.code, outcomingCurrency.code);
+      const data = await currencyService.fetchExchangeData(incomingCurrency.code, outcomingCurrency.code);
 
       if (data && data.length > 0) {
         const rate = data[data.length - 1].price;
@@ -97,7 +99,7 @@ export const useExchangeStore = create<ExchangeState>((set, get) => ({
         });
       }
     } catch (err) {
-      console.error('Could not get exchange rate data from the server', err);
+      set({ error: 'Could not get exchange rates from the server', loading: false });
     }
   }
 }));
