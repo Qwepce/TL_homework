@@ -19,7 +19,7 @@ const usePageLocation = () => {
     case "/check":
       return "Проверка знаний";
 
-    case "/result":
+    case "/results":
       return "Результат проверки знаний";
 
     default:

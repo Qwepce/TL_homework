@@ -18,7 +18,7 @@ function App() {
         <Route path="/new-word" element={<AddWord />} />
         <Route path="/edit-word" element={<EditWord />} />
         <Route path="/check" element={<CheckWords />} />
-        <Route path="/result" element={<Results />} />
+        <Route path="/results" element={<Results />} />
       </Routes>
     </>
   );
