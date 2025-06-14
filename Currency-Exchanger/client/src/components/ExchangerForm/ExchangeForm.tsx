@@ -16,18 +16,18 @@ const ExchangeForm = () => {
     incomingCurrencyAmount,
     outcomingCurrencyAmount,
     exchangeData,
-    fetchExchangeData
+    getExchangeRates
   } = useExchangeStore();
 
   useEffect(() => {
-    fetchExchangeData();
+    getExchangeRates();
 
     const interval = setInterval(() => {
-      fetchExchangeData();
+      getExchangeRates();
     }, 10_000);
 
     return () => clearInterval(interval);
-  }, [fetchExchangeData]);
+  }, [getExchangeRates]);
 
   const renderCurrencyInformation = () => {
     if (incomingCurrency.code === outcomingCurrency.code) {

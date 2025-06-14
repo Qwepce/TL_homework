@@ -6,11 +6,11 @@ import ExchangeFilterList from './components/ExchangeFilterList/ExchangeFilterLi
 import { useFiltersStore } from './stores/useFilterStore.ts';
 
 export const App = () => {
-  const { error, loading, fetchCurrencies } = useExchangeStore();
+  const { error, loading, getCurrencies } = useExchangeStore();
   const { filters } = useFiltersStore();
 
   useEffect(() => {
-    fetchCurrencies();
+    getCurrencies();
   }, []);
 
   if (loading) {
