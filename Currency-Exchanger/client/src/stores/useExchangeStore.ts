@@ -90,7 +90,7 @@ export const useExchangeStore = create<ExchangeState>((set, get) => ({
     }
 
     const now = dayjs();
-    const formattedDate = now.format(`DD-MM-YYYY HH:mm:ss`).replace(/ /g, `%20`).replace(/:/g, `%3A`);
+    const formattedDate = now.format(`YYYY-MM-DD`);
 
     const apiUrl = `${GET_EXCHANGE_RATE_BASE_URI}PaymentCurrency=${outcomingCurrency.code}&PurchasedCurrency=${incomingCurrency.code}&FromDateTime=${formattedDate}`;
 
