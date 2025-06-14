@@ -62,36 +62,8 @@ export default function ScaleRating({
     return emojiRating <= selectedValue ? selectedColor : "#FFF";
   };
 
-  const selectedColor =
-    selectedValue !== null ? colors[getColorIndex(selectedValue)] : null;
-
-  return (
-    <div className={styles.scaleContainer}>
-      <input
-        type="range"
-        min="0"
-        max="100"
-        step={100 / (emojis.length - 1)}
-        value={selectedValue ?? -1}
-        onChange={handleChange}
-        aria-label={scaleTitle}
-        className={styles.hiddenRange}
-      />
-
-      <div className={styles.scaleRating}>
-        <div
-          className={styles.scaleLine}
-          style={{
-            background: selectedColor
-              ? `linear-gradient(to right, ${selectedColor} 0%, ${selectedColor} ${selectedValue}%, transparent ${selectedValue}%, transparent 100%)`
-              : undefined,
-            borderImage: selectedColor
-              ? `linear-gradient(to right, ${selectedColor} 0%, ${selectedColor} ${selectedValue}%, #DCDCDC ${selectedValue}%, #DCDCDC 100%) 1 stretch`
-              : undefined,
-          }}
-        ></div>
-
-        {emojis.map((emoji) => {
+  const renderEmojis = () => {
+    return emojis.map((emoji) => {
           const emojiColor = colors[getColorIndex(emoji.rating)];
           const isSelected = selectedValue === emoji.rating;
           const dotColor = getDotColor(emoji.rating, selectedValue);
@@ -121,7 +93,39 @@ export default function ScaleRating({
               </span>
             </label>
           );
-        })}
+        });
+  }
+
+  const selectedColor =
+    selectedValue !== null ? colors[getColorIndex(selectedValue)] : null;
+
+  return (
+    <div className={styles.scaleContainer}>
+      <input
+        type="range"
+        min="0"
+        max="100"
+        step={100 / (emojis.length - 1)}
+        value={selectedValue ?? -1}
+        onChange={handleChange}
+        aria-label={scaleTitle}
+        className={styles.hiddenRange}
+      />
+
+      <div className={styles.scaleRating}>
+        <div
+          className={styles.scaleLine}
+          style={{
+            background: selectedColor
+              ? `linear-gradient(to right, ${selectedColor} 0%, ${selectedColor} ${selectedValue}%, transparent ${selectedValue}%, transparent 100%)`
+              : undefined,
+            borderImage: selectedColor
+              ? `linear-gradient(to right, ${selectedColor} 0%, ${selectedColor} ${selectedValue}%, #DCDCDC ${selectedValue}%, #DCDCDC 100%) 1 stretch`
+              : undefined,
+          }}
+        ></div>
+
+        {renderEmojis()}
       </div>
 
       <div className={styles.scaleTitle}>{scaleTitle}</div>
