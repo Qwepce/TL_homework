@@ -1,15 +1,14 @@
+import type { EmojiType } from "../../types/types";
 import styles from "./emojiButton.module.css";
 
 interface EmojiButtonProps {
-  src: string;
-  alt: string;
+  emoji: EmojiType;
   isActive: boolean;
   onClick: () => void;
 }
 
 export default function EmojiButton({
-  src,
-  alt,
+  emoji,
   isActive,
   onClick,
 }: EmojiButtonProps) {
@@ -19,7 +18,7 @@ export default function EmojiButton({
       onClick={onClick}
       type="button"
     >
-      <img src={src} alt={alt} />
+      <img src={emoji.src} alt={emoji.alt} />
     </button>
   );
 }
