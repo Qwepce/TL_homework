@@ -42,7 +42,7 @@ const CheckWords = () => {
     }
     setIsChecked(true);
     if (currentWordIndex + 1 === words.length) {
-      navigate("/result", {
+      navigate("/results", {
         state: {
           stats: {
             ...stats,
