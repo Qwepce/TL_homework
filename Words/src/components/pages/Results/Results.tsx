@@ -16,6 +16,9 @@ const Results = () => {
 
   return (
     <>
+      <div style={{ display: `flex`, alignItems: `center`, columnGap: `10px` }}>
+        <h1>Результат проверки знаний</h1>
+      </div>
       <div className={styles.container}>
         <h2>Ответы</h2>
         <div className={styles.result}>

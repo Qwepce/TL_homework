@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import WordForm from "../../wordForm/WordForm";
 import useDictionaryStore from "../../../store/useDictionaryStore";
+import GoBackButton from "../../GoBackButton/GoBackButton";
 
 const AddWord = () => {
   const { addWord, words } = useDictionaryStore();
@@ -18,7 +19,15 @@ const AddWord = () => {
     navigate("/dictionary");
   };
 
-  return <WordForm onSave={handleSave} />;
+  return (
+    <>
+      <div style={{ display: `flex`, alignItems: `center`, columnGap: `10px` }}>
+        <GoBackButton onClick={() => navigate(`/dictionary`)} />
+        <h1>Добавление слова</h1>
+      </div>
+      <WordForm onSave={handleSave} />
+    </>
+  );
 };
 
 export default AddWord;

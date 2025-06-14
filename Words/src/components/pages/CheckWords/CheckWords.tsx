@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import styles from "./CheckWords.module.scss";
 import { useNavigate } from "react-router-dom";
+import GoBackButton from "../../GoBackButton/GoBackButton";
 
 const CheckWords = () => {
   const { words } = useDictionaryStore();
@@ -64,6 +65,10 @@ const CheckWords = () => {
 
   return (
     <>
+      <div style={{ display: `flex`, alignItems: `center`, columnGap: `10px` }}>
+        <GoBackButton onClick={() => navigate(`/`)} />
+        <h1>Проверка знаний</h1>
+      </div>
       <p>
         Слово {currentWordIndex + 1} из {words.length}
       </p>
@@ -110,7 +115,7 @@ const CheckWords = () => {
           </Select>
         </div>
       </form>
-      <div style={{marginTop: `30px`}}>
+      <div style={{ marginTop: `30px` }}>
         <Button
           variant="contained"
           onClick={handleCheck}

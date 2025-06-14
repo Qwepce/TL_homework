@@ -6,13 +6,18 @@ export default function MainPage() {
   const navigate = useNavigate();
 
   return (
-    <Stack spacing={2} direction="row">
-      <Button variant="contained" onClick={() => navigate("dictionary")}>
-        Заполнить словарь
-      </Button>
-      <Button variant="outlined" onClick={() => navigate("check")}>
-        Проверить знания
-      </Button>
-    </Stack>
+    <>
+      <div style={{ display: `flex`, alignItems: `center`, columnGap: `10px` }}>
+        <h1>Выберите режим</h1>
+      </div>
+      <Stack spacing={2} direction="row">
+        <Button variant="contained" onClick={() => navigate("dictionary")}>
+          Заполнить словарь
+        </Button>
+        <Button variant="outlined" onClick={() => navigate("check")}>
+          Проверить знания
+        </Button>
+      </Stack>
+    </>
   );
 }

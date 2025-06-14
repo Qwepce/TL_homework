@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import type { Word } from "../../../types/types";
 import WordForm from "../../wordForm/WordForm";
 import useDictionaryStore from "../../../store/useDictionaryStore";
+import GoBackButton from "../../GoBackButton/GoBackButton";
 
 const EditWord = () => {
   const { words, updateWord } = useDictionaryStore();
@@ -15,7 +16,9 @@ const EditWord = () => {
 
   const handleSave = (russian: string, english: string) => {
     const isExists = words.some(
-      (w) => w.russian.toLowerCase() === russian.trim().toLowerCase() && w.id !== word.id
+      (w) =>
+        w.russian.toLowerCase() === russian.trim().toLowerCase() &&
+        w.id !== word.id
     );
     if (isExists) {
       navigate("/dictionary");
@@ -26,11 +29,17 @@ const EditWord = () => {
   };
 
   return (
-    <WordForm
-      defaultWordValue={word.russian}
-      defaultTranslationValue={word.english}
-      onSave={handleSave}
-    />
+    <>
+      <div style={{ display: `flex`, alignItems: `center`, columnGap: `10px` }}>
+        <GoBackButton onClick={() => navigate(`/dictionary`)} />
+        <h1>Редактирование слова</h1>
+      </div>
+      <WordForm
+        defaultWordValue={word.russian}
+        defaultTranslationValue={word.english}
+        onSave={handleSave}
+      />
+    </>
   );
 };
 
