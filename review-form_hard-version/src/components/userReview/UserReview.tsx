@@ -1,6 +1,6 @@
 import Avatar from "../../assets/images/avatar.png";
 import styles from "./userReview.module.css";
-import type { ReviewData } from "../../types/ReviewData";
+import type { ReviewData } from "../../types/types";
 
 export default function UserReview({ username, review, rating }: ReviewData) {
   const averageRating =

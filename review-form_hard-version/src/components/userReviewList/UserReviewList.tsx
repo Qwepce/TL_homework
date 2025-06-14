@@ -1,4 +1,4 @@
-import type { ReviewData } from "../../types/ReviewData";
+import type { ReviewData } from "../../types/types";
 import UserReview from "../userReview/UserReview";
 
 interface UserReviewListProps {
