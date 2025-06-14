@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRef } from "react";
-import type { ReviewData } from "../../types/ReviewData";
+import type { ReviewData } from "../../types/types";
 import EmojiButtonsList from "../emojiButtonsList/EmojiButtonsList";
 import SubmitReviewButton from "../submitReviewButton/SubmitReviewButton";
 import styles from "./reviewForm.module.css";

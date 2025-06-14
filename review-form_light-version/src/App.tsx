@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import ReviewForm from "./components/reviewForm/ReviewForm";
 import UserReview from "./components/userReview/UserReview";
-import type { ReviewData } from "./types/ReviewData";
+import type { ReviewData } from "./types/types";
 
 export default function App() {
   const [formData, setFormData] = useState<ReviewData | null>(null);
