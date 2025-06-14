@@ -32,7 +32,7 @@ export const App = () => {
 
   return (
     <div className="app-container">
-      <div className={`filters-list ${filters.length > 0 ? 'active' : ''}`}>
+      <div className={`filters-list ${filters.length > 0 ? 'visible' : ''}`}>
         <ExchangeFilterList />
       </div>
       <ExchangeForm />
