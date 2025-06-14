@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import type { Currency, ExchangeRate } from '../types/types';
-import dayjs from 'dayjs';
+import { fetchCurrencies, fetchExchangeData } from '../api/exchangeService';
 
 interface ExchangeState {
   currencies: Currency[];
@@ -19,12 +19,9 @@ interface ExchangeState {
   setIncomingAmount: (amount: number) => void;
   setOutcomingAmount: (amount: number) => void;
 
-  fetchCurrencies: () => Promise<void>;
-  fetchExchangeData: () => Promise<void>;
+  getCurrencies: () => Promise<void>;
+  getExchangeRates: () => Promise<void>;
 }
-
-const GET_CURRENCIES_URI = 'http://localhost:5081/Currency';
-const GET_EXCHANGE_RATE_BASE_URI = 'http://localhost:5081/prices?';
 
 export const useExchangeStore = create<ExchangeState>((set, get) => ({
   currencies: [],
@@ -37,11 +34,10 @@ export const useExchangeStore = create<ExchangeState>((set, get) => ({
   exchangeRate: 1,
   exchangeData: [],
 
-  fetchCurrencies: async () => {
+  getCurrencies: async () => {
     set({ loading: true, error: null });
     try {
-      const response = await fetch(GET_CURRENCIES_URI);
-      const data = await response.json();
+      const data = await fetchCurrencies();
 
       set({
         currencies: data,
@@ -50,7 +46,7 @@ export const useExchangeStore = create<ExchangeState>((set, get) => ({
         loading: false
       });
 
-      await get().fetchExchangeData();
+      await get().getExchangeRates();
     } catch (err) {
       set({ error: 'Could not get data from the server', loading: false });
     }
@@ -58,12 +54,12 @@ export const useExchangeStore = create<ExchangeState>((set, get) => ({
 
   setIncomingCurrency: (currency) => {
     set({ incomingCurrency: currency });
-    get().fetchExchangeData();
+    get().getExchangeRates();
   },
 
   setOutcomingCurrency: (currency) => {
     set({ outcomingCurrency: currency });
-    get().fetchExchangeData();
+    get().getExchangeRates();
   },
 
   setIncomingAmount: (amount) => {
@@ -82,21 +78,15 @@ export const useExchangeStore = create<ExchangeState>((set, get) => ({
     });
   },
 
-  fetchExchangeData: async () => {
+  getExchangeRates: async () => {
     const { incomingCurrency, outcomingCurrency } = get();
 
     if (!incomingCurrency?.code || !outcomingCurrency?.code) {
       return;
     }
 
-    const now = dayjs();
-    const formattedDate = now.format(`YYYY-MM-DD`);
-
-    const apiUrl = `${GET_EXCHANGE_RATE_BASE_URI}PaymentCurrency=${outcomingCurrency.code}&PurchasedCurrency=${incomingCurrency.code}&FromDateTime=${formattedDate}`;
-
     try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
+      const data = await fetchExchangeData(incomingCurrency.code, outcomingCurrency.code);
 
       if (data && data.length > 0) {
         const rate = data[data.length - 1].price;
