@@ -10,8 +10,9 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-import ActionMenu from './ActionMenu/ActionMenu';
+import ActionMenu from "./ActionMenu/ActionMenu";
 import useDictionaryStore from "../../../store/useDictionaryStore";
+import GoBackButton from "../../GoBackButton/GoBackButton";
 
 const Dictionary = () => {
   const { words } = useDictionaryStore();
@@ -19,6 +20,10 @@ const Dictionary = () => {
 
   return (
     <>
+      <div style={{ display: `flex`, alignItems: `center`, columnGap: `10px` }}>
+        <GoBackButton onClick={() => navigate(`/`)} />
+        <h1>Словарь</h1>
+      </div>
       <Button
         startIcon={<AddIcon />}
         variant="contained"
