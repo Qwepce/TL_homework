@@ -15,7 +15,7 @@
   border-bottom-right-radius: 20px;
 }
 
-.filters-list.active {
+.filters-list.visible {
   background-color: #fff;
 }
 
