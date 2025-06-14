@@ -1,0 +1,19 @@
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 8px;
+  transition: background 0.2s;
+  box-shadow: var(--border-shadow);
+}
+
+.dragging {
+  background-color: var(--card-old-place-bg-color);
+  opacity: 0.5;
+}
+
+.default {
+  background-color: var(--card-bg-color);
+}

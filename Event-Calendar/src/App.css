@@ -1,0 +1,17 @@
+#root {
+  text-align: center;
+
+  --card-bg-color: #fee4c3;
+  --card-preview-bg-color: #e5f6fe;
+  --card-old-place-bg-color: #f3f5fa;
+  --card-preview-border-color: #47a5fc;
+  --border-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.app {
+  display: flex;
+  justify-content: space-around;
+  gap: 16px;
+  height: 100vh;
+  box-sizing: border-box;
+}
