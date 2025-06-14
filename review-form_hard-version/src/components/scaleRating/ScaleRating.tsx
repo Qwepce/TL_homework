@@ -5,21 +5,16 @@ import NeutralFace from "../../assets/icons/neutral-face.svg";
 import SlightlySmilingFace from "../../assets/icons/slightly-smiling-face.svg";
 import GrinningFace from "../../assets/icons/grinning-face.svg";
 import styles from "./scaleRating.module.css";
-
-interface ScaleOptionProps {
-  src: string;
-  alt: string;
-  rating: number;
-}
+import type { ScaleOptionType } from "../../types/types";
 
 interface ScaleRatingProps {
-  scaleTitle: string;
   id: number;
-  onRatingChange: (id: number, value: number) => void;
+  scaleTitle: string;
   reset: boolean;
+  onRatingChange: (id: number, value: number) => void;
 }
 
-const emojis: ScaleOptionProps[] = [
+const emojis: ScaleOptionType[] = [
   { src: AngryFace, alt: "Angry face", rating: 0 },
   { src: SlightlyFrowningFace, alt: "Slightly frowning face", rating: 25 },
   { src: NeutralFace, alt: "Neutral face", rating: 50 },
