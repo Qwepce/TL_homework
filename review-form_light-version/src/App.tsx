@@ -5,10 +5,10 @@ import UserReview from "./components/userReview/UserReview";
 import type { ReviewData } from "./types/ReviewData";
 
 export default function App() {
-  const [dataFromForm, setDataFromForm] = useState<ReviewData | null>(null);
+  const [formData, setFormData] = useState<ReviewData | null>(null);
 
   const handleFormSubmit = ({ username, review, rating }: ReviewData) => {
-    setDataFromForm({ username, review, rating });
+    setFormData({ username, review, rating });
   };
 
   return (
@@ -16,12 +16,12 @@ export default function App() {
       <div className="review-form-container">
         <ReviewForm onSubmit={handleFormSubmit} />
       </div>
-      {dataFromForm && (
+      {formData && (
         <div className="review-display">
           <UserReview
-            rating={dataFromForm.rating}
-            username={dataFromForm.username}
-            review={dataFromForm.review}
+            rating={formData.rating}
+            username={formData.username}
+            review={formData.review}
           />
         </div>
       )}
