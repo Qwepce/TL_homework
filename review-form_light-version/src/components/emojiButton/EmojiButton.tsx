@@ -1,5 +1,5 @@
 import type { EmojiType } from "../../types/types";
-import styles from "./emojiButton.module.css";
+import styles from "./EmojiButton.module.css";
 
 interface EmojiButtonProps {
   emoji: EmojiType;

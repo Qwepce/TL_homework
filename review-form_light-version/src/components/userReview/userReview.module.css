@@ -40,7 +40,7 @@
   align-self: center;
 }
 
-.review {
+.text {
   letter-spacing: -0.02em;
   grid-area: review;
   justify-self: start;

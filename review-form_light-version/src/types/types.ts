@@ -1,7 +1,7 @@
 export type ReviewData = {
   rating: number;
   username: string;
-  review: string;
+  text: string;
 }
 
 export type EmojiType = {

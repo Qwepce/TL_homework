@@ -4,7 +4,7 @@ import NeutralFace from "../../assets/icons/neutral-face.svg";
 import SlightlySmilingFace from "../../assets/icons/slightly-smiling-face.svg";
 import GrinningFace from "../../assets/icons/grinning-face.svg";
 import EmojiButton from "../emojiButton/EmojiButton";
-import styles from "./emojiButtonsList.module.css";
+import styles from "./EmojiButtonsList.module.css";
 import type { EmojiButtonsList } from "../../types/types";
 
 interface EmojiButtonsListProps {
@@ -24,8 +24,8 @@ export default function EmojiButtonsList({
   onRatingSelect,
   selectedRating,
 }: EmojiButtonsListProps) {
-  const handleClick = (id: number) => {
-    const newRating = id === selectedRating ? 0 : id;
+  const handleClick = (id: number): void => {
+    const newRating: number = id === selectedRating ? 0 : id;
     onRatingSelect(newRating);
   };
 

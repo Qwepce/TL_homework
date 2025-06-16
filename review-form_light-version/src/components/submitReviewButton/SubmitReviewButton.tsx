@@ -1,4 +1,4 @@
-import styles from "./submitReviewButton.module.css";
+import styles from "./SubmitReviewButton.module.css";
 
 interface SubmitButtonProps {
   isDisabled: boolean;

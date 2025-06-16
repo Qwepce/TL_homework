@@ -3,7 +3,7 @@ import { useRef } from "react";
 import type { ReviewData } from "../../types/types";
 import EmojiButtonsList from "../emojiButtonsList/EmojiButtonsList";
 import SubmitReviewButton from "../submitReviewButton/SubmitReviewButton";
-import styles from "./reviewForm.module.css";
+import styles from "./ReviewForm.module.css";
 
 interface ReviewFormProps {
   onSubmit: (data: ReviewData) => void;
@@ -11,11 +11,11 @@ interface ReviewFormProps {
 
 export default function ReviewForm({ onSubmit }: ReviewFormProps) {
   const [username, setUsername] = useState<string>("");
-  const [review, setReview] = useState<string>("");
+  const [text, setText] = useState<string>("");
   const [rating, setRating] = useState<number>(0);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
-  const adjustTextAreaHeight = () => {
+  const adjustTextAreaHeight = (): void => {
     if (textAreaRef.current) {
       textAreaRef.current.style.height = "auto";
       textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
@@ -24,20 +24,20 @@ export default function ReviewForm({ onSubmit }: ReviewFormProps) {
 
   useEffect(() => {
     adjustTextAreaHeight();
-  }, [review]);
+  }, [text]);
 
-  const isFormValid = !!username.trim() && !!review.trim() && rating > 0;
+  const isFormValid: boolean = !!username.trim() && !!text.trim() && rating > 0;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
     if (isFormValid) {
       onSubmit({
         rating,
         username: username.trim(),
-        review: review.trim(),
+        text: text.trim(),
       });
       setUsername("");
-      setReview("");
+      setText("");
       setRating(0);
     }
   };
@@ -68,8 +68,8 @@ export default function ReviewForm({ onSubmit }: ReviewFormProps) {
           ref={textAreaRef}
           id="review"
           placeholder="Напишите, что понравилось, что было непонятно"
-          value={review}
-          onChange={(e) => setReview(e.target.value)}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
         ></textarea>
       </fieldset>
       <div className={styles.submitButtonContainer}>
