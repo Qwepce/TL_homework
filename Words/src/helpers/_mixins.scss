@@ -1,0 +1,9 @@
+@mixin alignItemsCenter {
+  display: flex;
+  align-items: center;
+}
+
+@mixin titleStyleWithButton {
+  @include alignItemsCenter();
+  column-gap: 10px;
+}

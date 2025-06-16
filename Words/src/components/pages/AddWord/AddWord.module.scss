@@ -1,0 +1,5 @@
+@use "../../../helpers/mixins.scss" as *;
+
+.title {
+  @include titleStyleWithButton;
+}

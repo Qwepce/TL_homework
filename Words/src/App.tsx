@@ -9,16 +9,14 @@ import Results from "./components/pages/Results/Results";
 
 function App() {
   return (
-    <>
-      <Routes>
-        <Route index element={<MainPage />} />
-        <Route path="/dictionary" element={<Dictionary />} />
-        <Route path="/new-word" element={<AddWord />} />
-        <Route path="/edit-word" element={<EditWord />} />
-        <Route path="/check" element={<CheckWords />} />
-        <Route path="/results" element={<Results />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route index element={<MainPage />} />
+      <Route path="/dictionary" element={<Dictionary />} />
+      <Route path="/new-word" element={<AddWord />} />
+      <Route path="/edit-word" element={<EditWord />} />
+      <Route path="/check" element={<CheckWords />} />
+      <Route path="/results" element={<Results />} />
+    </Routes>
   );
 }
 

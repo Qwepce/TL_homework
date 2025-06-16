@@ -14,8 +14,8 @@ const WordForm = ({
   defaultTranslationValue = "",
   onSave,
 }: WordFormProps) => {
-  const [russian, setRussian] = useState(defaultWordValue);
-  const [english, setEnglish] = useState(defaultTranslationValue);
+  const [russian, setRussian] = useState<string>(defaultWordValue);
+  const [english, setEnglish] = useState<string>(defaultTranslationValue);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const WordForm = ({
 
   const isFormValid = russian.trim() !== "" && english.trim() !== "";
 
-  const handleSave = () => {
+  const handleSave = (): void => {
     if (!isFormValid) return;
     onSave(russian.trim(), english.trim());
   };
@@ -37,7 +37,7 @@ const WordForm = ({
     <>
       <div className={styles.container}>
         <h2 className={styles.title}>Словарное слово</h2>
-        <hr style={{ border: "none", borderTop: "1px solid #D7DDE7" }} />
+        <hr className={styles.line} />
         <form
           className={styles.inputContainer}
           onSubmit={(e) => {
@@ -63,7 +63,7 @@ const WordForm = ({
               onChange={(e) => setEnglish(e.target.value)}
             />
           </div>
-          <div style={{ marginTop: "20px" }}>
+          <div className={styles.buttons}>
             <Stack spacing={2} direction="row">
               <Button variant="contained" disabled={!isFormValid} type="submit">
                 Сохранить

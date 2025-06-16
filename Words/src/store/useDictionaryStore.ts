@@ -17,7 +17,7 @@ const useDictionaryStore = create<DictionaryStore>()(
     (set, get) => ({
       words: [],
 
-      addWord: (rus, eng) => {
+      addWord: (rus: string, eng: string): void => {
         const { words } = get();
         const newWord: Word = {
           id: crypto.randomUUID(),
@@ -27,17 +27,17 @@ const useDictionaryStore = create<DictionaryStore>()(
         set({ words: [...words, newWord] });
       },
 
-      deleteWord: (id) => {
+      deleteWord: (id: string): void => {
         set({ words: get().words.filter((word) => word.id !== id) });
       },
 
-      getWordById: (id) => {
-        const words = get().words;
+      getWordById: (id: string): Word | undefined => {
+        const words: Word[] = get().words;
         return words.find((word) => word.id === id);
       },
 
-      updateWord: (id, russian, english) =>
-        set((state) => ({
+      updateWord: (id: string, russian: string, english: string): void =>
+        set((state: DictionaryStore) => ({
           words: state.words.map((word) =>
             word.id === id
               ? {

@@ -11,18 +11,19 @@ import {
 import styles from "./CheckWords.module.scss";
 import { useNavigate } from "react-router-dom";
 import GoBackButton from "../../GoBackButton/GoBackButton";
+import type { Result, Word } from "../../../types/types";
 
 const CheckWords = () => {
   const { words } = useDictionaryStore();
   const [selectedTranslation, setSelectedTranslation] = useState<string>("");
   const [currentWordIndex, setCurrentWordIndex] = useState<number>(0);
-  const [stats, setStats] = useState({ correct: 0, incorrect: 0 });
+  const [currentResult, setCurrentResult] = useState<Result>({ correct: 0, incorrect: 0 });
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
 
-  const getRandomOptions = () => {
-    const correctOption = words[currentWordIndex].english;
-    const otherOptions = words
+  const getRandomOptions = (): string[] => {
+    const correctOption: string = words[currentWordIndex].english;
+    const otherOptions: string[] = words
       .filter((_, index) => index !== currentWordIndex)
       .map((word) => word.english)
       .sort(() => Math.random() - 0.5)
@@ -31,33 +32,27 @@ const CheckWords = () => {
     return [correctOption, ...otherOptions].sort(() => Math.random() - 0.5);
   };
 
-  const options = getRandomOptions();
-  const currentWord = words[currentWordIndex];
-  const isAnswerCorrect = selectedTranslation === currentWord.english;
+  const options: string[] = getRandomOptions();
+  const currentWord: Word = words[currentWordIndex];
+  const isAnswerCorrect: boolean = selectedTranslation === currentWord.english;
 
-  const handleCheck = () => {
-    if (isAnswerCorrect) {
-      setStats((prev) => ({ ...prev, correct: prev.correct + 1 }));
-    } else {
-      setStats((prev) => ({ ...prev, incorrect: prev.incorrect + 1 }));
-    }
+  const handleCheck = (): void => {
+    const result: Result = {
+      correct: isAnswerCorrect ? currentResult.correct + 1 : currentResult.correct,
+      incorrect: isAnswerCorrect ? currentResult.incorrect : currentResult.incorrect + 1,
+    };
+    
+    setCurrentResult(result);
     setIsChecked(true);
+    
     if (currentWordIndex + 1 === words.length) {
-      navigate("/results", {
-        state: {
-          stats: {
-            ...stats,
-            correct: isAnswerCorrect ? stats.correct + 1 : stats.correct,
-            incorrect: isAnswerCorrect ? stats.incorrect : stats.incorrect + 1,
-          },
-        },
-      });
+      navigate("/results", { state: { result } } );
     } else {
       handleNext();
     }
   };
 
-  const handleNext = () => {
+  const handleNext = (): void => {
     setSelectedTranslation("");
     setIsChecked(false);
     setCurrentWordIndex((prev) => (prev + 1) % words.length);
@@ -65,7 +60,7 @@ const CheckWords = () => {
 
   return (
     <>
-      <div style={{ display: `flex`, alignItems: `center`, columnGap: `10px` }}>
+      <div className={styles.title}>
         <GoBackButton onClick={() => navigate(`/`)} />
         <h1>Проверка знаний</h1>
       </div>

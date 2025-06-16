@@ -1,7 +1,13 @@
+@use "../../../helpers/mixins.scss" as *;
+@use "../../../helpers/variables.scss" as *;
+
+.title {
+  @include titleStyleWithButton;
+}
+
 .inputContainer {
-  display: flex;
+  @include alignItemsCenter;
   justify-content: space-between;
-  align-items: center;
   width: 40%;
 }
 
@@ -9,11 +15,11 @@
   display: flex;
   flex-direction: column;
   row-gap: 20px;
-  background-color: #fff;
+  background-color: $container-bg-color;
   padding: 20px 20px;
-  border: 1px solid #d7dde7;
+  border: $border;
 }
 
 .checkBtn {
-    margin-top: 20px;
+  margin-top: 20px;
 }

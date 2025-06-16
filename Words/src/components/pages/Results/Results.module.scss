@@ -1,23 +1,29 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
-    background-color: #fff;
-    width: 20%;
-    padding: 20px;
-    border-radius: 10px;
+@use "../../../helpers/mixins.scss" as *;
+@use "../../../helpers/variables.scss" as *;
 
-    h2 {
-        margin: 0;
-    }
+.title {
+  @include alignItemsCenter;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  background-color: $container-bg-color;
+  width: 20%;
+  padding: 20px;
+  border-radius: 10px;
+
+  h2 {
+    margin: 0;
+  }
 }
 
 .result {
-    display: flex;
-    align-items: center;
-    column-gap: 10px;
+  @include alignItemsCenter;
+  column-gap: 10px;
 }
 
 .btns {
-    margin-top: 30px;
+  margin-top: 30px;
 }

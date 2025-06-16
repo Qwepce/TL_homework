@@ -1,13 +1,14 @@
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import styles from "./MainPage.module.scss";
 
-export default function MainPage() {
+const MainPage = () => {
   const navigate = useNavigate();
 
   return (
     <>
-      <div style={{ display: `flex`, alignItems: `center`, columnGap: `10px` }}>
+      <div className={styles.title}>
         <h1>Выберите режим</h1>
       </div>
       <Stack spacing={2} direction="row">
@@ -20,4 +21,6 @@ export default function MainPage() {
       </Stack>
     </>
   );
-}
+};
+
+export default MainPage;

@@ -12,7 +12,7 @@ interface PositionedMenuProps {
   wordID: string;
 }
 
-export default function PositionedMenu({ wordID }: PositionedMenuProps) {
+const PositionedMenu = ({ wordID }: PositionedMenuProps) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -66,4 +66,6 @@ export default function PositionedMenu({ wordID }: PositionedMenuProps) {
       </Menu>
     </div>
   );
-}
+};
+
+export default PositionedMenu;

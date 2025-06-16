@@ -3,6 +3,7 @@ import type { Word } from "../../../types/types";
 import WordForm from "../../wordForm/WordForm";
 import useDictionaryStore from "../../../store/useDictionaryStore";
 import GoBackButton from "../../GoBackButton/GoBackButton";
+import styles from "./EditWord.module.scss";
 
 const EditWord = () => {
   const { words, updateWord } = useDictionaryStore();
@@ -14,8 +15,8 @@ const EditWord = () => {
     return <div>Отсутствует слово для редактирования</div>;
   }
 
-  const handleSave = (russian: string, english: string) => {
-    const isExists = words.some(
+  const handleSave = (russian: string, english: string): void => {
+    const isExists: boolean = words.some(
       (w) =>
         w.russian.toLowerCase() === russian.trim().toLowerCase() &&
         w.id !== word.id
@@ -30,7 +31,7 @@ const EditWord = () => {
 
   return (
     <>
-      <div style={{ display: `flex`, alignItems: `center`, columnGap: `10px` }}>
+      <div className={styles.title}>
         <GoBackButton onClick={() => navigate(`/dictionary`)} />
         <h1>Редактирование слова</h1>
       </div>
