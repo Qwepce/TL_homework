@@ -1,16 +1,17 @@
 import styles from '../ExchangeFilter/ExchangeFilter.module.css';
 import { useFiltersStore } from '../../stores/useFilterStore';
 import { useExchangeStore } from '../../stores/useExchangeStore';
+import { Currency, Filter } from '../../types/types';
 
 const ExchangeFilterList = () => {
   const { filters, activeFilter, setActiveFilter, clearFilters } = useFiltersStore();
   const { currencies, setIncomingCurrency, setOutcomingCurrency } = useExchangeStore();
 
-  const handleFilterClick = (filter: typeof activeFilter) => {
+  const handleFilterClick = (filter: Filter): void => {
     setActiveFilter(filter);
 
-    const incoming = currencies.find((c) => c.code === filter?.incomingCurrencyCode);
-    const outcoming = currencies.find((c) => c.code === filter?.outcomingCurrencyCode);
+    const incoming: Currency | undefined = currencies.find((c) => c.code === filter?.incomingCurrencyCode);
+    const outcoming: Currency | undefined = currencies.find((c) => c.code === filter?.outcomingCurrencyCode);
 
     if (incoming && outcoming) {
       setIncomingCurrency(incoming);

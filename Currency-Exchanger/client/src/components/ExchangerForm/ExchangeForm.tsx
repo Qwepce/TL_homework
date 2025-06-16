@@ -7,6 +7,7 @@ import { ShowInfoButton } from '../ShowInfoButton/ShowInfoButton';
 import CurrencyChart from '../CurrencyChart/CurrencyChart';
 import { useExchangeStore } from '../../stores/useExchangeStore';
 import ExchangeFilter from '../ExchangeFilter/ExchangeFilter';
+import { SelectorType } from '../../types/enums';
 
 const ExchangeForm = () => {
   const [toggle, setToggle] = useState<boolean>(false);
@@ -22,14 +23,14 @@ const ExchangeForm = () => {
   useEffect(() => {
     getExchangeRates();
 
-    const interval = setInterval(() => {
+    const interval: number = setInterval(() => {
       getExchangeRates();
     }, 10_000);
 
     return () => clearInterval(interval);
   }, [getExchangeRates]);
 
-  const renderCurrencyInformation = () => {
+  const renderCurrencyInformation = (): JSX.Element => {
     if (incomingCurrency.code === outcomingCurrency.code) {
       return <AboutCurrency {...incomingCurrency} />;
     }
@@ -42,7 +43,7 @@ const ExchangeForm = () => {
     );
   };
 
-  const handleShowMoreInfoClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleShowMoreInfoClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault();
     setToggle(!toggle);
   };
@@ -59,8 +60,8 @@ const ExchangeForm = () => {
           </div>
           <div className={styles.date}>{getFormattedDate(new Date())}</div>
           <div className={styles.selectors}>
-            <CurrencySelector key={`${incomingCurrency.code}-incoming`} selectorType="incoming" />
-            <CurrencySelector key={`${outcomingCurrency.code}-outcoming`} selectorType="outcoming" />
+            <CurrencySelector key={`${incomingCurrency.code}-incoming`} selectorType={SelectorType.Incoming} />
+            <CurrencySelector key={`${outcomingCurrency.code}-outcoming`} selectorType={SelectorType.Outcoming} />
           </div>
         </div>
         <div className={styles.chart}>
@@ -76,7 +77,7 @@ const ExchangeForm = () => {
         />
         <div className={styles.separatorLine}></div>
       </div>
-      <div className={styles.currenciesInfo}>{toggle && renderCurrencyInformation()}</div>
+      {toggle && <div className={styles.currenciesInfo}>{renderCurrencyInformation()}</div>}
     </form>
   );
 };

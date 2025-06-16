@@ -1,45 +1,47 @@
 import styles from './CurrencySelector.module.css';
 import { useExchangeStore } from '../../stores/useExchangeStore';
+import { Currency } from '../../types/types';
+import { SelectorType } from '../../types/enums';
 
 interface CurrencySelectorProps {
-  selectorType: 'incoming' | 'outcoming';
+  selectorType: SelectorType;
 }
 
 const CurrencySelector = ({ selectorType }: CurrencySelectorProps) => {
-  const currencies = useExchangeStore((state) => state.currencies);
+  const currencies: Currency[] = useExchangeStore((state) => state.currencies);
 
-  const selectedCurrency = useExchangeStore((state) =>
-    selectorType === 'incoming' ? state.incomingCurrency : state.outcomingCurrency
+  const selectedCurrency: Currency = useExchangeStore((state) =>
+    selectorType === SelectorType.Incoming ? state.incomingCurrency : state.outcomingCurrency
   );
 
-  const value = useExchangeStore((state) =>
-    selectorType === 'incoming' ? state.incomingCurrencyAmount : state.outcomingCurrencyAmount
+  const value: number = useExchangeStore((state) =>
+    selectorType === SelectorType.Incoming ? state.incomingCurrencyAmount : state.outcomingCurrencyAmount
   );
 
-  const setCurrency = useExchangeStore((state) =>
-    selectorType === 'incoming' ? state.setIncomingCurrency : state.setOutcomingCurrency
+  const setCurrency: (currency: Currency) => void = useExchangeStore((state) =>
+    selectorType === SelectorType.Incoming ? state.setIncomingCurrency : state.setOutcomingCurrency
   );
 
-  const setValue = useExchangeStore((state) =>
-    selectorType === 'incoming' ? state.setIncomingAmount : state.setOutcomingAmount
+  const setValue: (amount: number) => void = useExchangeStore((state) =>
+    selectorType === SelectorType.Incoming ? state.setIncomingAmount : state.setOutcomingAmount
   );
 
-  const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
+  const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const inputValue: string = e.target.value;
     if (inputValue === '') {
       setValue(0);
     } else {
-      const newValue = parseFloat(inputValue);
+      const newValue: number = parseFloat(inputValue);
       if (!isNaN(newValue)) {
-        const roundedValue = Math.round(newValue * 100) / 100;
+        const roundedValue: number = Math.round(newValue * 100) / 100;
         setValue(roundedValue);
       }
     }
   };
 
-  const handleCurrencySelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedCode = e.target.value;
-    const currency = currencies.find((c) => c.code === selectedCode);
+  const handleCurrencySelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+    const selectedCode: string = e.target.value;
+    const currency: Currency | undefined = currencies.find((c) => c.code === selectedCode);
     if (currency) {
       setCurrency(currency);
     }

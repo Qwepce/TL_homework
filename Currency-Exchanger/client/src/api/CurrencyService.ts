@@ -1,4 +1,4 @@
-import { GET_CURRENCIES_URI, GET_EXCHANGE_RATE_BASE_URI } from '../config/config';
+import { GET_CURRENCIES_URI, GET_EXCHANGE_RATE_BASE_URI } from '../config/constants';
 import dayjs from 'dayjs';
 import { Currency, ExchangeRate } from '../types/types';
 
@@ -15,7 +15,7 @@ class CurrencyService {
   }
 
   public async fetchCurrencies(): Promise<Currency[]> {
-    const response = await fetch(this.currenciesUri);
+    const response: Response = await fetch(this.currenciesUri);
     if (!response.ok) {
       throw new Error('Failed to fetch currencies');
     }
@@ -26,11 +26,11 @@ class CurrencyService {
     incomingCode: string,
     outcomingCode: string
   ): Promise<ExchangeRate[]> {
-    const now = dayjs();
-    const formattedDate = now.format('YYYY-MM-DD');
+    const now: dayjs.Dayjs = dayjs();
+    const formattedDate: string = now.format('YYYY-MM-DD');
 
-    const apiUrl = `${this.exchangeRateBaseUri}PaymentCurrency=${outcomingCode}&PurchasedCurrency=${incomingCode}&FromDateTime=${formattedDate}`;
-    const response = await fetch(apiUrl);
+    const apiUrl: string = `${this.exchangeRateBaseUri}PaymentCurrency=${outcomingCode}&PurchasedCurrency=${incomingCode}&FromDateTime=${formattedDate}`;
+    const response: Response = await fetch(apiUrl);
 
     if (!response.ok) {
       throw new Error('Failed to fetch exchange data');

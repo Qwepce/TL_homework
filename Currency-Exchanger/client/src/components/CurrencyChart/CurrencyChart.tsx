@@ -29,21 +29,21 @@ const CurrencyChart = ({ data = [] }: CurrencyChartProps) => {
 
   const { purchasedCurrencyCode, paymentCurrencyCode } = data[0];
 
-  const filterDataByTimeRange = () => {
+  const filterDataByTimeRange = (): ExchangeRate[] => {
     if (data.length === 0) {
       return [];
     }
 
-    const now = new Date();
-    const minutesAgo = new Date(now.getTime() - timeRange * 60000);
+    const now: Date = new Date();
+    const minutesAgo: Date = new Date(now.getTime() - timeRange * 60000);
 
     return data.filter((item) => {
-      const itemDate = new Date(item.dateTime);
+      const itemDate: Date = new Date(item.dateTime);
       return itemDate > minutesAgo;
     });
   };
 
-  const filteredData = filterDataByTimeRange();
+  const filteredData: ExchangeRate[] = filterDataByTimeRange();
 
   const chartData = {
     labels: filteredData.map((item) => getFormattedDate(new Date(item.dateTime))),

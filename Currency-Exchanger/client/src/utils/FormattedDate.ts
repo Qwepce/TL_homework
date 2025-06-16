@@ -1,18 +1,18 @@
 export default function getFormattedDate(currentDate: Date): string {
-  const day = currentDate.toLocaleDateString('en-US', { weekday: 'long' });
-  const dateFormat = currentDate.toLocaleDateString('en-US', {
+  const day: string = currentDate.toLocaleDateString('en-US', { weekday: 'long' });
+  const dateFormat: string = currentDate.toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
     year: 'numeric'
   });
 
-  const hours = (currentDate.getUTCHours() + 3) % 24;
-  const minutes = currentDate.getUTCMinutes();
+  const hours: number = (currentDate.getUTCHours() + 3) % 24;
+  const minutes: number = currentDate.getUTCMinutes();
   
-  const formattedHours = hours.toString().padStart(2, '0');
-  const formattedMinutes = minutes.toString().padStart(2, '0');
+  const formattedHours: string = hours.toString().padStart(2, '0');
+  const formattedMinutes: string = minutes.toString().padStart(2, '0');
 
-  const time = `${formattedHours}:${formattedMinutes} UTC`;
+  const time: string = `${formattedHours}:${formattedMinutes} UTC`;
 
   return `${day.substring(0, 3)}, ${dateFormat}, ${time}`;
 }
