@@ -5,17 +5,21 @@ interface UserReviewListProps {
   reviews: ReviewData[];
 }
 
+type ReviewWithId = ReviewData & {
+  id: string;
+};
+
 export default function UserReviewList({ reviews }: UserReviewListProps) {
-  const reviewsWithIDs = reviews.map((review) => ({
+  const reviewsWithIDs: ReviewWithId[] = reviews.map((review) => ({
     ...review,
     id: crypto.randomUUID(),
   }));
 
   return (
     <ul>
-      {reviewsWithIDs.map(({ id, username, rating, review }) => (
-        <li key={id}>
-          <UserReview username={username} rating={rating} review={review} />
+      {reviewsWithIDs.map((review) => (
+        <li key={review.id}>
+          <UserReview review={review} />
         </li>
       ))}
     </ul>

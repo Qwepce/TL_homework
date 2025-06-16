@@ -1,11 +1,6 @@
-import { useEffect, useState } from "react";
-import AngryFace from "../../assets/icons/angry-face.svg";
-import SlightlyFrowningFace from "../../assets/icons/slightly-frowning-face.svg";
-import NeutralFace from "../../assets/icons/neutral-face.svg";
-import SlightlySmilingFace from "../../assets/icons/slightly-smiling-face.svg";
-import GrinningFace from "../../assets/icons/grinning-face.svg";
-import styles from "./scaleRating.module.css";
-import type { ScaleOptionType } from "../../types/types";
+import { useEffect, useState, type JSX } from "react";
+import styles from "./ScaleRating.module.css";
+import { colors, emojis } from "../../types/constants";
 
 interface ScaleRatingProps {
   id: number;
@@ -14,16 +9,6 @@ interface ScaleRatingProps {
   onRatingChange: (id: number, value: number) => void;
 }
 
-const emojis: ScaleOptionType[] = [
-  { src: AngryFace, alt: "Angry face", rating: 0 },
-  { src: SlightlyFrowningFace, alt: "Slightly frowning face", rating: 25 },
-  { src: NeutralFace, alt: "Neutral face", rating: 50 },
-  { src: SlightlySmilingFace, alt: "Slightly smiling face", rating: 75 },
-  { src: GrinningFace, alt: "Grinning face", rating: 100 },
-];
-
-const colors = ["#E31919", "#FF8311", "#FF8311", "#FFC700", "#FFC700"];
-
 export default function ScaleRating({
   scaleTitle,
   id,
@@ -31,7 +16,7 @@ export default function ScaleRating({
   reset,
 }: ScaleRatingProps) {
   const [selectedValue, setSelectedValue] = useState<number | null>(null);
-  const inputName = `progress-${id}`;
+  const inputName: string = `progress-${id}`;
 
   useEffect(() => {
     if (reset) {
@@ -39,17 +24,17 @@ export default function ScaleRating({
     }
   }, [reset]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const value: number = parseInt(e.target.value);
     setSelectedValue(value);
     onRatingChange(id, value);
   };
 
-  const getColorIndex = (rating: number) => {
+  const getColorIndex = (rating: number): number => {
     return Math.floor(rating / 25);
   };
 
-  const getDotColor = (emojiRating: number, selectedValue: number | null) => {
+  const getDotColor = (emojiRating: number, selectedValue: number | null): string | null => {
     if (selectedValue === null) {
       return colors[getColorIndex(emojiRating)];
     }
@@ -57,11 +42,11 @@ export default function ScaleRating({
     return emojiRating <= selectedValue ? selectedColor : "#FFF";
   };
 
-  const renderEmojis = () => {
+  const renderEmojis = (): JSX.Element[] => {
     return emojis.map((emoji) => {
-          const emojiColor = colors[getColorIndex(emoji.rating)];
-          const isSelected = selectedValue === emoji.rating;
-          const dotColor = getDotColor(emoji.rating, selectedValue);
+          const emojiColor: string = colors[getColorIndex(emoji.rating)];
+          const isSelected: boolean = selectedValue === emoji.rating;
+          const dotColor: string | null = getDotColor(emoji.rating, selectedValue);
 
           return (
             <label key={emoji.rating} className={styles.scaleOption}>
@@ -91,7 +76,7 @@ export default function ScaleRating({
         });
   }
 
-  const selectedColor =
+  const selectedColor: string | null =
     selectedValue !== null ? colors[getColorIndex(selectedValue)] : null;
 
   return (

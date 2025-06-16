@@ -1,6 +1,6 @@
 import type { ScaleRatingType } from "../../types/types";
 import ScaleRating from "../scaleRating/ScaleRating";
-import styles from "./scaleRatingList.module.css";
+import styles from "./ScaleRatingList.module.css";
 
 interface ScaleRatingListProps {
   onRatingChange: (id: number, value: number) => void;

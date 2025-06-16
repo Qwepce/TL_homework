@@ -6,7 +6,7 @@ import "./App.css";
 
 export default function App() {
   const [reviews, setReviews] = useState<ReviewData[]>(() => {
-    const savedReviews = localStorage.getItem(`reviews`);
+    const savedReviews: string | null = localStorage.getItem(`reviews`);
     return savedReviews ? JSON.parse(savedReviews) : [];
   });
 
@@ -14,8 +14,8 @@ export default function App() {
     localStorage.setItem(`reviews`, JSON.stringify(reviews));
   }, [reviews]);
 
-  const handleFormSubmit = (newReview: ReviewData) => {
-    setReviews((previousReviews) => [newReview, ...previousReviews]);
+  const handleFormSubmit = (newReview: ReviewData): void => {
+    setReviews((previousReviews: ReviewData[]) => [newReview, ...previousReviews]);
   };
 
   return (
