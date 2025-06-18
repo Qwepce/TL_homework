@@ -41,10 +41,8 @@ export default function ReviewForm({ onSubmit }: ReviewFormProps) {
     adjustTextAreaHeight();
   }, [text]);
 
-  const allRatingsSelected: boolean =
-    rating.length === 5 && rating.every((rate) => rate !== -1);
-  const isFormValid: boolean =
-    !!username.trim() && !!text.trim() && allRatingsSelected;
+  const allRatingsSelected: boolean = rating.length === 5 && rating.every((rate) => rate !== -1);
+  const isFormValid: boolean = !!username.trim() && !!text.trim() && allRatingsSelected;
 
   const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
