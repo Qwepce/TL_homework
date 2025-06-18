@@ -1,0 +1,10 @@
+.showMoreInfoButton {
+  background-color: var(--fields-border-color);
+  border: none;
+  padding-block: 5px;
+  padding-inline: 30px;
+  border-radius: 15px;
+  position: relative;
+  z-index: 1;
+  min-width: 175px;
+}
