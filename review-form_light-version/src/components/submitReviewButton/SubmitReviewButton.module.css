@@ -1,0 +1,14 @@
+.button {
+  color: #fff;
+  font-size: 14px;
+  padding-block: 8px;
+  padding-inline: 30px;
+  border-radius: 5px;
+  letter-spacing: 0.015em;
+  background-color: var(--active-background-color);
+  border: 1px solid var(--border-color);
+}
+
+.button:disabled {
+  background-color: var(--disabled-button-color);
+}
