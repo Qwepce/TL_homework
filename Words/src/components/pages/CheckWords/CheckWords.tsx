@@ -39,27 +39,28 @@ const CheckWords = () => {
   const currentWord: Word = words[currentWordIndex];
   const isAnswerCorrect: boolean = selectedTranslation === currentWord.english;
 
-  const handleCheck = () => {
-    if (isAnswerCorrect) {
-      setCurrentResult((prev) => ({ ...prev, correct: prev.correct + 1 }));
-    } else {
-      setCurrentResult((prev) => ({ ...prev, incorrect: prev.incorrect + 1 }));
-    }
+  const getUpdatedResult = (
+    isCorrect: boolean,
+    previousResult: Result
+  ): Result => {
+    return {
+      ...previousResult,
+      correct: isCorrect ? previousResult.correct + 1 : previousResult.correct,
+      incorrect: isCorrect
+        ? previousResult.incorrect
+        : previousResult.incorrect + 1,
+    };
+  };
+
+  const handleCheck = (): void => {
+    const result: Result = getUpdatedResult(isAnswerCorrect, currentResult);
+    const isLastWord: boolean = currentWordIndex + 1 === words.length;
+
+    setCurrentResult(result);
     setIsChecked(true);
-    if (currentWordIndex + 1 === words.length) {
-      navigate("/results", {
-        state: {
-          result: {
-            ...currentResult,
-            correct: isAnswerCorrect
-              ? currentResult.correct + 1
-              : currentResult.correct,
-            incorrect: isAnswerCorrect
-              ? currentResult.incorrect
-              : currentResult.incorrect + 1,
-          },
-        },
-      });
+
+    if (isLastWord) {
+      navigate("/results", { state: { result: result } });
     } else {
       handleNext();
     }
@@ -78,7 +79,7 @@ const CheckWords = () => {
         <h1>Проверка знаний</h1>
       </div>
       <p>
-        Слово {currentWordIndex + 1} из {words.length}
+        {`Слово ${currentWordIndex + 1} из ${words.length}`}
       </p>
       <form className={styles.checkForm}>
         <div className={styles.inputContainer}>
