@@ -8,7 +8,7 @@ import type { Result } from "../../../types/types";
 
 const Results = () => {
   const location = useLocation();
-  const result = location.state?.result as Result;
+  const result: Result = location.state?.result;
   const navigate = useNavigate();
 
   if (!result) {

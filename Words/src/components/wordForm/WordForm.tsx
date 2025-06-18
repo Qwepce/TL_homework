@@ -34,48 +34,46 @@ const WordForm = ({
   };
 
   return (
-    <>
-      <div className={styles.container}>
-        <h2 className={styles.title}>Словарное слово</h2>
-        <hr className={styles.line} />
-        <form
-          className={styles.inputContainer}
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSave();
-          }}
-        >
-          <div className={styles.textInputContainer}>
-            Слово на русском языке
-            <input
-              type="text"
-              className={styles.input}
-              value={russian}
-              onChange={(e) => setRussian(e.target.value)}
-            />
-          </div>
-          <div className={styles.textInputContainer}>
-            Перевод на английский язык
-            <input
-              type="text"
-              className={styles.input}
-              value={english}
-              onChange={(e) => setEnglish(e.target.value)}
-            />
-          </div>
-          <div className={styles.buttons}>
-            <Stack spacing={2} direction="row">
-              <Button variant="contained" disabled={!isFormValid} type="submit">
-                Сохранить
-              </Button>
-              <Button variant="outlined" onClick={() => navigate(-1)}>
-                Отменить
-              </Button>
-            </Stack>
-          </div>
-        </form>
-      </div>
-    </>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Словарное слово</h2>
+      <hr className={styles.line} />
+      <form
+        className={styles.inputContainer}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSave();
+        }}
+      >
+        <div className={styles.textInputContainer}>
+          Слово на русском языке
+          <input
+            type="text"
+            className={styles.input}
+            value={russian}
+            onChange={(e) => setRussian(e.target.value)}
+          />
+        </div>
+        <div className={styles.textInputContainer}>
+          Перевод на английский язык
+          <input
+            type="text"
+            className={styles.input}
+            value={english}
+            onChange={(e) => setEnglish(e.target.value)}
+          />
+        </div>
+        <div className={styles.buttons}>
+          <Stack spacing={2} direction="row">
+            <Button variant="contained" disabled={!isFormValid} type="submit">
+              Сохранить
+            </Button>
+            <Button variant="outlined" onClick={() => navigate(-1)}>
+              Отменить
+            </Button>
+          </Stack>
+        </div>
+      </form>
+    </div>
   );
 };
 

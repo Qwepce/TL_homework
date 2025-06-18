@@ -17,7 +17,10 @@ const CheckWords = () => {
   const { words } = useDictionaryStore();
   const [selectedTranslation, setSelectedTranslation] = useState<string>("");
   const [currentWordIndex, setCurrentWordIndex] = useState<number>(0);
-  const [currentResult, setCurrentResult] = useState<Result>({ correct: 0, incorrect: 0 });
+  const [currentResult, setCurrentResult] = useState<Result>({
+    correct: 0,
+    incorrect: 0,
+  });
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
 
@@ -36,17 +39,27 @@ const CheckWords = () => {
   const currentWord: Word = words[currentWordIndex];
   const isAnswerCorrect: boolean = selectedTranslation === currentWord.english;
 
-  const handleCheck = (): void => {
-    const result: Result = {
-      correct: isAnswerCorrect ? currentResult.correct + 1 : currentResult.correct,
-      incorrect: isAnswerCorrect ? currentResult.incorrect : currentResult.incorrect + 1,
-    };
-    
-    setCurrentResult(result);
+  const handleCheck = () => {
+    if (isAnswerCorrect) {
+      setCurrentResult((prev) => ({ ...prev, correct: prev.correct + 1 }));
+    } else {
+      setCurrentResult((prev) => ({ ...prev, incorrect: prev.incorrect + 1 }));
+    }
     setIsChecked(true);
-    
     if (currentWordIndex + 1 === words.length) {
-      navigate("/results", { state: { result } } );
+      navigate("/results", {
+        state: {
+          result: {
+            ...currentResult,
+            correct: isAnswerCorrect
+              ? currentResult.correct + 1
+              : currentResult.correct,
+            incorrect: isAnswerCorrect
+              ? currentResult.incorrect
+              : currentResult.incorrect + 1,
+          },
+        },
+      });
     } else {
       handleNext();
     }
