@@ -1,0 +1,87 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 550px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 2px -1px rgba(220, 220, 220, 1);
+  border-radius: 20px;
+  padding-top: 43px;
+  padding-left: 70px;
+  padding-right: 97px;
+  padding-bottom: 84px;
+  letter-spacing: 0.015em;
+}
+
+.fieldSet {
+  padding: 0;
+  margin: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  color: var(--font-color);
+  font-size: 24px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.scalesContainer {
+  margin-top: 31px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 44px;
+}
+
+.usernameContainer {
+  position: relative;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.usernameContainer label {
+  position: absolute;
+  top: -7px;
+  left: 4px;
+  background: #fff;
+  font-size: 10px;
+  color: var(--placeholder-font-color);
+}
+
+.usernameContainer input {
+  color: var(--font-color);
+  padding-block: 6px;
+  padding-left: 15px;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+}
+
+.form textarea {
+  resize: none;
+  min-height: 113px;
+  width: 100%;
+  max-width: 383px;
+  margin-top: 27px;
+  padding-inline: 15px;
+  padding-top: 11px;
+  padding-bottom: 17px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  color: var(--font-color);
+  overflow-y: hidden;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+}
+
+.form textarea::placeholder {
+  letter-spacing: 0.015em;
+}
+
+.submitButton {
+  display: flex;
+  justify-content: end;
+  margin-top: 20px;
+}
