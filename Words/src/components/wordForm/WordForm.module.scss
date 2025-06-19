@@ -1,0 +1,42 @@
+@use "../../helpers/mixins.scss" as *;
+@use "../../helpers/variables.scss" as *;
+
+.container {
+  background-color: $container-bg-color;
+  border: $border;
+  padding: 15px 20px;
+}
+
+.title {
+  @include alignItemsCenter;
+  color: #364963;
+  font-weight: 400;
+  font-size: 30px;
+  margin: 0;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  row-gap: 20px;
+}
+
+.textInputContainer {
+  @include alignItemsCenter;
+  justify-content: space-between;
+  max-width: 40%;
+  width: 100%;
+}
+
+.input {
+  padding: 10px;
+}
+
+.line {
+  border-top: $border;
+}
+
+.buttons {
+  margin-top: 20px;
+}

@@ -1,0 +1,25 @@
+@use "../../../helpers/mixins.scss" as *;
+@use "../../../helpers/variables.scss" as *;
+
+.title {
+  @include titleStyleWithButton;
+}
+
+.inputContainer {
+  @include alignItemsCenter;
+  justify-content: space-between;
+  width: 40%;
+}
+
+.checkForm {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  background-color: $container-bg-color;
+  padding: 20px 20px;
+  border: $border;
+}
+
+.checkBtn {
+  margin-top: 20px;
+}
